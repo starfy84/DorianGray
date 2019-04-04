@@ -1,0 +1,11 @@
+Gladly.
+You slam the office door as you leave in frustration.
+F
+0
+T
+-5
+T
+10
+T
+-15
+0

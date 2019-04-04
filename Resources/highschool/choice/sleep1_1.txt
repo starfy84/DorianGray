@@ -1,0 +1,13 @@
+Stay awake!
+It's a struggle, but you manage to scrawl the notes.
+F
+0
+T
+-5
+T
+5
+T
+5
+2
+notes1
+sleep2

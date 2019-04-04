@@ -1,0 +1,13 @@
+I'm busy.
+Mom insists you help out with chores if you're not going.
+F
+0
+T
+-10
+T
+-5
+F
+0
+2
+chore1
+chore2

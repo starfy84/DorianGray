@@ -1,0 +1,11 @@
+Let's cook!
+You burn the rice, but it's edible.
+T
+10
+T
+-20
+F
+0
+T
+10
+0

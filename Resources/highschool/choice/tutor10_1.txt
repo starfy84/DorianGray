@@ -1,0 +1,11 @@
+Cool.
+You're too tired for formalities, and leave quickly.
+F
+0
+T
+10
+F
+0
+T
+5
+0

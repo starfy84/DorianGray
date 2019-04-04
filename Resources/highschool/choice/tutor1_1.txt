@@ -1,0 +1,12 @@
+Bye.
+Mr. Jones is disappointed, but not surprised. You leave.
+F
+0
+T
+1
+5
+T
+-5
+F
+0
+0

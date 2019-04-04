@@ -1,0 +1,13 @@
+Sorry, I won't go.
+Bram seems disappointed, so you feel kind of guilty.
+F
+0
+T
+-5
+T
+-15
+T
+-10
+2
+sorry1
+sorry2

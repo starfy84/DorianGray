@@ -1,0 +1,11 @@
+Just once.
+Mr. Jones gives you both the evil eye after class but stays silent.
+F
+0
+T
+10
+F
+0
+T
+-10
+0

@@ -1,0 +1,11 @@
+Do it yourself.
+Katie gets angry and stops talking to you.
+F
+0
+T
+-10
+T
+-5
+T
+10
+0

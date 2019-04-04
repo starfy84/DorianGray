@@ -1,0 +1,11 @@
+I won't be ready.
+You begin to play piano for its enjoyment, and find that fulfilling enough.
+F
+0
+T
+10
+T
+-5
+T
+5
+0
