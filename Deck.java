@@ -31,17 +31,17 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class Deck {
-    private List<List<Card>> deck;
-    private Card currentCard;
-    
-    private Parent deckImgs;
-    
+  private List<List<Card>> deck;
+  private Card currentCard;
+
+  private Parent deckImgs;
+
     /** Constructor
       *  
       * @param deckName  The string relating to the Deck file.
       **/
     public Deck (List<List<Card>> deck) {
-	this.deck = deck;
+      this.deck = deck;
     }
     
     /** Adds nextCards from choice into Deck, removes empty entries in deck, and sets the new value of currentCard.
@@ -51,42 +51,34 @@ public class Deck {
       * @return  If the deck still has cards.
       **/
     public boolean nextCard(Choice chosen){
-	// Add result card from chosen choice to front of Deck
-	if (chosen.getNextCards().size() > 0)
-	    deck.get(0).add(0,chosen.getNextCard());
-	
-	// Add next cards from the chosen choice (result card has already been removed)
-	deck.add((int)(Math.random()*(deck.size()-1))+1, chosen.getNextCards());
-	
-	return nextCard();
-    }
-    
+	   // Add result card from chosen choice to front of Deck
+     if (chosen.getNextCards().size() > 0)
+       deck.get(0).add(0,chosen.getNextCard());
+
+	   // Add next cards from the chosen choice (result card has already been removed)
+     deck.add((int)(Math.random()*(deck.size()-1))+1, chosen.getNextCards());
+
+     return nextCard();
+   }
+
     /** Called to perform nextCard functions that don't need a Choice (in the constructor and in nextCard original)
       * 
       * @return  If the deck still has cards.
       **/    
     public boolean nextCard(){
-	// Remove empty sequences at front
-	while (deck.size() > 0 && deck.get(0).size() == 0)
-	    deck.remove(0);
-	
-	// Signals a game over
-	if (deck.size() == 0)
-	    return false;
-	
-	// Add next card from front of deck
-	currentCard = deck.get(0).remove(0);
-	return true;
-    }
-    
-    /** Shuffles deck.**/
-    public void shuffle(){
-	List<List<Card>> temp = new ArrayList<List<Card>>();
-	while (deck.size() > 0)
-	    temp.add(deck.remove((int)(Math.random()*deck.size())));
-	deck = temp;
-    }
-    
+	   // Remove empty sequences at front
+     while (deck.size() > 0 && deck.get(0).size() == 0)
+       deck.remove(0);
+
+	   // Signals a game over
+     if (deck.size() == 0)
+       return false;
+
+	   // Add next card from front of deck
+     currentCard = deck.get(0).remove(0);
+     return true;
+   }
+
     /** The card currently in play.
       * 
       * @return  Value of currentCard.
@@ -105,4 +97,4 @@ public class Deck {
       **/
     @Override
     public String toString() { return "" + deck;}
-}
+  }
