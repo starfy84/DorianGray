@@ -30,7 +30,7 @@ public class Driver extends Application {
 	stage.getIcons().add(new Image ("/Images/icons/icon64x64.png"));  //Set icon
 	MainMenu m = new MainMenu(); //Initialize and run main menu
 	window.setScene(m.getScene());
-	window.setTitle ("To Live");
+	window.setTitle ("The Changing of Dorian Gray");
 	window.show();
 	m.intro();
     }    
