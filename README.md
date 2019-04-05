@@ -1,5 +1,5 @@
 # The Changing of Dorian Gray
-ENG3U Creative Project Made with JavaFx
+ENG3U Creative Project Made with JavaFx by Dereck Tu (Chief Programmer), Matthew Mach (Project Manager & Story Designer), William Xu (Artist)
 
 TODO
 =
