@@ -171,7 +171,7 @@ public class MainMenu{
     
     //Creates highscore counter
     highscoreMenu = new Pane();
-    highscores = new HighscoreMaster("C:/ToLive");
+    highscores = new HighscoreMaster(Const.HIGHSCORE_PATH);
     crown = new ImageView (new Image(IMGPATH + "highscores_screen.png"));
     score1 = new ImageView (new Image(IMGPATH + "level_select_text2.png"));
     score2 = new ImageView (new Image(IMGPATH + "level_select_text3.png"));
