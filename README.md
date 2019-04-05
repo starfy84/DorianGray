@@ -47,4 +47,5 @@ TODO
 	* Remove responses (CardGen)
 	* Change Level options
 	* Make text sequential
-
+	* Add "Add Deck" function to Deck.java
+		* Append new decks to current deck depending on choices.
