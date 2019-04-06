@@ -122,8 +122,8 @@ public class Game {
     root = new Pane();
     
     //background intialization
-    background = new ImageView(new Image("/Images/game/backgrounds/"+deckName+".png"));
-    boardScore = new ImageView(new Image("/Images/game/ui/game_bar.png"));
+    background = new ImageView(new Image(Const.GAME_PATH+"backgrounds/"+deckName+".png"));
+    boardScore = new ImageView(new Image(Const.GAME_PATH+"ui/game_bar.png"));
     boardScore.relocate(420, 0);
     
     //initialization of the boards
@@ -131,7 +131,7 @@ public class Game {
     Color brown = Color.rgb(108, 58, 5);
     boardCard = new Rectangle (440, 720, peach);
     boardName = new Rectangle (440, 70, brown);  
-    cardBackStation = new ImageView(new Image("/Images/card/back/"+deckName+".png"));     
+    cardBackStation = new ImageView(new Image(Const.CARD_BACK_PATH+deckName+".png"));     
     
     //relocation of the boards
     boardCard.relocate(420, 0);
@@ -193,11 +193,11 @@ public class Game {
     
     
     //Intialization of the back and front of the cards
-    cardBack = new ImageView(new Image("/Images/card/back/"+deckName+".png")); 
+    cardBack = new ImageView(new Image(Const.CARD_BACK_PATH+deckName+".png")); 
     //Set invisible until flipped
     cardBack.setScaleX(0);
     cardFront = currentCard.getCardFront(); 
-    cardDim = new ImageView (new Image ("/Images/game/ui/transparent_back.png"));
+    cardDim = new ImageView (new Image (Const.GAME_PATH+"ui/transparent_back.png"));
     
     //Centers the card front and back
     cardBack.relocate(460, 260);

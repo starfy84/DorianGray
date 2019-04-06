@@ -29,8 +29,6 @@ import javafx.geometry.Bounds;
 
 public class MainMenu{
   //Instance Variables
-  private final String IMGPATH = "/Images/main menu/"; //path of the images used in main menu
-  
   private static Scene scene; //the scene used throughout the entire program
   private Pane root; //The main menu root, contains all the main menu elements
   private Game tutorial; //The game object of the tutorial
@@ -76,13 +74,13 @@ public class MainMenu{
   public MainMenu (){
     
     //Initializes intro images and relocates them
-    door = new ImageView (new Image(IMGPATH + "door.png"));
-    text1 = new ImageView (new Image(IMGPATH + "intro_text1.png"));
-    text2 = new ImageView (new Image(IMGPATH + "intro_text2.png"));
-    text3 = new ImageView (new Image(IMGPATH + "intro_text3.png"));
-    text4 = new ImageView (new Image(IMGPATH + "intro_text4.png"));
-    title = new ImageView (new Image(IMGPATH + "title.png"));
-    textBot = new ImageView (new Image(IMGPATH + "intro_textStudioLabel.png"));
+    door = new ImageView (new Image(Const.MAIN_MENU_PATH + "door.png"));
+    text1 = new ImageView (new Image(Const.MAIN_MENU_PATH + "intro_text1.png"));
+    text2 = new ImageView (new Image(Const.MAIN_MENU_PATH + "intro_text2.png"));
+    text3 = new ImageView (new Image(Const.MAIN_MENU_PATH + "intro_text3.png"));
+    text4 = new ImageView (new Image(Const.MAIN_MENU_PATH + "intro_text4.png"));
+    title = new ImageView (new Image(Const.MAIN_MENU_PATH + "title.png"));
+    textBot = new ImageView (new Image(Const.MAIN_MENU_PATH + "intro_textStudioLabel.png"));
     
     door.relocate (210, 140);
     text1.relocate (500, 145);
@@ -113,19 +111,19 @@ public class MainMenu{
     
     //Creates menu button and picutres for both help and credits
     sideMenu = new Pane();
-    credits = new ImageView (new Image (IMGPATH + "credits.png"));
-    help = new ImageView (new Image (IMGPATH + "help.png"));
+    credits = new ImageView (new Image (Const.MAIN_MENU_PATH + "credits.png"));
+    help = new ImageView (new Image (Const.MAIN_MENU_PATH + "help.png"));
     menuButton = createMenuButton();;
     sideMenu.getChildren().addAll(help, menuButton);
     
     
     //Creates level select
     levelSelect = new Pane();
-    clock = new ImageView(new Image(IMGPATH + "level_select_clock.png"));
-    choice1 = new ImageView (new Image(IMGPATH + "level_select_text1.png"));
-    choice2 = new ImageView (new Image(IMGPATH + "level_select_text2.png"));
-    choice3 = new ImageView (new Image(IMGPATH + "level_select_text3.png"));
-    choice4 = new ImageView (new Image(IMGPATH + "level_select_text4.png"));
+    clock = new ImageView(new Image(Const.MAIN_MENU_PATH + "level_select_clock.png"));
+    choice1 = new ImageView (new Image(Const.MAIN_MENU_PATH + "level_select_text1.png"));
+    choice2 = new ImageView (new Image(Const.MAIN_MENU_PATH + "level_select_text2.png"));
+    choice3 = new ImageView (new Image(Const.MAIN_MENU_PATH + "level_select_text3.png"));
+    choice4 = new ImageView (new Image(Const.MAIN_MENU_PATH + "level_select_text4.png"));
     
     choice1.relocate (450, 195);
     choice2.relocate (450, 295);
@@ -172,10 +170,10 @@ public class MainMenu{
     //Creates highscore counter
     highscoreMenu = new Pane();
     highscores = new HighscoreMaster(Const.HIGHSCORE_PATH);
-    crown = new ImageView (new Image(IMGPATH + "highscores_screen.png"));
-    score1 = new ImageView (new Image(IMGPATH + "level_select_text2.png"));
-    score2 = new ImageView (new Image(IMGPATH + "level_select_text3.png"));
-    score3 = new ImageView (new Image(IMGPATH + "level_select_text4.png"));
+    crown = new ImageView (new Image(Const.MAIN_MENU_PATH + "highscores_screen.png"));
+    score1 = new ImageView (new Image(Const.MAIN_MENU_PATH + "level_select_text2.png"));
+    score2 = new ImageView (new Image(Const.MAIN_MENU_PATH + "level_select_text3.png"));
+    score3 = new ImageView (new Image(Const.MAIN_MENU_PATH + "level_select_text4.png"));
     
     score1.relocate (450, 295);
     score2.relocate (450, 395);
@@ -197,7 +195,7 @@ public class MainMenu{
     * @return An Imageview of the button with working user input
     **/
   private ImageView createMenuButton(){
-    ImageView menuButtonTemp = new ImageView (new Image (IMGPATH + "menu_button.png"));
+    ImageView menuButtonTemp = new ImageView (new Image (Const.MAIN_MENU_PATH + "menu_button.png"));
     menuButtonTemp.relocate (35, 35);
     menuButtonTemp.setOnMousePressed(new EventHandler<MouseEvent>(){
       @Override public void handle(MouseEvent mouseEvent) {
@@ -206,12 +204,12 @@ public class MainMenu{
     });
     menuButtonTemp.setOnMouseEntered(new EventHandler<MouseEvent>(){
       @Override public void handle(MouseEvent mouseEvent) {
-        menuButtonTemp.setImage(new Image(IMGPATH + "menu_button_over.png"));
+        menuButtonTemp.setImage(new Image(Const.MAIN_MENU_PATH + "menu_button_over.png"));
       }
     });
     menuButtonTemp.setOnMouseExited(new EventHandler<MouseEvent>() {
       @Override public void handle(MouseEvent mouseEvent) {
-        menuButtonTemp.setImage(new Image(IMGPATH + "menu_button.png"));
+        menuButtonTemp.setImage(new Image(Const.MAIN_MENU_PATH + "menu_button.png"));
         
       }
     });
@@ -223,7 +221,7 @@ public class MainMenu{
     * @return An Imageview of the button with working user input
     **/
   private ImageView createHighscoresMenuButton(){
-    ImageView menuButtonTemp = new ImageView (new Image (IMGPATH + "menu_button.png")); //Gets the image
+    ImageView menuButtonTemp = new ImageView (new Image (Const.MAIN_MENU_PATH + "menu_button.png")); //Gets the image
     menuButtonTemp.relocate (35, 35); //relocates it
     //Adds if mouse pressed, and hover over user input
     menuButtonTemp.setOnMousePressed(new EventHandler<MouseEvent>(){
@@ -233,12 +231,12 @@ public class MainMenu{
     });
     menuButtonTemp.setOnMouseEntered(new EventHandler<MouseEvent>(){
       @Override public void handle(MouseEvent mouseEvent) {
-        menuButtonTemp.setImage(new Image(IMGPATH + "menu_button_over.png"));
+        menuButtonTemp.setImage(new Image(Const.MAIN_MENU_PATH + "menu_button_over.png"));
       }
     });
     menuButtonTemp.setOnMouseExited(new EventHandler<MouseEvent>() {
       @Override public void handle(MouseEvent mouseEvent) {
-        menuButtonTemp.setImage(new Image(IMGPATH + "menu_button.png"));
+        menuButtonTemp.setImage(new Image(Const.MAIN_MENU_PATH + "menu_button.png"));
         
       }
     });
@@ -250,16 +248,16 @@ public class MainMenu{
     * @return An Imageview of the button with working user input
     **/
   private ImageView createGameMenuButton(Pane gamePane){
-    ImageView menuButtonTemp = new ImageView (new Image (IMGPATH + "menu_button.png"));
+    ImageView menuButtonTemp = new ImageView (new Image (Const.MAIN_MENU_PATH + "menu_button.png"));
     menuButtonTemp.relocate (35, 35);
     menuButtonTemp.setOnMouseEntered(new EventHandler<MouseEvent>(){
       @Override public void handle(MouseEvent mouseEvent) {
-        menuButtonTemp.setImage(new Image(IMGPATH + "menu_button_over.png"));
+        menuButtonTemp.setImage(new Image(Const.MAIN_MENU_PATH + "menu_button_over.png"));
       }
     });
     menuButtonTemp.setOnMouseExited(new EventHandler<MouseEvent>() {
       @Override public void handle(MouseEvent mouseEvent) {
-        menuButtonTemp.setImage(new Image(IMGPATH + "menu_button.png"));
+        menuButtonTemp.setImage(new Image(Const.MAIN_MENU_PATH + "menu_button.png"));
         
       }
     });
@@ -271,12 +269,12 @@ public class MainMenu{
     **/
   private void changeGameMenuFunction(Pane gamePane){
     
-    closePrompt = new ImageView (new Image (IMGPATH + "leave_main.png"));
+    closePrompt = new ImageView (new Image (Const.MAIN_MENU_PATH + "leave_main.png"));
     backFade = new Rectangle (1280, 720, Color.rgb(0,0,0,0.5));
     closePrompt.relocate(206, 128);
     backFade.relocate(0,0);
     
-    leave = new ImageView (new Image (IMGPATH + "leave.png"));
+    leave = new ImageView (new Image (Const.MAIN_MENU_PATH + "leave.png"));
     leave.setOnMousePressed(new EventHandler<MouseEvent>(){
       @Override public void handle(MouseEvent mouseEvent) {
         scene.setRoot(levelSelect);
@@ -284,18 +282,18 @@ public class MainMenu{
     });
     leave.setOnMouseEntered(new EventHandler<MouseEvent>(){
       @Override public void handle(MouseEvent mouseEvent) {
-        leave.setImage(new Image(IMGPATH + "leave_over.png"));
+        leave.setImage(new Image(Const.MAIN_MENU_PATH + "leave_over.png"));
       }
     });
     leave.setOnMouseExited(new EventHandler<MouseEvent>() {
       @Override public void handle(MouseEvent mouseEvent) {
-        leave.setImage(new Image(IMGPATH + "leave.png"));
+        leave.setImage(new Image(Const.MAIN_MENU_PATH + "leave.png"));
         
       }
     });
     leave.relocate(370, 500);
     
-    stay = new ImageView (new Image (IMGPATH + "stay.png"));
+    stay = new ImageView (new Image (Const.MAIN_MENU_PATH + "stay.png"));
     stay.setOnMousePressed(new EventHandler<MouseEvent>(){
       @Override public void handle(MouseEvent mouseEvent) {
         gamePane.getChildren().remove(16, 20); //Place numbers in here
@@ -303,12 +301,12 @@ public class MainMenu{
     });
     stay.setOnMouseEntered(new EventHandler<MouseEvent>(){
       @Override public void handle(MouseEvent mouseEvent) {
-        stay.setImage(new Image(IMGPATH + "stay_over.png"));
+        stay.setImage(new Image(Const.MAIN_MENU_PATH + "stay_over.png"));
       }
     });
     stay.setOnMouseExited(new EventHandler<MouseEvent>() {
       @Override public void handle(MouseEvent mouseEvent) {
-        stay.setImage(new Image(IMGPATH + "stay.png"));
+        stay.setImage(new Image(Const.MAIN_MENU_PATH + "stay.png"));
         
       }
     });
@@ -516,11 +514,11 @@ public class MainMenu{
     fadeOut.setOnFinished(new EventHandler<ActionEvent>() {
       @Override
       public void handle(ActionEvent t) {
-        text1.setImage(new Image(IMGPATH + "menu_text1.png"));
-        text2.setImage(new Image(IMGPATH + "menu_text2.png"));
-        text3.setImage(new Image(IMGPATH + "menu_text3.png"));
-        text4.setImage(new Image(IMGPATH + "menu_text4.png"));
-        textBot.setImage(new Image(IMGPATH + "menu_textPrompt.png"));
+        text1.setImage(new Image(Const.MAIN_MENU_PATH + "menu_text1.png"));
+        text2.setImage(new Image(Const.MAIN_MENU_PATH + "menu_text2.png"));
+        text3.setImage(new Image(Const.MAIN_MENU_PATH + "menu_text3.png"));
+        text4.setImage(new Image(Const.MAIN_MENU_PATH + "menu_text4.png"));
+        textBot.setImage(new Image(Const.MAIN_MENU_PATH + "menu_textPrompt.png"));
         fadeIn.play();
       }
     });
@@ -549,14 +547,14 @@ public class MainMenu{
     });
     door.setOnMouseEntered(new EventHandler<MouseEvent>(){
       @Override public void handle(MouseEvent mouseEvent) {
-        door.setImage(new Image(IMGPATH + "door_over.png"));
-        textBot.setImage(new Image (IMGPATH + "close.png"));
+        door.setImage(new Image(Const.MAIN_MENU_PATH + "door_over.png"));
+        textBot.setImage(new Image (Const.MAIN_MENU_PATH + "close.png"));
       }
     });
     door.setOnMouseExited(new EventHandler<MouseEvent>() {
       @Override public void handle(MouseEvent mouseEvent) {
-        door.setImage(new Image(IMGPATH + "door.png"));
-        textBot.setImage (new Image (IMGPATH + "menu_textPrompt.png"));
+        door.setImage(new Image(Const.MAIN_MENU_PATH + "door.png"));
+        textBot.setImage (new Image (Const.MAIN_MENU_PATH + "menu_textPrompt.png"));
       }
     });
     
@@ -568,12 +566,12 @@ public class MainMenu{
     });
     text1.setOnMouseEntered(new EventHandler<MouseEvent>(){
       @Override public void handle(MouseEvent mouseEvent) {
-        text1.setImage(new Image(IMGPATH + "menu_text1_over.png"));
+        text1.setImage(new Image(Const.MAIN_MENU_PATH + "menu_text1_over.png"));
       }
     });
     text1.setOnMouseExited(new EventHandler<MouseEvent>() {
       @Override public void handle(MouseEvent mouseEvent) {
-        text1.setImage(new Image(IMGPATH + "menu_text1.png"));
+        text1.setImage(new Image(Const.MAIN_MENU_PATH + "menu_text1.png"));
         
       }
     });
@@ -587,13 +585,13 @@ public class MainMenu{
     text2.setOnMouseEntered(new EventHandler<MouseEvent>() {
       @Override
       public void handle(MouseEvent mouseEvent) {
-        text2.setImage(new Image(IMGPATH + "menu_text2_over.png"));
+        text2.setImage(new Image(Const.MAIN_MENU_PATH + "menu_text2_over.png"));
       }
     });
     text2.setOnMouseExited(new EventHandler<MouseEvent>() {
       @Override
       public void handle(MouseEvent mouseEvent) {
-        text2.setImage(new Image(IMGPATH + "menu_text2.png"));
+        text2.setImage(new Image(Const.MAIN_MENU_PATH + "menu_text2.png"));
       }
     });
     
@@ -605,13 +603,13 @@ public class MainMenu{
     });
     text3.setOnMouseEntered(new EventHandler<MouseEvent>(){
       @Override public void handle(MouseEvent mouseEvent) {
-        text3.setImage(new Image(IMGPATH + "menu_text3_over.png"));
+        text3.setImage(new Image(Const.MAIN_MENU_PATH + "menu_text3_over.png"));
       }
     });
     text3.setOnMouseExited(new EventHandler<MouseEvent>() {
       @Override
       public void handle(MouseEvent mouseEvent) {
-        text3.setImage(new Image(IMGPATH + "menu_text3.png"));
+        text3.setImage(new Image(Const.MAIN_MENU_PATH + "menu_text3.png"));
       }
     });
     
@@ -623,13 +621,13 @@ public class MainMenu{
     });
     text4.setOnMouseEntered(new EventHandler<MouseEvent>(){
       @Override public void handle(MouseEvent mouseEvent) {
-        text4.setImage(new Image(IMGPATH + "menu_text4_over.png"));
+        text4.setImage(new Image(Const.MAIN_MENU_PATH + "menu_text4_over.png"));
       }
     });
     text4.setOnMouseExited(new EventHandler<MouseEvent>() {
       @Override
       public void handle(MouseEvent mouseEvent) {
-        text4.setImage(new Image(IMGPATH + "menu_text4.png"));
+        text4.setImage(new Image(Const.MAIN_MENU_PATH + "menu_text4.png"));
       }
     });
   }
@@ -647,12 +645,12 @@ public class MainMenu{
     });
     choice1.setOnMouseEntered(new EventHandler<MouseEvent>(){
       @Override public void handle(MouseEvent mouseEvent) {
-        choice1.setImage(new Image(IMGPATH + "level_select_text1_over.png"));
+        choice1.setImage(new Image(Const.MAIN_MENU_PATH + "level_select_text1_over.png"));
       }
     });
     choice1.setOnMouseExited(new EventHandler<MouseEvent>() {
       @Override public void handle(MouseEvent mouseEvent) {
-        choice1.setImage(new Image(IMGPATH + "level_select_text1.png"));
+        choice1.setImage(new Image(Const.MAIN_MENU_PATH + "level_select_text1.png"));
       }
     });
     
@@ -669,13 +667,13 @@ public class MainMenu{
     choice2.setOnMouseEntered(new EventHandler<MouseEvent>() {
       @Override
       public void handle(MouseEvent mouseEvent) {
-        choice2.setImage(new Image(IMGPATH + "level_select_text2_over.png"));
+        choice2.setImage(new Image(Const.MAIN_MENU_PATH + "level_select_text2_over.png"));
       }
     });
     choice2.setOnMouseExited(new EventHandler<MouseEvent>() {
       @Override
       public void handle(MouseEvent mouseEvent) {
-        choice2.setImage(new Image(IMGPATH + "level_select_text2.png"));
+        choice2.setImage(new Image(Const.MAIN_MENU_PATH + "level_select_text2.png"));
       }
     });
     
@@ -691,13 +689,13 @@ public class MainMenu{
     });
     choice3.setOnMouseEntered(new EventHandler<MouseEvent>(){
       @Override public void handle(MouseEvent mouseEvent) {
-        choice3.setImage(new Image(IMGPATH + "level_select_text3_over.png"));
+        choice3.setImage(new Image(Const.MAIN_MENU_PATH + "level_select_text3_over.png"));
       }
     });
     choice3.setOnMouseExited(new EventHandler<MouseEvent>() {
       @Override
       public void handle(MouseEvent mouseEvent) {
-        choice3.setImage(new Image(IMGPATH + "level_select_text3.png"));
+        choice3.setImage(new Image(Const.MAIN_MENU_PATH + "level_select_text3.png"));
       }
     });
     
@@ -713,13 +711,13 @@ public class MainMenu{
     });
     choice4.setOnMouseEntered(new EventHandler<MouseEvent>(){
       @Override public void handle(MouseEvent mouseEvent) {
-        choice4.setImage(new Image(IMGPATH + "level_select_text4_over.png"));
+        choice4.setImage(new Image(Const.MAIN_MENU_PATH + "level_select_text4_over.png"));
       }
     });
     choice4.setOnMouseExited(new EventHandler<MouseEvent>() {
       @Override
       public void handle(MouseEvent mouseEvent) {
-        choice4.setImage(new Image(IMGPATH + "level_select_text4.png"));
+        choice4.setImage(new Image(Const.MAIN_MENU_PATH + "level_select_text4.png"));
       }
     });
   }
@@ -735,13 +733,13 @@ public class MainMenu{
     score1.setOnMouseEntered(new EventHandler<MouseEvent>() {
       @Override
       public void handle(MouseEvent mouseEvent) {
-        score1.setImage(new Image(IMGPATH + "level_select_text2_over.png"));
+        score1.setImage(new Image(Const.MAIN_MENU_PATH + "level_select_text2_over.png"));
       }
     });
     score1.setOnMouseExited(new EventHandler<MouseEvent>() {
       @Override
       public void handle(MouseEvent mouseEvent) {
-        score1.setImage(new Image(IMGPATH + "level_select_text2.png"));
+        score1.setImage(new Image(Const.MAIN_MENU_PATH + "level_select_text2.png"));
       }
     });
     
@@ -754,13 +752,13 @@ public class MainMenu{
     });
     score2.setOnMouseEntered(new EventHandler<MouseEvent>(){
       @Override public void handle(MouseEvent mouseEvent) {
-        score2.setImage(new Image(IMGPATH + "level_select_text3_over.png"));
+        score2.setImage(new Image(Const.MAIN_MENU_PATH + "level_select_text3_over.png"));
       }
     });
     score2.setOnMouseExited(new EventHandler<MouseEvent>() {
       @Override
       public void handle(MouseEvent mouseEvent) {
-        score2.setImage(new Image(IMGPATH + "level_select_text3.png"));
+        score2.setImage(new Image(Const.MAIN_MENU_PATH + "level_select_text3.png"));
       }
     });
     
@@ -773,13 +771,13 @@ public class MainMenu{
     });
     score3.setOnMouseEntered(new EventHandler<MouseEvent>(){
       @Override public void handle(MouseEvent mouseEvent) {
-        score3.setImage(new Image(IMGPATH + "level_select_text4_over.png"));
+        score3.setImage(new Image(Const.MAIN_MENU_PATH + "level_select_text4_over.png"));
       }
     });
     score3.setOnMouseExited(new EventHandler<MouseEvent>() {
       @Override
       public void handle(MouseEvent mouseEvent) {
-        score3.setImage(new Image(IMGPATH + "level_select_text4.png"));
+        score3.setImage(new Image(Const.MAIN_MENU_PATH + "level_select_text4.png"));
       }
     });
   }

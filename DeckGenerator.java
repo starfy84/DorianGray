@@ -58,7 +58,7 @@ public class DeckGenerator {
         this.choiceHash = new HashMap<String,Choice>();
         this.imageHash = new HashMap<String,ImageView>();
         
-        this.resultImage = createImage("/Images/card/front/konscench_"+deckName+".png");
+        this.resultImage = createImage(Const.CARD_FRONT_PATH+"konscench_"+deckName+".png");
         this.imageHash.put("RESULT", resultImage);
     }
 
