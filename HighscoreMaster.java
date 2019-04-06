@@ -25,14 +25,9 @@ public class HighscoreMaster {
 	this.fileName = fileName;
 	
 	// Checks if the files exist
-	try {
-	    BufferedReader reader = new BufferedReader(new FileReader(fileName + "/childhood.txt"));
-	    reader.close();
-	    reader = new BufferedReader(new FileReader(fileName + "/middleschool.txt"));
-	    reader.close();
-	    reader = new BufferedReader(new FileReader(fileName + "/highschool.txt"));
-	    reader.close();
-	} catch (Exception e){
+	File f = new File(fileName);
+	if(!f.exists())
+	{
 	    // If they don't, create the directory
 	    System.out.println("Making directory: " + new File(fileName).mkdirs());
 	    
@@ -51,10 +46,6 @@ public class HighscoreMaster {
 	middleschoolHandler = new HighscoreHandler(fileName + "/middleschool.txt");
 	highschoolHandler = new HighscoreHandler(fileName + "/highschool.txt");
 	
-	// Initiate file values
-	childhoodHandler.clearScores();
-	middleschoolHandler.clearScores();
-	highschoolHandler.clearScores();
     }
     
     /** Accessor for handlers
