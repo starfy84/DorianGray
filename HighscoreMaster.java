@@ -1,4 +1,4 @@
-'/**
+/**
  * Author(s): Andy Pham and Matthew Mach
  * Version: 1.0
  * Date: June 7, 2018
