@@ -199,7 +199,7 @@ public class Game {
       @Override public void handle(MouseEvent mouseEvent) {
         if (mouseEvent.getSceneX() < 450){ //if mouse is on the left
           if (v.choiceRight){
-            root.getChildren().remove(17, 18); //removes the right choice if it the mouse somehow never goes in the middle
+            root.getChildren().remove(root.getChildren().size()-2, root.getChildren().size()); //removes the right choice if it the mouse somehow never goes in the middle
             root.getChildren().add(choice2);
           }
           else if (!v.choiceLeft)
@@ -212,7 +212,7 @@ public class Game {
         }
         else if (mouseEvent.getSceneX() > 810){ //if mouse is on the right
           if (v.choiceLeft){
-            root.getChildren().remove(17, 18); //removes the left choice if it the mouse somehow never goes in the middle
+            root.getChildren().remove(root.getChildren().size()-2, root.getChildren().size()); //removes the left choice if it the mouse somehow never goes in the middle
             root.getChildren().add(choice1);
           }
           else if (!v.choiceRight)
