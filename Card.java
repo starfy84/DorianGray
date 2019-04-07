@@ -30,9 +30,9 @@ import javafx.event.*;
 import javafx.event.EventHandler;
 
 public class Card {
-    private String text;
-    private String name;
-    private String fileName;
+  private String text;
+  private String name;
+  private String fileName;
     /* Text is the description of problem, the thing Derek must make a choice on
        Name is the name of the person presenting the choice
        Filename is the filename storing the card's info. Also used to reference card as a key in DeckImageGenerator's cardHash
@@ -48,10 +48,10 @@ public class Card {
       * @param cardBack  The image of the back face. Might be shared between cards, so created in DeckImageGenerator.
       **/
     public Card (String fileName, String text, String name, ImageView cardFront){
-        this.fileName = fileName;
-        this.cardFront = cardFront;
-        this.text = text;
-        this.name = name;
+      this.fileName = fileName;
+      this.cardFront = cardFront;
+      this.text = text;
+      this.name = name;
     }
 
     /** Mutator for leftChoice.
@@ -108,7 +108,7 @@ public class Card {
       **/
     @Override
     public String toString(){
-        return "(Card:"+fileName+")";
+      return "(Card:"+fileName+")";
     }
     
-}
+  }

@@ -479,34 +479,34 @@ public class MainMenu{
   public void intro(){
     //The fade out transition, repeatedly increases the alpha value of a white rgb value to simulate a fade out 
     Timeline fadeOut = new Timeline (
-                                     new KeyFrame(
-                                                  Duration.millis(100),
-                                                  (evt) -> {
-      alpha = (((double)(int)(alpha*100.0))+4)/100;
-      fade = Color.rgb(255, 255, 255, alpha);
-      fade1.setFill(fade);
-      fade2.setFill(fade);
-      fade3.setFill(fade);
-      fade4.setFill(fade);
-      fadeBot.setFill(fade);
-    }));
+     new KeyFrame(
+      Duration.millis(100),
+      (evt) -> {
+        alpha = (((double)(int)(alpha*100.0))+4)/100;
+        fade = Color.rgb(255, 255, 255, alpha);
+        fade1.setFill(fade);
+        fade2.setFill(fade);
+        fade3.setFill(fade);
+        fade4.setFill(fade);
+        fadeBot.setFill(fade);
+      }));
     fadeOut.setCycleCount (25);               //Cycles 10 times
     fadeOut.setDelay(Duration.seconds(3));   //Starts after 100 millis
     
     //The fade in transition; repeatedly decreases the alpha value of a white rgb value to simulate a fade in
     Timeline fadeIn = new Timeline (
-                                    new KeyFrame(
-                                                 Duration.millis(100),
-                                                 (evt) -> {
-      alpha = (((double)(int)(alpha*100.0))-4)/100;
-      fade = Color.rgb(255, 255, 255, alpha);
-      fade1.setFill(fade);
-      fade2.setFill(fade);
-      fade3.setFill(fade);
-      fade4.setFill(fade);
-      fadeTitle.setFill(fade);
-      fadeBot.setFill(fade);
-    }));
+      new KeyFrame(
+       Duration.millis(100),
+       (evt) -> {
+        alpha = (((double)(int)(alpha*100.0))-4)/100;
+        fade = Color.rgb(255, 255, 255, alpha);
+        fade1.setFill(fade);
+        fade2.setFill(fade);
+        fade3.setFill(fade);
+        fade4.setFill(fade);
+        fadeTitle.setFill(fade);
+        fadeBot.setFill(fade);
+      }));
     fadeIn.setCycleCount (25);                //Cycles 10 times
     
     

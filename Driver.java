@@ -22,17 +22,17 @@ import javafx.scene.image.*;
 
 public class Driver extends Application {
     private static Stage window; //the window of the game
-  
+
     /** Used in applications to initialize what is run on start**/
     @Override
     public void start(Stage stage) throws Exception {
-	window = stage;
-	stage.getIcons().add(new Image ("/Images/icons/icon64x64.png"));  //Set icon
-	MainMenu m = new MainMenu(); //Initialize and run main menu
-	window.setScene(m.getScene());
-	window.setTitle (Const.TITLE);
-	window.show();
-	m.intro();
+      window = stage;
+      stage.getIcons().add(new Image ("/Images/icons/icon64x64.png"));  //Set icon
+      MainMenu m = new MainMenu(); //Initialize and run main menu
+      window.setScene(m.getScene());
+      window.setTitle (Const.TITLE);
+      window.show();
+      m.intro();
     }    
     /* Gameplay pseudocode:
      * 
@@ -57,13 +57,13 @@ public class Driver extends Application {
      * 8 - End game and return to Deck
      */
     
-     /** Closes the window**/
+    /** Closes the window**/
     public static void close(){
       window.close();
     }
-    
+
     /**Main method **/
     public static void main(String[] args) {
-	launch();
+      launch();
     }
-}
+  }

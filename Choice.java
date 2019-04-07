@@ -41,10 +41,10 @@ public class Choice {
       * @param nextCards      Stores cards that appear as a result of this choice.
       **/
     public Choice(String text, boolean[] hasEffect, int[] effectAmount, List<Card> nextCards){
-        this.text = text;
-        this.hasEffect = hasEffect;
-        this.effectAmount = effectAmount;
-        this.nextCards = nextCards;
+      this.text = text;
+      this.hasEffect = hasEffect;
+      this.effectAmount = effectAmount;
+      this.nextCards = nextCards;
     }
     
     /** Overloaded constructor for choices that have no effect on the game (simply to confirm the results of cards).
@@ -52,10 +52,10 @@ public class Choice {
       * @param text  Preview text for choice.
       **/
     public Choice(String text){
-        this.text = text;
-        this.hasEffect = new boolean[4];
-        this.effectAmount = new int[4];
-        this.nextCards = new ArrayList<Card>();
+      this.text = text;
+      this.hasEffect = new boolean[4];
+      this.effectAmount = new int[4];
+      this.nextCards = new ArrayList<Card>();
     }
     
     /** Accessor method
@@ -94,12 +94,12 @@ public class Choice {
       **/
     @Override
     public String toString(){
-        String s = "Choice:"+nextCards+":";
-        for (int i = 0; i < 4; i++)
-            s += hasEffect[i] + " ";
-        s += ":";
-        for (int i = 0; i < 4; i++)
-            s += effectAmount[i] + " ";
-        return s;
+      String s = "Choice:"+nextCards+":";
+      for (int i = 0; i < 4; i++)
+        s += hasEffect[i] + " ";
+      s += ":";
+      for (int i = 0; i < 4; i++)
+        s += effectAmount[i] + " ";
+      return s;
     }
-}
+  }

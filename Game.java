@@ -465,9 +465,9 @@ public class Game {
     root.getChildren().addAll(title, label1, textField);
     root.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
       if(key.getCode()==KeyCode.ENTER) {
-          highscoresHandler.insertScore(score, textField.getText());
-          highscoresHandler.writeScores();
-          MainMenu.backToLevelSelect();
+        highscoresHandler.insertScore(score, textField.getText());
+        highscoresHandler.writeScores();
+        MainMenu.backToLevelSelect();
       }
     });
   }

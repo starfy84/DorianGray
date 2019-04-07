@@ -26,15 +26,15 @@ public class HighscoreHandler {
       * @param fileName The filename of the highscore file
       **/
     public HighscoreHandler(String fileName){
-	this.fileName = fileName;
-	scores = new ArrayList<Integer>();
-	names = new ArrayList<String>();
-	
+    	this.fileName = fileName;
+    	scores = new ArrayList<Integer>();
+    	names = new ArrayList<String>();
+    	
 	//Reads the scores and corresponding names to the arrays
-	for (int i = 0; i < 10; i++){
-	    scores.add(i, 0);
-	    names.add(i, "-");
-	}
+    	for (int i = 0; i < 10; i++){
+    		scores.add(i, 0);
+    		names.add(i, "-");
+    	}
     }
     
     /** Inserts a score and returns if the player has set a high score
@@ -44,55 +44,55 @@ public class HighscoreHandler {
       * @return if the score is high enough to be added to the highscore file
       **/
     public boolean insertScore(int score, String name){
-	for (int i = 0; i < 10; i++)
-	    if (scores.get(i) < score){
-		scores.add(i,score);
-		names.add(i,name);
-		scores.remove(10);
-		names.remove(10);
-		writeScores();
-		return true;
-	    }
-	return false;
-    }
-    
-    /** Reads data into scores **/
-    public void readScores(){
-	ArrayList<Integer> tempScores = new ArrayList<Integer>();
-	ArrayList<String> tempNames = new ArrayList<String>();
-	try{
-	    BufferedReader reader = new BufferedReader(new FileReader(fileName));
-	    for (int i = 0; i < 10; i++){
-		tempScores.add(Integer.parseInt(reader.readLine()));
-		tempNames.add(reader.readLine());
-	    }
-	    reader.close();
-	    scores = tempScores;
-	    names = tempNames;
-	}catch (IOException e){System.out.println("IOException in readScores.");}
-    }
+    	for (int i = 0; i < 10; i++)
+    		if (scores.get(i) < score){
+    			scores.add(i,score);
+    			names.add(i,name);
+    			scores.remove(10);
+    			names.remove(10);
+    			writeScores();
+    			return true;
+    		}
+    		return false;
+    	}
+    	
+    	/** Reads data into scores **/
+    	public void readScores(){
+    		ArrayList<Integer> tempScores = new ArrayList<Integer>();
+    		ArrayList<String> tempNames = new ArrayList<String>();
+    		try{
+    			BufferedReader reader = new BufferedReader(new FileReader(fileName));
+    			for (int i = 0; i < 10; i++){
+    				tempScores.add(Integer.parseInt(reader.readLine()));
+    				tempNames.add(reader.readLine());
+    			}
+    			reader.close();
+    			scores = tempScores;
+    			names = tempNames;
+    		}catch (IOException e){System.out.println("IOException in readScores.");}
+    	}
 
-    /** Writes data from scores into file **/
-    public void writeScores(){
-	try{
-	    PrintWriter writer = new PrintWriter (new BufferedWriter (new FileWriter (fileName)));
-	    for (int i = 0; i < 10; i++){
-		writer.println(scores.get(i));
-		writer.println(names.get(i));
-	    }
-	    writer.close();
-	}catch (IOException e){System.out.println("IOException in writeScores.");}
-    }
-    
-    /** Clears scores **/
-    public void clearScores(){
-	for (int i = 0; i < 10; i++){
-	    scores.set(i, 0);
-	    names.set(i, "-");
-	}
-	writeScores();
-    }
-    
+    	/** Writes data from scores into file **/
+    	public void writeScores(){
+    		try{
+    			PrintWriter writer = new PrintWriter (new BufferedWriter (new FileWriter (fileName)));
+    			for (int i = 0; i < 10; i++){
+    				writer.println(scores.get(i));
+    				writer.println(names.get(i));
+    			}
+    			writer.close();
+    		}catch (IOException e){System.out.println("IOException in writeScores.");}
+    	}
+    	
+    	/** Clears scores **/
+    	public void clearScores(){
+    		for (int i = 0; i < 10; i++){
+    			scores.set(i, 0);
+    			names.set(i, "-");
+    		}
+    		writeScores();
+    	}
+    	
     /** Accessor for high scores
       *
       * @return The list of high scores

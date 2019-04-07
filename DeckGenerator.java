@@ -70,7 +70,7 @@ public class DeckGenerator {
         List<List<Card>> d = new ArrayList<List<Card>>();
         List<Card> seq;
         System.out.println (DEBUG);
-      System.out.println("debug:"+DEBUG);
+        System.out.println("debug:"+DEBUG);
         if (DEBUG)
             System.out.println("getDeck");
         // Create cards from Deck file
@@ -98,7 +98,7 @@ public class DeckGenerator {
                 
                 for (int i = 0; i < lines; i++){
                     String line = reader.readLine();
-                            
+                    
                     if (DEBUG){
                         System.out.println("Line("+i+"):"+line);
                         System.out.println("    Resources/" + deckName + "/card/" + line + ".txt");
@@ -242,9 +242,9 @@ public class DeckGenerator {
         } catch (Exception e) { System.out.println("create card: error: "+e);}
 
         Card c = new Card(
-                fileName, text, name,
-                createImage("/Images/card/front/" + cleanText(name.toLowerCase()) + "_" + deckName + ".png")
-        );
+            fileName, text, name,
+            createImage("/Images/card/front/" + cleanText(name.toLowerCase()) + "_" + deckName + ".png")
+            );
         cardHash.put(fileName, c);
         return c;
     }
@@ -278,8 +278,8 @@ public class DeckGenerator {
         // Read text and name from file
         String clean = cleanText(resultText);
         Card c = new Card(
-             clean,resultText,typ,resultImage
-        );
+           clean,resultText,typ,resultImage
+           );
         c.setLeftChoice(new Choice(getFillerText()));
         c.setRightChoice(new Choice(getFillerText()));
         tempCardHash.put(clean, c);
@@ -335,88 +335,88 @@ public class DeckGenerator {
                     System.out.println("                       EFFECT:["+hasEffect[i]+","+effectAmount[i]+"]");
 
             // Read nextCards
+                try{
+                    cardNum = Integer.parseInt(reader.readLine());
+                    nextCards = new ArrayList<Card>();
+                    nextCards.add(createResultCard(resultText));
+                    String a;
+                    for (int i = 0; i < cardNum; i++){
+                        a = reader.readLine();
+                        Card ca = cardHash.get("Resources/" + deckName + "/card/" + a + ".txt");
+                        nextCards.add(ca);
+                    }
+                }catch (NumberFormatException e){System.out.println("cardNum parse fail");}
+                
+                if (DEBUG)
+                    System.out.println("                            Next Cards:"+cardNum+","+nextCards);
+                
+                reader.close ();
+
+                leftChoice = new Choice(choiceText, hasEffect, effectAmount, nextCards);
+                choiceHash.put(fileName, leftChoice);
+                
+                if (DEBUG)
+                    System.out.println(leftChoice);
+
+            }catch (IOException e){System.out.println("file io fail");}
+
             try{
-                cardNum = Integer.parseInt(reader.readLine());
-                nextCards = new ArrayList<Card>();
-                nextCards.add(createResultCard(resultText));
-                String a;
-                for (int i = 0; i < cardNum; i++){
-                    a = reader.readLine();
-                    Card ca = cardHash.get("Resources/" + deckName + "/card/" + a + ".txt");
-                    nextCards.add(ca);
-                }
-            }catch (NumberFormatException e){System.out.println("cardNum parse fail");}
-            
-            if (DEBUG)
-                System.out.println("                            Next Cards:"+cardNum+","+nextCards);
-            
-            reader.close ();
+                fileName = "Resources/" + c.getFileName().substring(10,c.getFileName().indexOf("/card")) + "/choice/";
+                fileName += c.getFileName().substring(c.getFileName().indexOf("card/")+5,c.getFileName().length()-4)+"_1.txt";
+                if (DEBUG)
+                    System.out.println("                fileName:"+fileName);
+                reader = new BufferedReader (new FileReader (fileName));
 
-            leftChoice = new Choice(choiceText, hasEffect, effectAmount, nextCards);
-            choiceHash.put(fileName, leftChoice);
-            
-            if (DEBUG)
-                System.out.println(leftChoice);
-
-        }catch (IOException e){System.out.println("file io fail");}
-
-        try{
-            fileName = "Resources/" + c.getFileName().substring(10,c.getFileName().indexOf("/card")) + "/choice/";
-            fileName += c.getFileName().substring(c.getFileName().indexOf("card/")+5,c.getFileName().length()-4)+"_1.txt";
-            if (DEBUG)
-                System.out.println("                fileName:"+fileName);
-            reader = new BufferedReader (new FileReader (fileName));
-
-            choiceText = reader.readLine();
-            if (choiceText.equals("-"))
-                choiceText = getFillerText();
-            resultText = reader.readLine();
-            
-            if (DEBUG)
-                System.out.println("                    Choice Info:"+choiceText + " " + resultText);
+                choiceText = reader.readLine();
+                if (choiceText.equals("-"))
+                    choiceText = getFillerText();
+                resultText = reader.readLine();
+                
+                if (DEBUG)
+                    System.out.println("                    Choice Info:"+choiceText + " " + resultText);
 
             // Read info for effects
-            hasEffect = new boolean[4];
-            effectAmount = new int[4];
-            for (int i = 0; i < 4; i++){
-                hasEffect[i] = reader.readLine().equals("T");
-                try{
-                    effectAmount[i] = Integer.parseInt(reader.readLine());
-                }catch (NumberFormatException e){System.out.println("effectAmount parse fail");}
-            }
-            if (DEBUG)
-                for (int i = 0; i < 4; i++)
-                    System.out.println("                       EFFECT:["+hasEffect[i]+","+effectAmount[i]+"]");
+                hasEffect = new boolean[4];
+                effectAmount = new int[4];
+                for (int i = 0; i < 4; i++){
+                    hasEffect[i] = reader.readLine().equals("T");
+                    try{
+                        effectAmount[i] = Integer.parseInt(reader.readLine());
+                    }catch (NumberFormatException e){System.out.println("effectAmount parse fail");}
+                }
+                if (DEBUG)
+                    for (int i = 0; i < 4; i++)
+                        System.out.println("                       EFFECT:["+hasEffect[i]+","+effectAmount[i]+"]");
 
             // Read nextCards
-            try{
-                cardNum = Integer.parseInt(reader.readLine());
-                nextCards = new ArrayList<Card>();
-                nextCards.add(createResultCard(resultText));
-                String a;
-                for (int i = 0; i < cardNum; i++){
-                    a = reader.readLine();
-                    Card ca = cardHash.get("Resources/" + deckName + "/card/" + a + ".txt");
-                    nextCards.add(ca);
-                }
-            }catch (NumberFormatException e){System.out.println("cardNum parse fail");}
-            
-            if (DEBUG)
-                System.out.println("                            Next Cards:"+cardNum+","+nextCards);
-            
-            reader.close ();
+                    try{
+                        cardNum = Integer.parseInt(reader.readLine());
+                        nextCards = new ArrayList<Card>();
+                        nextCards.add(createResultCard(resultText));
+                        String a;
+                        for (int i = 0; i < cardNum; i++){
+                            a = reader.readLine();
+                            Card ca = cardHash.get("Resources/" + deckName + "/card/" + a + ".txt");
+                            nextCards.add(ca);
+                        }
+                    }catch (NumberFormatException e){System.out.println("cardNum parse fail");}
+                    
+                    if (DEBUG)
+                        System.out.println("                            Next Cards:"+cardNum+","+nextCards);
+                    
+                    reader.close ();
 
-            rightChoice = new Choice(choiceText, hasEffect, effectAmount, nextCards);
-            choiceHash.put(fileName, rightChoice);
-            
-            if (DEBUG)
-                System.out.println(rightChoice+"\n");
+                    rightChoice = new Choice(choiceText, hasEffect, effectAmount, nextCards);
+                    choiceHash.put(fileName, rightChoice);
+                    
+                    if (DEBUG)
+                        System.out.println(rightChoice+"\n");
 
-        }catch (IOException e){System.out.println("file io fail");}
-        
-        c.setLeftChoice(leftChoice);
-        c.setRightChoice(rightChoice);
-    }
+                }catch (IOException e){System.out.println("file io fail");}
+                
+                c.setLeftChoice(leftChoice);
+                c.setRightChoice(rightChoice);
+            }
 
     /** Accessor for imageHash
       * 
