@@ -58,7 +58,6 @@ public class Game {
   private HashMap<String,Card> cardHash; //Used to make sure no card is use more than once
   
   private int score; //The current score of the player
-  private int[] aspects; //The current levels of each aspect. There are four aspects health, happiness, selfesteem, achievement
   private String state; //The current state of the program; states are: Intro, Main, End
   
   private Pane root; //the root that contains all the object in the scene
@@ -70,7 +69,6 @@ public class Game {
   private ImageView background; //The background of the scene
   private Text levelName, scoreTxt, personName, question; //Text for the level name, score, person's name, and question 
   private ImageView boardScore; //The board that displays the score bars under it
-  private Rectangle healthBar, happinessBar, selfesteemBar, achievementBar; //Each bar represents a the four values in aspects
   private Rectangle boardCard, boardName; // boardCard is the backboard used to hold the card and the other boards; boardName is the board for the name
   private ImageView cardBackStation; //a stationary carBack behind the current card front and back to simulate going through a deck
   
@@ -108,11 +106,6 @@ public class Game {
     // Reset score
     score = 0;
     
-    // Set starting values of aspects
-    aspects = new int[4];
-    for (int i = 0; i < 4; i++)
-      aspects[i] = 50;
-    
     state = "Intro";   // Intro, Main, End
     
     //first card is null so nextCard must be called after intialization
@@ -137,17 +130,9 @@ public class Game {
     boardCard.relocate(420, 0);
     boardName.relocate(420, 650);
     cardBackStation.relocate (460, 260);
-    //intialization of the four aspect bars
-    healthBar = new Rectangle (50, aspects[0]/2, Color.rgb(153, 225, 100));
-    happinessBar = new Rectangle (50, aspects[1]/2, Color.rgb (254, 165, 46));
-    selfesteemBar = new Rectangle (50, aspects[2]/2, Color.rgb (171, 40, 72));
-    achievementBar = new Rectangle (50, aspects[3]/2, Color.rgb (54, 200, 197));
+
     
-    //relocation of the four aspect bars
-    healthBar.relocate(448, 100-aspects[0]/2);
-    happinessBar.relocate(557, 100-aspects[1]/2);
-    selfesteemBar.relocate(671, 100-aspects[2]/2);
-    achievementBar.relocate(778, 100-aspects[3]/2);
+
     
     //initialization of the text that displays the score of the user
     scoreTxt = new Text (1200, 60, String.valueOf(score));
@@ -240,7 +225,7 @@ public class Game {
         }
         else{ //if mouse is in the middle
           if (v.choiceRight || v.choiceLeft)
-            root.getChildren().remove(16, 18);
+            root.getChildren().remove(root.getChildren().size()-2, root.getChildren().size());
           cardFront.setRotate(360+(int)((mouseEvent.getSceneX()-555)/19.5));
           v.choiceLeft = false; //Shows no choice should be shown
           v.choiceRight = false;
@@ -259,11 +244,11 @@ public class Game {
         cardFront.relocate(460, 260); //Relocated card front and hides it
         cardFront.setRotate(0);
         if (mouseEvent.getSceneX() < 450){
-          root.getChildren().remove(16, 18); //dim and choice removes
+          root.getChildren().remove(root.getChildren().size()-2, root.getChildren().size()); //dim and choice removes
           updateGame(true); //left choice was chosen
         }
         else if (mouseEvent.getSceneX() > 810){
-          root.getChildren().remove(16, 18);
+          root.getChildren().remove(root.getChildren().size()-2, root.getChildren().size());
           updateGame(false); //right choice was chosen
         }
         if (currentCard == null){ //if the game is over
@@ -276,7 +261,7 @@ public class Game {
     });
     
     //Adds all the nodes to the scene
-    root.getChildren().addAll(background, boardCard, boardName, cardBackStation, healthBar, happinessBar, selfesteemBar, achievementBar, boardScore, scoreTxt, levelName, question, personName, cardFront, cardBack);
+    root.getChildren().addAll(background, boardCard, boardName, cardBackStation, boardScore, scoreTxt, levelName, question, personName, cardFront, cardBack);
   }
   
   
@@ -318,30 +303,13 @@ public class Game {
     }
     else if (state.equals("Main")){
       // Apply effects of choice
-      int sum = 0;
+      int sum = 200;
       
       Choice chosen = (swipeLeft ? currentCard.getLeftChoice() : currentCard.getRightChoice());
       
       System.out.println("  current: "+currentCard);
       System.out.println("  chosen: "+chosen);
-      System.out.print("  aspects: ");
-      
-      for (int i = 0; i < 4; i++){
-        if (chosen.getHasEffect()[i]){
-          aspects[i] = Math.min(Math.max(aspects[i] + chosen.getEffectAmount()[i],0),100);
-          
-          // Check if game over due to aspect depletion
-          if (aspects[i] == 0){
-            currentCard = endingCards.get(i);
-            return;
-          } 
-          
-          sum += aspects[i];
-        }
-        System.out.print(" " + aspects[i]);
-      }
-      
-      // Increase score by average of aspects divided by 4, multiply by 10 for aesthetic
+
       score += (int)(10+(sum/16.0)*10);
       System.out.println("\n  score:"+score);
       
@@ -390,25 +358,6 @@ public class Game {
     rotation1.play();
   }
   
-  /** Updates the aspect bars with the current values after the choice and updates the score**/
-  private void updateGameBars(){
-    healthBar.setHeight(aspects[0]/2);
-    happinessBar.setHeight(aspects[1]/2);
-    selfesteemBar.setHeight(aspects[2]/2);
-    achievementBar.setHeight(aspects[3]/2);
-    
-    healthBar.relocate(448, 100-aspects[0]/2);
-    happinessBar.relocate(557, 100-aspects[1]/2);
-    selfesteemBar.relocate(671, 100-aspects[2]/2);
-    achievementBar.relocate(778, 100-aspects[3]/2);
-    
-    scoreTxt.setText(String.valueOf(score));
-    
-    scoreTxt.relocate(1200, 60);
-    Bounds temp = scoreTxt.getBoundsInParent();
-    scoreTxt.relocate (2434 -temp.getMaxX(), 20);
-  }
-  
   /** **/
   private void updateGame(boolean swipeLeft){
     nextCard(swipeLeft);
@@ -416,7 +365,6 @@ public class Game {
       return;
     cardFront.setImage(currentCard.getCardFront().getImage());  
     cardBack.setScaleX(1);
-    updateGameBars();
     scoreTxt.setText(String.valueOf(score));
     personName.setText(currentCard.getName());
     question.setText(currentCard.getText());

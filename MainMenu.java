@@ -639,7 +639,7 @@ public class MainMenu{
         tutorial = new Game("tutorial");
         tutorialPane = tutorial.getRoot();
         changeGameMenuFunction(tutorialPane);
-        tutorialPane.getChildren().add(15, menuButton4);
+        tutorialPane.getChildren().add(menuButton4);
         scene.setRoot(tutorialPane);
       }
     });
@@ -660,7 +660,7 @@ public class MainMenu{
         childhood = new Game("childhood");
         childhoodPane = childhood.getRoot();
         changeGameMenuFunction(childhoodPane);
-        childhoodPane.getChildren().add(15, menuButton5);
+        childhoodPane.getChildren().add(menuButton5);
         scene.setRoot(childhoodPane);
       }
     });
@@ -683,7 +683,7 @@ public class MainMenu{
         middleschool = new Game("middleschool");
         middleschoolPane = middleschool.getRoot();
         changeGameMenuFunction(middleschoolPane);
-        middleschoolPane.getChildren().add(15, menuButton6);
+        middleschoolPane.getChildren().add(menuButton6);
         scene.setRoot(middleschoolPane);
       }
     });
@@ -705,7 +705,7 @@ public class MainMenu{
         highschool = new Game("highschool");
         highschoolPane = highschool.getRoot();
         changeGameMenuFunction(highschoolPane);
-        highschoolPane.getChildren().add(15, menuButton7);
+        highschoolPane.getChildren().add(menuButton7);
         scene.setRoot(highschoolPane);
       }
     });
