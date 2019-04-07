@@ -1,3 +1,13 @@
+/**
+ * Author(s): Matthew Mach, Dereck Tu, William Xu
+ * Version: 2.0
+ * Date: April 07, 2019
+ *
+ * Modifications:
+ *
+ * Description:
+ * 
+ **/
 public final class Const{
 	public static final String HIGHSCORE_PATH = "saves/Highscores";
 	public static final String MAIN_MENU_PATH = "/Images/main menu/";

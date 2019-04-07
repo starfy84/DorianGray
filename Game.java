@@ -1,7 +1,7 @@
 /**
- * Author(s): Matthew Mach, Andy Pham
- * Version: 1.5
- * Date: June 8, 2018
+ * Author(s): Matthew Mach, Dereck Tu, William Xu
+ * Version: 2.0
+ * Date: April 07, 2019
  *
  * Modifications:
  * - Added state field

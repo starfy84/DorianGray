@@ -1,13 +1,13 @@
 /**
- * Author(s): Andy Pham and Matthew Mach
- * Version: 1.0
- * Date: June 7, 2018
+ * Author(s): Matthew Mach, Dereck Tu, William Xu
+ * Version: 2.0
+ * Date: April 07, 2019
  *
  * Modifications:
- * - Created class
+ * Created class
  *
  * Description:
- * This class creates files for HighscoreHandler to write to and uses HighscoreHandler to modify those highscores.
+ * 
  **/
 
 import java.io.*;

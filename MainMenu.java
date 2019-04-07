@@ -1,10 +1,9 @@
 /**
  * Author(s): Matthew Mach, Dereck Tu, William Xu
- * Version: 1.4
- * Date: May 27, 2018
+ * Version: 2.0
+ * Date: April 07, 2019
  *
  * Modifications:
- * Created class
  *
  * Description:
  * 

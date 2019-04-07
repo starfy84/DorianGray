@@ -1,7 +1,7 @@
 /**
-  * Author(s): Andy Pham
-  * Version: 1.5
-  * Date: June 5, 2018
+ * Author(s): Matthew Mach, Dereck Tu, William Xu
+ * Version: 2.0
+ * Date: April 07, 2019
   *
   * Modifications:
   * - Changed nextCards to List</Card> for flexibility.

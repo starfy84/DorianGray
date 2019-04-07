@@ -1,7 +1,7 @@
 /**
-  * Author(s): Matthew Mach, Andy Pham
-  * Version: 1.6
-  * Date: June 7, 2018
+ * Author(s): Matthew Mach, Dereck Tu, William Xu
+ * Version: 2.0
+ * Date: April 07, 2019
   *
   * Modifications:
   * - Added nextCard method that sets the next card and inserts cards as needed depending on the current card

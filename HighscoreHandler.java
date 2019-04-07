@@ -1,15 +1,13 @@
 /**
- * Author(s): Andy Pham and Matthew Mach
- * Version: 1.1
- * Date: June 4, 2018
+ * Author(s): Matthew Mach, Dereck Tu, William Xu
+ * Version: 2.0
+ * Date: April 07, 2019
  *
  * Modifications:
- * - Removed readScores from constructor in case we're creating the file for the first time
- * - Added code to give scores and names right values in constructor
+ * Created class
  *
  * Description:
- * This class reads and writes highscore information to a text file and
- * provides methdods for the main game to carry out its highscore functions.
+ * 
  **/
 
 import java.io.*;
