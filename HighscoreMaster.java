@@ -32,19 +32,27 @@ public class HighscoreMaster {
 	    System.out.println("Making directory: " + new File(fileName).mkdirs());
 	    
 	    try{
-		PrintWriter writer = new PrintWriter(fileName + "/childhood.txt", "UTF-8");
-		writer.close();
-		writer = new PrintWriter(fileName + "/middleschool.txt", "UTF-8");
-		writer.close();
-		writer = new PrintWriter(fileName + "/highschool.txt", "UTF-8");
-		writer.close();
-	    } catch (IOException e2) {System.out.println(e2);}
+			PrintWriter writer = new PrintWriter(fileName + "/childhood.txt", "UTF-8");
+			writer.close();
+			writer = new PrintWriter(fileName + "/middleschool.txt", "UTF-8");
+			writer.close();
+			writer = new PrintWriter(fileName + "/highschool.txt", "UTF-8");
+			writer.close();
+	    } catch (IOException e2) {System.out.println(e2);}	
+		// Create handlers
+		childhoodHandler = new HighscoreHandler(fileName + "/childhood.txt");
+		middleschoolHandler = new HighscoreHandler(fileName + "/middleschool.txt");
+		highschoolHandler = new HighscoreHandler(fileName + "/highschool.txt");
+	   	childhoodHandler.clearScores();
+		middleschoolHandler.clearScores();
+		highschoolHandler.clearScores();
 	}
-	
-	// Create handlers
-	childhoodHandler = new HighscoreHandler(fileName + "/childhood.txt");
-	middleschoolHandler = new HighscoreHandler(fileName + "/middleschool.txt");
-	highschoolHandler = new HighscoreHandler(fileName + "/highschool.txt");
+	else{
+		childhoodHandler = new HighscoreHandler(fileName + "/childhood.txt");
+		middleschoolHandler = new HighscoreHandler(fileName + "/middleschool.txt");
+		highschoolHandler = new HighscoreHandler(fileName + "/highschool.txt");
+	}
+
 	
     }
     
