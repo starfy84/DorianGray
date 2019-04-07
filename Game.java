@@ -374,7 +374,7 @@ public class Game {
   }
   
   private void enterHighscore(){
-    root.getChildren().remove(0, 16);
+    root.getChildren().clear();
     HighscoreMaster highscores = new HighscoreMaster(Const.HIGHSCORE_PATH);
     HighscoreHandler highscoresHandler = highscores.getHandler(deckName);
     highscoresHandler.readScores();
