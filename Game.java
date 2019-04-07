@@ -174,7 +174,7 @@ public class Game {
     personName.setWrappingWidth(440);
     
     question = new Text (435, 160, currentCard.getText()); 
-    question.setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 24));
+    question.setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 22));
     question.setFill (Color.rgb(0, 0, 0));
     question.setTextAlignment(TextAlignment.CENTER);
     question.setWrappingWidth(410);
