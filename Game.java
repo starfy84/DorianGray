@@ -68,7 +68,7 @@ public class Game {
   
   private ImageView background; //The background of the scene
   private Text levelName, scoreTxt, personName, question; //Text for the level name, score, person's name, and question 
-  private ImageView boardScore; //The board that displays the score bars under it
+  //private ImageView boardScore; //The board that displays the score bars under it
   private Rectangle boardCard, boardName; // boardCard is the backboard used to hold the card and the other boards; boardName is the board for the name
   private ImageView cardBackStation; //a stationary carBack behind the current card front and back to simulate going through a deck
   
@@ -116,8 +116,11 @@ public class Game {
     
     //background intialization
     background = new ImageView(new Image(Const.GAME_PATH+"backgrounds/"+deckName+".png"));
+    
+    /*
     boardScore = new ImageView(new Image(Const.GAME_PATH+"ui/game_bar.png"));
     boardScore.relocate(420, 0);
+    */
     
     //initialization of the boards
     Color peach = Color.rgb(212, 185, 113);
@@ -252,16 +255,13 @@ public class Game {
           updateGame(false); //right choice was chosen
         }
         if (currentCard == null){ //if the game is over
-          if (deckName != "tutorial")
-            enterHighscore(); //enter highscores
-          else
             MainMenu.backToLevelSelect(); //back to level select
         }
       }
     });
     
     //Adds all the nodes to the scene
-    root.getChildren().addAll(background, boardCard, boardName, cardBackStation, boardScore, scoreTxt, levelName, question, personName, cardFront, cardBack);
+    root.getChildren().addAll(background, boardCard, boardName, cardBackStation, /*boardScore,*/ scoreTxt, levelName, question, personName, cardFront, cardBack);
   }
   
   
@@ -371,53 +371,6 @@ public class Game {
     choice1.setText(currentCard.getLeftChoice().getText());
     choice2.setText(currentCard.getRightChoice().getText());
     cardFlip();
-  }
-  
-  private void enterHighscore(){
-    root.getChildren().clear();
-    HighscoreMaster highscores = new HighscoreMaster(Const.HIGHSCORE_PATH);
-    HighscoreHandler highscoresHandler = highscores.getHandler(deckName);
-    highscoresHandler.readScores();
-    
-    Text[] nameObj = new Text[10];
-    Text[] scoreObj = new Text[10];
-    
-    List<String> names = highscoresHandler.getNames();
-    List<Integer> scores = highscoresHandler.getScores();
-    
-    for (int x=0; x < 5; x++){
-      nameObj[x] = new Text (440, 100*(x+1)+50, (x+1)+ ". " + names.get(x));
-      scoreObj[x] = new Text (600, 100*(x+1)+50, String.valueOf(scores.get(x)));
-      nameObj[x+5] = new Text (660, 100*(x+1)+50, (x+6)+ ". " + names.get(x+5));
-      scoreObj[x+5] = new Text (800, 100*(x+1)+50, String.valueOf(scores.get(x+5)));
-      
-      nameObj[x].setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 16));
-      scoreObj[x].setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 16));
-      nameObj[x+5].setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 16));
-      scoreObj[x+5].setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 16));
-      Bounds temp1 = scoreObj[x].getBoundsInParent();
-      scoreObj[x].relocate (1220 -temp1.getMaxX(), 100*(x+1)-16+50);
-      Bounds temp2 = scoreObj[x+5].getBoundsInParent();
-      scoreObj[x+5].relocate (1640 -temp2.getMaxX(), 100*(x+1)-16+50);
-      root.getChildren().addAll(nameObj[x], scoreObj[x], nameObj[x+5], scoreObj[x+5]);      
-    }
-    Text title = new Text (370, 80, deckName.substring(0,1).toUpperCase() + deckName.substring(1) + " Highscores");
-    title.setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 44));
-    
-    Label label1 = new Label("Name:");
-    TextField textField = new TextField ();
-    textField.setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 16));
-    label1.setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 16));
-    label1.relocate(100, 100);
-    textField.relocate(100, 150);
-    root.getChildren().addAll(title, label1, textField);
-    root.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
-      if(key.getCode()==KeyCode.ENTER) {
-        highscoresHandler.insertScore(score, textField.getText());
-        highscoresHandler.writeScores();
-        MainMenu.backToLevelSelect();
-      }
-    });
   }
   
   //Subject to deletion; used for bugtesting
