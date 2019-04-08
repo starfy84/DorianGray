@@ -67,7 +67,7 @@ public class Game {
   private ImageView cardDim; //The dim on the top of the card when displaying each choice
   
   private ImageView background; //The background of the scene
-  private Text levelName, scoreTxt, personName, question; //Text for the level name, score, person's name, and question 
+  private Text levelName, /*scoreTxt,*/ personName, question; //Text for the level name, score, person's name, and question 
   //private ImageView boardScore; //The board that displays the score bars under it
   private Rectangle boardCard, boardName; // boardCard is the backboard used to hold the card and the other boards; boardName is the board for the name
   private ImageView cardBackStation; //a stationary carBack behind the current card front and back to simulate going through a deck
@@ -137,15 +137,15 @@ public class Game {
     
 
     
-    //initialization of the text that displays the score of the user
-    scoreTxt = new Text (1200, 60, String.valueOf(score));
-    scoreTxt.setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 36));
-    scoreTxt.setFill (Color.rgb(216, 91, 161));
+    // //initialization of the text that displays the score of the user
+    // scoreTxt = new Text (1200, 60, String.valueOf(score));
+    // scoreTxt.setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 36));
+    // scoreTxt.setFill (Color.rgb(216, 91, 161));
     
-    //Makes sure the score is aligned to the right
-    Bounds temp = scoreTxt.getBoundsInParent();
-    System.out.println (temp.getMaxX());
-    scoreTxt.relocate (2434 -temp.getMaxX(), 20);
+    // //Makes sure the score is aligned to the right
+    // Bounds temp = scoreTxt.getBoundsInParent();
+    // System.out.println (temp.getMaxX());
+    // scoreTxt.relocate (2434 -temp.getMaxX(), 20);
     
     //Initialization of the level name, question, and choice texts        
     levelName = new Text (35, 685, deckName.substring(0, 1).toUpperCase() + deckName.substring(1)); 
@@ -261,7 +261,7 @@ public class Game {
     });
     
     //Adds all the nodes to the scene
-    root.getChildren().addAll(background, boardCard, boardName, cardBackStation, /*boardScore,*/ scoreTxt, levelName, question, personName, cardFront, cardBack);
+    root.getChildren().addAll(background, boardCard, boardName, cardBackStation, /*boardScore,*//* scoreTxt,*/ levelName, question, personName, cardFront, cardBack);
   }
   
   
@@ -365,7 +365,7 @@ public class Game {
       return;
     cardFront.setImage(currentCard.getCardFront().getImage());  
     cardBack.setScaleX(1);
-    scoreTxt.setText(String.valueOf(score));
+    // scoreTxt.setText(String.valueOf(score));
     personName.setText(currentCard.getName());
     question.setText(currentCard.getText());
     choice1.setText(currentCard.getLeftChoice().getText());
