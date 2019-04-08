@@ -53,8 +53,8 @@ public class MainMenu{
   private ImageView choice1, choice2, choice3, choice4; //Each ooption in level select
   private ImageView menuButton2; //The menu button to go back to the main menu 
   
-  private HighscoreMaster highscores; //The highscore master
-  private Pane highscoreMenu; //The pane that holds all the nodes used in the highscore menu
+  // private HighscoreMaster highscores; //The highscore master
+  // private Pane highscoreMenu; //The pane that holds all the nodes used in the highscore menu
   private ImageView crown, menuButton3; //The crown and title shown in the highscore menu, and the menu button for this pane 
   private ImageView score1, score2, score3; //Each option 
   private Pane childhoodScores, middleschoolScores, highschoolScores; //each pane that holds the highscores of each level
@@ -166,22 +166,22 @@ public class MainMenu{
     });
     
     
-    //Creates highscore counter
-    highscoreMenu = new Pane();
-    highscores = new HighscoreMaster(Const.HIGHSCORE_PATH);
-    crown = new ImageView (new Image(Const.MAIN_MENU_PATH + "highscores_screen.png"));
-    score1 = new ImageView (new Image(Const.MAIN_MENU_PATH + "level_select_text2.png"));
-    score2 = new ImageView (new Image(Const.MAIN_MENU_PATH + "level_select_text3.png"));
-    score3 = new ImageView (new Image(Const.MAIN_MENU_PATH + "level_select_text4.png"));
+    // //Creates highscore counter
+    // highscoreMenu = new Pane();
+    // highscores = new HighscoreMaster(Const.HIGHSCORE_PATH);
+    // crown = new ImageView (new Image(Const.MAIN_MENU_PATH + "highscores_screen.png"));
+    // score1 = new ImageView (new Image(Const.MAIN_MENU_PATH + "level_select_text2.png"));
+    // score2 = new ImageView (new Image(Const.MAIN_MENU_PATH + "level_select_text3.png"));
+    // score3 = new ImageView (new Image(Const.MAIN_MENU_PATH + "level_select_text4.png"));
     
-    score1.relocate (450, 295);
-    score2.relocate (450, 395);
-    score3.relocate (450, 495);
+    // score1.relocate (450, 295);
+    // score2.relocate (450, 395);
+    // score3.relocate (450, 495);
     
-    menuButton3 = createMenuButton();
-    enableHighscoreFunction();
+    // menuButton3 = createMenuButton();
+    // enableHighscoreFunction();
     
-    highscoreMenu.getChildren().addAll (crown, menuButton3, score1, score2, score3);
+    // highscoreMenu.getChildren().addAll (crown, menuButton3, score1, score2, score3);
     
     
     //Creates the inital scene
@@ -219,28 +219,28 @@ public class MainMenu{
     *  
     * @return An Imageview of the button with working user input
     **/
-  private ImageView createHighscoresMenuButton(){
-    ImageView menuButtonTemp = new ImageView (new Image (Const.MAIN_MENU_PATH + "menu_button.png")); //Gets the image
-    menuButtonTemp.relocate (35, 35); //relocates it
-    //Adds if mouse pressed, and hover over user input
-    menuButtonTemp.setOnMousePressed(new EventHandler<MouseEvent>(){
-      @Override public void handle(MouseEvent mouseEvent) {
-        scene.setRoot(highscoreMenu);
-      }
-    });
-    menuButtonTemp.setOnMouseEntered(new EventHandler<MouseEvent>(){
-      @Override public void handle(MouseEvent mouseEvent) {
-        menuButtonTemp.setImage(new Image(Const.MAIN_MENU_PATH + "menu_button_over.png"));
-      }
-    });
-    menuButtonTemp.setOnMouseExited(new EventHandler<MouseEvent>() {
-      @Override public void handle(MouseEvent mouseEvent) {
-        menuButtonTemp.setImage(new Image(Const.MAIN_MENU_PATH + "menu_button.png"));
+  // private ImageView createHighscoresMenuButton(){
+  //   ImageView menuButtonTemp = new ImageView (new Image (Const.MAIN_MENU_PATH + "menu_button.png")); //Gets the image
+  //   menuButtonTemp.relocate (35, 35); //relocates it
+  //   //Adds if mouse pressed, and hover over user input
+  //   menuButtonTemp.setOnMousePressed(new EventHandler<MouseEvent>(){
+  //     @Override public void handle(MouseEvent mouseEvent) {
+  //       scene.setRoot(highscoreMenu);
+  //     }
+  //   });
+  //   menuButtonTemp.setOnMouseEntered(new EventHandler<MouseEvent>(){
+  //     @Override public void handle(MouseEvent mouseEvent) {
+  //       menuButtonTemp.setImage(new Image(Const.MAIN_MENU_PATH + "menu_button_over.png"));
+  //     }
+  //   });
+  //   menuButtonTemp.setOnMouseExited(new EventHandler<MouseEvent>() {
+  //     @Override public void handle(MouseEvent mouseEvent) {
+  //       menuButtonTemp.setImage(new Image(Const.MAIN_MENU_PATH + "menu_button.png"));
         
-      }
-    });
-    return menuButtonTemp;
-  }
+  //     }
+  //   });
+  //   return menuButtonTemp;
+  // }
   
   /** Created as multiple game menu buttons are created
     *  
@@ -339,140 +339,140 @@ public class MainMenu{
     scene.setRoot(sideMenu);
   }
   
-  /** updates the childhood highscores from the file**/
-  private void updateChildhoodHighscores(){
-    childhoodScores = new Pane();
-    HighscoreHandler childhoodHandler = highscores.getHandler("childhood");
-    childhoodHandler.readScores();
+  // /** updates the childhood highscores from the file**/
+  // private void updateChildhoodHighscores(){
+  //   childhoodScores = new Pane();
+  //   HighscoreHandler childhoodHandler = highscores.getHandler("childhood");
+  //   childhoodHandler.readScores();
     
-    Text[] nameObj = new Text[10];
-    Text[] scoreObj = new Text[10];
+  //   Text[] nameObj = new Text[10];
+  //   Text[] scoreObj = new Text[10];
     
-    List<String> names = childhoodHandler.getNames();
-    List<Integer> scores = childhoodHandler.getScores();
+  //   List<String> names = childhoodHandler.getNames();
+  //   List<Integer> scores = childhoodHandler.getScores();
     
-    for (int x=0; x < 5; x++){
-      System.out.println (names.get(x) + " " + String.valueOf(scores.get(x)) + names.get(x+5) + " " + String.valueOf(scores.get(x+5)));
-      nameObj[x] = new Text (440, 100*(x+1)+50, (x+1)+ ". " + names.get(x));
-      scoreObj[x] = new Text (600, 100*(x+1)+50, String.valueOf(scores.get(x)));
-      nameObj[x+5] = new Text (660, 100*(x+1)+50, (x+6)+ ". " + names.get(x+5));
-      scoreObj[x+5] = new Text (800, 100*(x+1)+50, String.valueOf(scores.get(x+5)));
+  //   for (int x=0; x < 5; x++){
+  //     System.out.println (names.get(x) + " " + String.valueOf(scores.get(x)) + names.get(x+5) + " " + String.valueOf(scores.get(x+5)));
+  //     nameObj[x] = new Text (440, 100*(x+1)+50, (x+1)+ ". " + names.get(x));
+  //     scoreObj[x] = new Text (600, 100*(x+1)+50, String.valueOf(scores.get(x)));
+  //     nameObj[x+5] = new Text (660, 100*(x+1)+50, (x+6)+ ". " + names.get(x+5));
+  //     scoreObj[x+5] = new Text (800, 100*(x+1)+50, String.valueOf(scores.get(x+5)));
       
-      nameObj[x].setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 16));
-      scoreObj[x].setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 16));
-      nameObj[x+5].setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 16));
-      scoreObj[x+5].setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 16));
-      Bounds temp1 = scoreObj[x].getBoundsInParent();
-      scoreObj[x].relocate (1220 -temp1.getMaxX(), 100*(x+1)-16+50);
-      Bounds temp2 = scoreObj[x+5].getBoundsInParent();
-      scoreObj[x+5].relocate (1640 -temp2.getMaxX(), 100*(x+1)-16+50);
-      childhoodScores.getChildren().addAll(nameObj[x], scoreObj[x], nameObj[x+5], scoreObj[x+5]);
-    }
+  //     nameObj[x].setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 16));
+  //     scoreObj[x].setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 16));
+  //     nameObj[x+5].setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 16));
+  //     scoreObj[x+5].setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 16));
+  //     Bounds temp1 = scoreObj[x].getBoundsInParent();
+  //     scoreObj[x].relocate (1220 -temp1.getMaxX(), 100*(x+1)-16+50);
+  //     Bounds temp2 = scoreObj[x+5].getBoundsInParent();
+  //     scoreObj[x+5].relocate (1640 -temp2.getMaxX(), 100*(x+1)-16+50);
+  //     childhoodScores.getChildren().addAll(nameObj[x], scoreObj[x], nameObj[x+5], scoreObj[x+5]);
+  //   }
     
-    Text title = new Text (400, 80, "Childhood Highscores");
-    title.setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 44));
-    ImageView menuButtonTmp = createHighscoresMenuButton();
-    Text clear = new Text (520, 650, "Click to clear");
-    clear.setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 34));
-    clear.setOnMousePressed(new EventHandler<MouseEvent>(){
-      @Override public void handle(MouseEvent mouseEvent) {
-        childhoodHandler.clearScores();
-        updateChildhoodHighscores();
-        scene.setRoot(childhoodScores);
-      }
-    });
+  //   Text title = new Text (400, 80, "Childhood Highscores");
+  //   title.setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 44));
+  //   ImageView menuButtonTmp = createHighscoresMenuButton();
+  //   Text clear = new Text (520, 650, "Click to clear");
+  //   clear.setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 34));
+  //   clear.setOnMousePressed(new EventHandler<MouseEvent>(){
+  //     @Override public void handle(MouseEvent mouseEvent) {
+  //       childhoodHandler.clearScores();
+  //       updateChildhoodHighscores();
+  //       scene.setRoot(childhoodScores);
+  //     }
+  //   });
     
-    childhoodScores.getChildren().addAll(title, menuButtonTmp, clear);
-  }
+  //   childhoodScores.getChildren().addAll(title, menuButtonTmp, clear);
+  // }
   
   /** Updates the middleschool highscores from the file **/
-  private void updateMiddleschoolHighscores(){
-    middleschoolScores = new Pane();
-    HighscoreHandler middleschoolHandler = highscores.getHandler("middleschool");
-    middleschoolHandler.readScores();
+  // private void updateMiddleschoolHighscores(){
+  //   middleschoolScores = new Pane();
+  //   HighscoreHandler middleschoolHandler = highscores.getHandler("middleschool");
+  //   middleschoolHandler.readScores();
     
-    Text[] nameObj = new Text[10];
-    Text[] scoreObj = new Text[10];
+  //   Text[] nameObj = new Text[10];
+  //   Text[] scoreObj = new Text[10];
     
-    List<String> names = middleschoolHandler.getNames();
-    List<Integer> scores = middleschoolHandler.getScores();
+  //   List<String> names = middleschoolHandler.getNames();
+  //   List<Integer> scores = middleschoolHandler.getScores();
     
-    for (int x=0; x < 5; x++){
-      nameObj[x] = new Text (440, 100*(x+1)+50, (x+1)+ ". " + names.get(x));
-      scoreObj[x] = new Text (600, 100*(x+1)+50, String.valueOf(scores.get(x)));
-      nameObj[x+5] = new Text (660, 100*(x+1)+50, (x+6)+ ". " + names.get(x+5));
-      scoreObj[x+5] = new Text (800, 100*(x+1)+50, String.valueOf(scores.get(x+5)));
+  //   for (int x=0; x < 5; x++){
+  //     nameObj[x] = new Text (440, 100*(x+1)+50, (x+1)+ ". " + names.get(x));
+  //     scoreObj[x] = new Text (600, 100*(x+1)+50, String.valueOf(scores.get(x)));
+  //     nameObj[x+5] = new Text (660, 100*(x+1)+50, (x+6)+ ". " + names.get(x+5));
+  //     scoreObj[x+5] = new Text (800, 100*(x+1)+50, String.valueOf(scores.get(x+5)));
       
-      nameObj[x].setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 16));
-      scoreObj[x].setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 16));
-      nameObj[x+5].setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 16));
-      scoreObj[x+5].setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 16));
-      Bounds temp1 = scoreObj[x].getBoundsInParent();
-      scoreObj[x].relocate (1220 -temp1.getMaxX(), 100*(x+1)-16+50);
-      Bounds temp2 = scoreObj[x+5].getBoundsInParent();
-      scoreObj[x+5].relocate (1640 -temp2.getMaxX(), 100*(x+1)-16+50);
-      middleschoolScores.getChildren().addAll(nameObj[x], scoreObj[x], nameObj[x+5], scoreObj[x+5]);
-    }
-    Text title = new Text (370, 80, "Middleschool Highscores");
-    title.setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 44));
-    ImageView menuButtonTmp = createHighscoresMenuButton();
-    Text clear = new Text (520, 650, "Click to clear");
-    clear.setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 34));
-    clear.setOnMousePressed(new EventHandler<MouseEvent>(){
-      @Override public void handle(MouseEvent mouseEvent) {
-        middleschoolHandler.clearScores();
-        updateMiddleschoolHighscores();
-        scene.setRoot(middleschoolScores);
-      }
-    });
+  //     nameObj[x].setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 16));
+  //     scoreObj[x].setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 16));
+  //     nameObj[x+5].setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 16));
+  //     scoreObj[x+5].setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 16));
+  //     Bounds temp1 = scoreObj[x].getBoundsInParent();
+  //     scoreObj[x].relocate (1220 -temp1.getMaxX(), 100*(x+1)-16+50);
+  //     Bounds temp2 = scoreObj[x+5].getBoundsInParent();
+  //     scoreObj[x+5].relocate (1640 -temp2.getMaxX(), 100*(x+1)-16+50);
+  //     middleschoolScores.getChildren().addAll(nameObj[x], scoreObj[x], nameObj[x+5], scoreObj[x+5]);
+  //   }
+  //   Text title = new Text (370, 80, "Middleschool Highscores");
+  //   title.setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 44));
+  //   ImageView menuButtonTmp = createHighscoresMenuButton();
+  //   Text clear = new Text (520, 650, "Click to clear");
+  //   clear.setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 34));
+  //   clear.setOnMousePressed(new EventHandler<MouseEvent>(){
+  //     @Override public void handle(MouseEvent mouseEvent) {
+  //       middleschoolHandler.clearScores();
+  //       updateMiddleschoolHighscores();
+  //       scene.setRoot(middleschoolScores);
+  //     }
+  //   });
     
-    middleschoolScores.getChildren().addAll(title, menuButtonTmp, clear);
-  }
+  //   middleschoolScores.getChildren().addAll(title, menuButtonTmp, clear);
+  // }
   
-  /** Updates the highschool highscores from the file **/
-  private void updateHighschoolHighscores(){
-    highschoolScores = new Pane();
-    HighscoreHandler highschoolHandler = highscores.getHandler("highschool");
-    highschoolHandler.readScores();
+  // /** Updates the highschool highscores from the file **/
+  // private void updateHighschoolHighscores(){
+  //   highschoolScores = new Pane();
+  //   HighscoreHandler highschoolHandler = highscores.getHandler("highschool");
+  //   highschoolHandler.readScores();
     
-    Text[] nameObj = new Text[10];
-    Text[] scoreObj = new Text[10];
+  //   Text[] nameObj = new Text[10];
+  //   Text[] scoreObj = new Text[10];
     
-    List<String> names = highschoolHandler.getNames();
-    List<Integer> scores = highschoolHandler.getScores();
+  //   List<String> names = highschoolHandler.getNames();
+  //   List<Integer> scores = highschoolHandler.getScores();
     
-    for (int x=0; x < 5; x++){
-      nameObj[x] = new Text (440, 100*(x+1)+50, (x+1)+ ". " + names.get(x));
-      scoreObj[x] = new Text (600, 100*(x+1)+50, String.valueOf(scores.get(x)));
-      nameObj[x+5] = new Text (660, 100*(x+1)+50, (x+6)+ ". " + names.get(x+5));
-      scoreObj[x+5] = new Text (800, 100*(x+1)+50, String.valueOf(scores.get(x+5)));
+  //   for (int x=0; x < 5; x++){
+  //     nameObj[x] = new Text (440, 100*(x+1)+50, (x+1)+ ". " + names.get(x));
+  //     scoreObj[x] = new Text (600, 100*(x+1)+50, String.valueOf(scores.get(x)));
+  //     nameObj[x+5] = new Text (660, 100*(x+1)+50, (x+6)+ ". " + names.get(x+5));
+  //     scoreObj[x+5] = new Text (800, 100*(x+1)+50, String.valueOf(scores.get(x+5)));
       
-      nameObj[x].setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 16));
-      scoreObj[x].setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 16));
-      nameObj[x+5].setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 16));
-      scoreObj[x+5].setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 16));
-      Bounds temp1 = scoreObj[x].getBoundsInParent();
-      scoreObj[x].relocate (1220 -temp1.getMaxX(), 100*(x+1)-16+50);
-      Bounds temp2 = scoreObj[x+5].getBoundsInParent();
-      scoreObj[x+5].relocate (1640 -temp2.getMaxX(), 100*(x+1)-16+50);
-      highschoolScores.getChildren().addAll(nameObj[x], scoreObj[x], nameObj[x+5], scoreObj[x+5]);
-    }
+  //     nameObj[x].setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 16));
+  //     scoreObj[x].setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 16));
+  //     nameObj[x+5].setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 16));
+  //     scoreObj[x+5].setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 16));
+  //     Bounds temp1 = scoreObj[x].getBoundsInParent();
+  //     scoreObj[x].relocate (1220 -temp1.getMaxX(), 100*(x+1)-16+50);
+  //     Bounds temp2 = scoreObj[x+5].getBoundsInParent();
+  //     scoreObj[x+5].relocate (1640 -temp2.getMaxX(), 100*(x+1)-16+50);
+  //     highschoolScores.getChildren().addAll(nameObj[x], scoreObj[x], nameObj[x+5], scoreObj[x+5]);
+  //   }
     
-    Text title = new Text (390, 80, "Highschool Highscores");
-    title.setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 44));
-    ImageView menuButtonTmp = createHighscoresMenuButton();
-    Text clear = new Text (520, 650, "Click to clear");
-    clear.setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 34));
-    clear.setOnMousePressed(new EventHandler<MouseEvent>(){
-      @Override public void handle(MouseEvent mouseEvent) {
-        highschoolHandler.clearScores();
-        updateHighschoolHighscores();
-        scene.setRoot(highschoolScores);
-      }
-    });
+  //   Text title = new Text (390, 80, "Highschool Highscores");
+  //   title.setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 44));
+  //   ImageView menuButtonTmp = createHighscoresMenuButton();
+  //   Text clear = new Text (520, 650, "Click to clear");
+  //   clear.setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 34));
+  //   clear.setOnMousePressed(new EventHandler<MouseEvent>(){
+  //     @Override public void handle(MouseEvent mouseEvent) {
+  //       highschoolHandler.clearScores();
+  //       updateHighschoolHighscores();
+  //       scene.setRoot(highschoolScores);
+  //     }
+  //   });
     
-    highschoolScores.getChildren().addAll(title, menuButtonTmp, clear);
-  }
+  //   highschoolScores.getChildren().addAll(title, menuButtonTmp, clear);
+  // }
   
   /** Creates and runs the intro animation**/
   public void intro(){
@@ -613,22 +613,22 @@ public class MainMenu{
     });
     
     
-    text4.setOnMousePressed(new EventHandler<MouseEvent>(){
-      @Override public void handle(MouseEvent mouseEvent) {
-        scene.setRoot (highscoreMenu);
-      }
-    });
-    text4.setOnMouseEntered(new EventHandler<MouseEvent>(){
-      @Override public void handle(MouseEvent mouseEvent) {
-        text4.setImage(new Image(Const.MAIN_MENU_PATH + "menu_text4_over.png"));
-      }
-    });
-    text4.setOnMouseExited(new EventHandler<MouseEvent>() {
-      @Override
-      public void handle(MouseEvent mouseEvent) {
-        text4.setImage(new Image(Const.MAIN_MENU_PATH + "menu_text4.png"));
-      }
-    });
+    // text4.setOnMousePressed(new EventHandler<MouseEvent>(){
+    //   @Override public void handle(MouseEvent mouseEvent) {
+    //     scene.setRoot (highscoreMenu);
+    //   }
+    // });
+    // text4.setOnMouseEntered(new EventHandler<MouseEvent>(){
+    //   @Override public void handle(MouseEvent mouseEvent) {
+    //     text4.setImage(new Image(Const.MAIN_MENU_PATH + "menu_text4_over.png"));
+    //   }
+    // });
+    // text4.setOnMouseExited(new EventHandler<MouseEvent>() {
+    //   @Override
+    //   public void handle(MouseEvent mouseEvent) {
+    //     text4.setImage(new Image(Const.MAIN_MENU_PATH + "menu_text4.png"));
+    //   }
+    // });
   }
   
   /** Enables level select user input; mostly used fro grouping code**/
@@ -721,65 +721,65 @@ public class MainMenu{
     });
   }
   
-  /** Enables user input in the highscore menu pane; mostly used to organize code**/
-  private void enableHighscoreFunction(){
-    score1.setOnMousePressed(new EventHandler<MouseEvent>(){
-      @Override public void handle(MouseEvent mouseEvent) {
-        updateChildhoodHighscores();
-        scene.setRoot(childhoodScores);
-      }
-    });
-    score1.setOnMouseEntered(new EventHandler<MouseEvent>() {
-      @Override
-      public void handle(MouseEvent mouseEvent) {
-        score1.setImage(new Image(Const.MAIN_MENU_PATH + "level_select_text2_over.png"));
-      }
-    });
-    score1.setOnMouseExited(new EventHandler<MouseEvent>() {
-      @Override
-      public void handle(MouseEvent mouseEvent) {
-        score1.setImage(new Image(Const.MAIN_MENU_PATH + "level_select_text2.png"));
-      }
-    });
+  // /** Enables user input in the highscore menu pane; mostly used to organize code**/
+  // private void enableHighscoreFunction(){
+  //   score1.setOnMousePressed(new EventHandler<MouseEvent>(){
+  //     @Override public void handle(MouseEvent mouseEvent) {
+  //       updateChildhoodHighscores();
+  //       scene.setRoot(childhoodScores);
+  //     }
+  //   });
+  //   score1.setOnMouseEntered(new EventHandler<MouseEvent>() {
+  //     @Override
+  //     public void handle(MouseEvent mouseEvent) {
+  //       score1.setImage(new Image(Const.MAIN_MENU_PATH + "level_select_text2_over.png"));
+  //     }
+  //   });
+  //   score1.setOnMouseExited(new EventHandler<MouseEvent>() {
+  //     @Override
+  //     public void handle(MouseEvent mouseEvent) {
+  //       score1.setImage(new Image(Const.MAIN_MENU_PATH + "level_select_text2.png"));
+  //     }
+  //   });
     
     
-    score2.setOnMousePressed(new EventHandler<MouseEvent>(){
-      @Override public void handle(MouseEvent mouseEvent) {
-        updateMiddleschoolHighscores();
-        scene.setRoot(middleschoolScores);
-      }
-    });
-    score2.setOnMouseEntered(new EventHandler<MouseEvent>(){
-      @Override public void handle(MouseEvent mouseEvent) {
-        score2.setImage(new Image(Const.MAIN_MENU_PATH + "level_select_text3_over.png"));
-      }
-    });
-    score2.setOnMouseExited(new EventHandler<MouseEvent>() {
-      @Override
-      public void handle(MouseEvent mouseEvent) {
-        score2.setImage(new Image(Const.MAIN_MENU_PATH + "level_select_text3.png"));
-      }
-    });
+  //   score2.setOnMousePressed(new EventHandler<MouseEvent>(){
+  //     @Override public void handle(MouseEvent mouseEvent) {
+  //       updateMiddleschoolHighscores();
+  //       scene.setRoot(middleschoolScores);
+  //     }
+  //   });
+  //   score2.setOnMouseEntered(new EventHandler<MouseEvent>(){
+  //     @Override public void handle(MouseEvent mouseEvent) {
+  //       score2.setImage(new Image(Const.MAIN_MENU_PATH + "level_select_text3_over.png"));
+  //     }
+  //   });
+  //   score2.setOnMouseExited(new EventHandler<MouseEvent>() {
+  //     @Override
+  //     public void handle(MouseEvent mouseEvent) {
+  //       score2.setImage(new Image(Const.MAIN_MENU_PATH + "level_select_text3.png"));
+  //     }
+  //   });
     
     
-    score3.setOnMousePressed(new EventHandler<MouseEvent>(){
-      @Override public void handle(MouseEvent mouseEvent) {
-        updateHighschoolHighscores();
-        scene.setRoot(highschoolScores);
-      }
-    });
-    score3.setOnMouseEntered(new EventHandler<MouseEvent>(){
-      @Override public void handle(MouseEvent mouseEvent) {
-        score3.setImage(new Image(Const.MAIN_MENU_PATH + "level_select_text4_over.png"));
-      }
-    });
-    score3.setOnMouseExited(new EventHandler<MouseEvent>() {
-      @Override
-      public void handle(MouseEvent mouseEvent) {
-        score3.setImage(new Image(Const.MAIN_MENU_PATH + "level_select_text4.png"));
-      }
-    });
-  }
+  //   score3.setOnMousePressed(new EventHandler<MouseEvent>(){
+  //     @Override public void handle(MouseEvent mouseEvent) {
+  //       updateHighschoolHighscores();
+  //       scene.setRoot(highschoolScores);
+  //     }
+  //   });
+  //   score3.setOnMouseEntered(new EventHandler<MouseEvent>(){
+  //     @Override public void handle(MouseEvent mouseEvent) {
+  //       score3.setImage(new Image(Const.MAIN_MENU_PATH + "level_select_text4_over.png"));
+  //     }
+  //   });
+  //   score3.setOnMouseExited(new EventHandler<MouseEvent>() {
+  //     @Override
+  //     public void handle(MouseEvent mouseEvent) {
+  //       score3.setImage(new Image(Const.MAIN_MENU_PATH + "level_select_text4.png"));
+  //     }
+  //   });
+  // }
   
   /** Brings the game back to level select; static because it is used in Game without passing a MainMenu object**/
   public static void backToLevelSelect(){
