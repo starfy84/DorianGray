@@ -56,8 +56,6 @@ public class Game {
   
   private HashMap<String,ImageView> imageHash; //Used to make sure no image is used more than once
   private HashMap<String,Card> cardHash; //Used to make sure no card is use more than once
-  
-  private int score; //The current score of the player
   private String state; //The current state of the program; states are: Intro, Main, End
   
   private Pane root; //the root that contains all the object in the scene
@@ -102,9 +100,6 @@ public class Game {
     cardHash = deckGenerator.getCardHash();
     
     resultImage = imageHash.get("RESULT");
-    
-    // Reset score
-    score = 0;
     
     state = "Intro";   // Intro, Main, End
     
@@ -303,15 +298,11 @@ public class Game {
     }
     else if (state.equals("Main")){
       // Apply effects of choice
-      int sum = 200;
       
       Choice chosen = (swipeLeft ? currentCard.getLeftChoice() : currentCard.getRightChoice());
       
       System.out.println("  current: "+currentCard);
       System.out.println("  chosen: "+chosen);
-
-      score += (int)(10+(sum/16.0)*10);
-      System.out.println("\n  score:"+score);
       
       // If the game deck has another card
       if (gameDeck.nextCard(chosen)){
