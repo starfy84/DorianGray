@@ -39,9 +39,9 @@ public class MainMenu{
   private ImageView door, title; //the images for the door used in the main menu and the title
   private ImageView text1, text2, text3, text4, textBot; //The images used for each option of the menu as well as the bottom prompt
   
-  private Rectangle fade1, fade2, fade3, fade4, fadeTitle, fadeBot; //The rectangles used in the intro fade animation 
-  private Color fade; //The color used for the fade
-  private double alpha; //The alpha used in fade
+  // private Rectangle fade1, fade2, fade3, fade4, fadeTitle, fadeBot; //The rectangles used in the intro fade animation 
+  // private Color fade; //The color used for the fade
+  // private double alpha; //The alpha used in fade
   
   private Pane sideMenu; //the pane that holds all nodes used in both side menus
   private ImageView credits; //The image of the credits screen
@@ -91,21 +91,21 @@ public class MainMenu{
     
     
     //Initializes fade rectangles put on top for each text to simulate a fade
-    alpha = 0.0;
-    fade = Color.rgb(255, 255, 255, alpha);
-    fade1 = new Rectangle (669, 47, fade);
-    fade2 = new Rectangle (540, 47, fade);
-    fade3 = new Rectangle (540, 47, fade);
-    fade4 = new Rectangle (617, 47, fade);
-    fadeTitle = new Rectangle (1280, 51, Color.rgb(255, 255, 255, 1));
-    fadeBot = new Rectangle (855, 52, fade);
+    // alpha = 0.0;
+    // fade = Color.rgb(255, 255, 255, alpha);
+    // fade1 = new Rectangle (669, 47, fade);
+    // fade2 = new Rectangle (540, 47, fade);
+    // fade3 = new Rectangle (540, 47, fade);
+    // fade4 = new Rectangle (617, 47, fade);
+    // fadeTitle = new Rectangle (1280, 51, Color.rgb(255, 255, 255, 1));
+    // fadeBot = new Rectangle (855, 52, fade);
     
-    fade1.relocate (500, 145);  
-    fade2.relocate (500, 245);
-    fade3.relocate (500, 345);
-    fade4.relocate (500, 445);
-    fadeTitle.relocate (0, 20);
-    fadeBot.relocate (190, 590);
+    // fade1.relocate (500, 145);  
+    // fade2.relocate (500, 245);
+    // fade3.relocate (500, 345);
+    // fade4.relocate (500, 445);
+    // fadeTitle.relocate (0, 20);
+    // fadeBot.relocate (190, 590);
     
     
     //Creates menu button and picutres for both help and credits
@@ -137,7 +137,7 @@ public class MainMenu{
     
     //Creates the root for the main menu pane
     root = new Pane();
-    root.getChildren().addAll(door, text1, text2, text3, text4, textBot, fade1, fade2, fade3, fade4, fadeBot, title, fadeTitle); //Adds all the intro nodes to the current pane
+    root.getChildren().addAll(door, text1, text2, text3, text4, textBot, /*fade1, fade2, fade3, fade4, fadeBot,*/ title/*, fadeTitle*/); //Adds all the intro nodes to the current pane
     
     //Adds function to the buttons that adds the "are you sure want to go back to the main menu" prompt
     menuButton4 = createGameMenuButton(tutorialPane);
@@ -477,64 +477,65 @@ public class MainMenu{
   /** Creates and runs the intro animation**/
   public void intro(){
     //The fade out transition, repeatedly increases the alpha value of a white rgb value to simulate a fade out 
-    Timeline fadeOut = new Timeline (
-     new KeyFrame(
-      Duration.millis(100),
-      (evt) -> {
-        alpha = (((double)(int)(alpha*100.0))+4)/100;
-        fade = Color.rgb(255, 255, 255, alpha);
-        fade1.setFill(fade);
-        fade2.setFill(fade);
-        fade3.setFill(fade);
-        fade4.setFill(fade);
-        fadeBot.setFill(fade);
-      }));
-    fadeOut.setCycleCount (25);               //Cycles 10 times
-    fadeOut.setDelay(Duration.seconds(3));   //Starts after 100 millis
+    // Timeline fadeOut = new Timeline (
+    //  new KeyFrame(
+    //   Duration.millis(100),
+    //   (evt) -> {
+    //     alpha = (((double)(int)(alpha*100.0))+4)/100;
+    //     fade = Color.rgb(255, 255, 255, alpha);
+    //     fade1.setFill(fade);
+    //     fade2.setFill(fade);
+    //     fade3.setFill(fade);
+    //     fade4.setFill(fade);
+    //     fadeBot.setFill(fade);
+    //   }));
+    // fadeOut.setCycleCount (25);               //Cycles 10 times
+    // fadeOut.setDelay(Duration.seconds(3));   //Starts after 100 millis
     
-    //The fade in transition; repeatedly decreases the alpha value of a white rgb value to simulate a fade in
-    Timeline fadeIn = new Timeline (
-      new KeyFrame(
-       Duration.millis(100),
-       (evt) -> {
-        alpha = (((double)(int)(alpha*100.0))-4)/100;
-        fade = Color.rgb(255, 255, 255, alpha);
-        fade1.setFill(fade);
-        fade2.setFill(fade);
-        fade3.setFill(fade);
-        fade4.setFill(fade);
-        fadeTitle.setFill(fade);
-        fadeBot.setFill(fade);
-      }));
-    fadeIn.setCycleCount (25);                //Cycles 10 times
+    // //The fade in transition; repeatedly decreases the alpha value of a white rgb value to simulate a fade in
+    // Timeline fadeIn = new Timeline (
+    //   new KeyFrame(
+    //    Duration.millis(100),
+    //    (evt) -> {
+    //     alpha = (((double)(int)(alpha*100.0))-4)/100;
+    //     fade = Color.rgb(255, 255, 255, alpha);
+    //     fade1.setFill(fade);
+    //     fade2.setFill(fade);
+    //     fade3.setFill(fade);
+    //     fade4.setFill(fade);
+    //     fadeTitle.setFill(fade);
+    //     fadeBot.setFill(fade);
+    //   }));
+    // fadeIn.setCycleCount (25);                //Cycles 10 times
     
     
-    //Sets an action when timeline is done; changes the images behind the white rectangles and autoplays the fade in transition
-    fadeOut.setOnFinished(new EventHandler<ActionEvent>() {
-      @Override
-      public void handle(ActionEvent t) {
+    // //Sets an action when timeline is done; changes the images behind the white rectangles and autoplays the fade in transition
+    // fadeOut.setOnFinished(new EventHandler<ActionEvent>() {
+    //   @Override
+    //   public void handle(ActionEvent t) {
         text1.setImage(new Image(Const.MAIN_MENU_PATH + "menu_text1.png"));
         text2.setImage(new Image(Const.MAIN_MENU_PATH + "menu_text2.png"));
         text3.setImage(new Image(Const.MAIN_MENU_PATH + "menu_text3.png"));
         text4.setImage(new Image(Const.MAIN_MENU_PATH + "menu_text4.png"));
         textBot.setImage(new Image(Const.MAIN_MENU_PATH + "menu_textPrompt.png"));
-        fadeIn.play();
-      }
-    });
+    //     fadeIn.play();
+    //   }
+    // });
     
     
-    //Sets an action when timeline is done; removes the rectangles from the root pane and enables menu function
-    fadeIn.setOnFinished(new EventHandler<ActionEvent>() {
-      @Override
-      public void handle(ActionEvent t) {
-        root.getChildren().remove(6, 11);
+    // //Sets an action when timeline is done; removes the rectangles from the root pane and enables menu function
+    // fadeIn.setOnFinished(new EventHandler<ActionEvent>() {
+    //   @Override
+    //   public void handle(ActionEvent t) {
+    //     root.getChildren().remove(6, 11);
         enableMenuFuction();
-      }
-    });
+    //   }
+    // });
     
     
-    //Plays the first animation
-    fadeOut.play();
+    // //Plays the first animation
+    // fadeOut.play();
+
   }
   
   /** Adds user input to the main menu; run after the intro animation is done **/
