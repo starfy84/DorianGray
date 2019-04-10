@@ -295,7 +295,7 @@ public class MainMenu{
     stay = new ImageView (new Image (Const.MAIN_MENU_PATH + "stay.png"));
     stay.setOnMousePressed(new EventHandler<MouseEvent>(){
       @Override public void handle(MouseEvent mouseEvent) {
-        gamePane.getChildren().remove(16, 20); //Place numbers in here
+        gamePane.getChildren().remove(gamePane.getChildren().size()-4, gamePane.getChildren().size()); //Place numbers in here
       }
     });
     stay.setOnMouseEntered(new EventHandler<MouseEvent>(){
