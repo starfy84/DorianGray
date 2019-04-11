@@ -24,7 +24,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.Font;
 import javafx.geometry.Bounds;
-
+import javafx.scene.effect.*;
 
 public class MainMenu{
   //Instance Variables
@@ -36,8 +36,8 @@ public class MainMenu{
   private Game highschool; //The game object of the highschool level
   
   //Graphics
-  private ImageView door, title; //the images for the door used in the main menu and the title
-  private ImageView text1, text2, text3, text4, textBot; //The images used for each option of the menu as well as the bottom prompt
+  private ImageView title; //the images for the door used in the main menu and the title
+  private Text text1, text2, text3,text4; //The images used for each option of the menu as well as the bottom prompt
   
   // private Rectangle fade1, fade2, fade3, fade4, fadeTitle, fadeBot; //The rectangles used in the intro fade animation 
   // private Color fade; //The color used for the fade
@@ -71,23 +71,22 @@ public class MainMenu{
    * Constructor for MainMenu
    **/
   public MainMenu (){
-    
+    //   Text title = new Text (400, 80, "Childhood Highscores");
+  //   title.setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 44));
+
     //Initializes intro images and relocates them
-    door = new ImageView (new Image(Const.MAIN_MENU_PATH + "door.png"));
-    text1 = new ImageView (new Image(Const.MAIN_MENU_PATH + "intro_text1.png"));
-    text2 = new ImageView (new Image(Const.MAIN_MENU_PATH + "intro_text2.png"));
-    text3 = new ImageView (new Image(Const.MAIN_MENU_PATH + "intro_text3.png"));
-    text4 = new ImageView (new Image(Const.MAIN_MENU_PATH + "intro_text4.png"));
+    text1 = new Text(500,145,"Level Select");
+    text1.setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 50));
+    // text1.setFill(Color.RED);
+    // text1.setStyle("-fx-font: 100px Tahoma;-fx-fill: linear-gradient(from 0% 0% to 100% 200%, repeat, aqua 0%, red 50%);-fx-stroke: black;-fx-stroke-width: 1;");
+    text2 = new Text(500,245,"Help");
+    text2.setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 50));
+    text3 = new Text(500,345,"Credits");
+    text3.setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 50));
+    text4 = new Text(500,445,"Exit");
+    text4.setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 50));
     title = new ImageView (new Image(Const.MAIN_MENU_PATH + "title.png"));
-    textBot = new ImageView (new Image(Const.MAIN_MENU_PATH + "intro_textStudioLabel.png"));
-    
-    door.relocate (210, 140);
-    text1.relocate (500, 145);
-    text2.relocate (500, 245);
-    text3.relocate (500, 345);
-    text4.relocate (500, 445);
     title.relocate (0, 20);
-    textBot.relocate (190, 590);
     
     
     //Initializes fade rectangles put on top for each text to simulate a fade
@@ -137,7 +136,7 @@ public class MainMenu{
     
     //Creates the root for the main menu pane
     root = new Pane();
-    root.getChildren().addAll(door, text1, text2, text3, text4, textBot, /*fade1, fade2, fade3, fade4, fadeBot,*/ title/*, fadeTitle*/); //Adds all the intro nodes to the current pane
+    root.getChildren().addAll(text1, text2, text3,text4,/*fade1, fade2, fade3, fade4, fadeBot,*/ title/*, fadeTitle*/); //Adds all the intro nodes to the current pane
     
     //Adds function to the buttons that adds the "are you sure want to go back to the main menu" prompt
     menuButton4 = createGameMenuButton(tutorialPane);
@@ -513,11 +512,6 @@ public class MainMenu{
     // fadeOut.setOnFinished(new EventHandler<ActionEvent>() {
     //   @Override
     //   public void handle(ActionEvent t) {
-        text1.setImage(new Image(Const.MAIN_MENU_PATH + "menu_text1.png"));
-        text2.setImage(new Image(Const.MAIN_MENU_PATH + "menu_text2.png"));
-        text3.setImage(new Image(Const.MAIN_MENU_PATH + "menu_text3.png"));
-        text4.setImage(new Image(Const.MAIN_MENU_PATH + "menu_text4.png"));
-        textBot.setImage(new Image(Const.MAIN_MENU_PATH + "menu_textPrompt.png"));
     //     fadeIn.play();
     //   }
     // });
@@ -540,24 +534,6 @@ public class MainMenu{
   
   /** Adds user input to the main menu; run after the intro animation is done **/
   private void enableMenuFuction(){
-    door.setOnMousePressed(new EventHandler<MouseEvent>(){
-      @Override public void handle(MouseEvent mouseEvent) {
-        Driver.close();
-      }
-    });
-    door.setOnMouseEntered(new EventHandler<MouseEvent>(){
-      @Override public void handle(MouseEvent mouseEvent) {
-        door.setImage(new Image(Const.MAIN_MENU_PATH + "door_over.png"));
-        textBot.setImage(new Image (Const.MAIN_MENU_PATH + "close.png"));
-      }
-    });
-    door.setOnMouseExited(new EventHandler<MouseEvent>() {
-      @Override public void handle(MouseEvent mouseEvent) {
-        door.setImage(new Image(Const.MAIN_MENU_PATH + "door.png"));
-        textBot.setImage (new Image (Const.MAIN_MENU_PATH + "menu_textPrompt.png"));
-      }
-    });
-    
     
     text1.setOnMousePressed(new EventHandler<MouseEvent>(){
       @Override public void handle(MouseEvent mouseEvent) {
@@ -566,12 +542,18 @@ public class MainMenu{
     });
     text1.setOnMouseEntered(new EventHandler<MouseEvent>(){
       @Override public void handle(MouseEvent mouseEvent) {
-        text1.setImage(new Image(Const.MAIN_MENU_PATH + "menu_text1_over.png"));
+         InnerShadow bloom = new InnerShadow();
+         bloom.setOffsetX(4);
+         bloom.setOffsetY(4);
+         bloom.setColor(Color.web("0xD44E4E"));
+        text1.setEffect(bloom);
+        System.out.println("Level Select Entered");
       }
     });
     text1.setOnMouseExited(new EventHandler<MouseEvent>() {
       @Override public void handle(MouseEvent mouseEvent) {
-        text1.setImage(new Image(Const.MAIN_MENU_PATH + "menu_text1.png"));
+        text1.setEffect(null);
+        System.out.println("Level Select Exited");
         
       }
     });
@@ -585,13 +567,19 @@ public class MainMenu{
     text2.setOnMouseEntered(new EventHandler<MouseEvent>() {
       @Override
       public void handle(MouseEvent mouseEvent) {
-        text2.setImage(new Image(Const.MAIN_MENU_PATH + "menu_text2_over.png"));
+        InnerShadow bloom = new InnerShadow();
+        bloom.setOffsetX(4);
+        bloom.setOffsetY(4);
+        bloom.setColor(Color.web("0xDF5900"));
+        text2.setEffect(bloom);
+        System.out.println("Help Entered");
       }
     });
     text2.setOnMouseExited(new EventHandler<MouseEvent>() {
       @Override
       public void handle(MouseEvent mouseEvent) {
-        text2.setImage(new Image(Const.MAIN_MENU_PATH + "menu_text2.png"));
+        text2.setEffect(null);
+       System.out.println("Help Exited");
       }
     });
     
@@ -603,16 +591,43 @@ public class MainMenu{
     });
     text3.setOnMouseEntered(new EventHandler<MouseEvent>(){
       @Override public void handle(MouseEvent mouseEvent) {
-        text3.setImage(new Image(Const.MAIN_MENU_PATH + "menu_text3_over.png"));
+        InnerShadow bloom = new InnerShadow();
+        bloom.setOffsetX(4);
+        bloom.setOffsetY(4);
+        bloom.setColor(Color.web("0x6AA84F"));
+        text3.setEffect(bloom);
+        System.out.println("Credits Entered");
       }
     });
     text3.setOnMouseExited(new EventHandler<MouseEvent>() {
       @Override
       public void handle(MouseEvent mouseEvent) {
-        text3.setImage(new Image(Const.MAIN_MENU_PATH + "menu_text3.png"));
+        text3.setEffect(null);
+        System.out.println("Credits Exited");
       }
     });
-    
+    text4.setOnMousePressed(new EventHandler<MouseEvent>(){
+      @Override public void handle(MouseEvent mouseEvent) {
+        Driver.close();
+      }
+    });
+    text4.setOnMouseEntered(new EventHandler<MouseEvent>(){
+      @Override public void handle(MouseEvent mouseEvent) {
+        InnerShadow bloom = new InnerShadow();
+        bloom.setOffsetX(4);
+        bloom.setOffsetY(4);
+        bloom.setColor(Color.web("0x674EA7"));
+        text4.setEffect(bloom);
+        System.out.println("Exit Entered");
+      }
+    });
+    text4.setOnMouseExited(new EventHandler<MouseEvent>() {
+      @Override
+      public void handle(MouseEvent mouseEvent) {
+        text4.setEffect(null);
+        System.out.println("Exit Exited");
+      }
+    });
     
     // text4.setOnMousePressed(new EventHandler<MouseEvent>(){
     //   @Override public void handle(MouseEvent mouseEvent) {
