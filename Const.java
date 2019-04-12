@@ -16,4 +16,6 @@ public final class Const{
 	public static final String CARD_FRONT_PATH = "/Images/card/front/";
 	public static final String CARD_BACK_PATH = "/Images/card/back/";
 	public static final String TITLE = "The Changing of Dorian Gray";
+	public static final int LENGTH = 1280;
+	public static final int WIDTH = 720;
 }

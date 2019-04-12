@@ -50,7 +50,7 @@ public class MainMenu{
   
   private static Pane levelSelect; //the pane that holds all the nodes used in the level select menu
   private ImageView clock; //The clock in the level select
-  private ImageView choice1, choice2, choice3, choice4; //Each ooption in level select
+  private Text choice1, choice2, choice3, choice4; //Each ooption in level select
   private ImageView menuButton2; //The menu button to go back to the main menu 
   
   // private HighscoreMaster highscores; //The highscore master
@@ -75,15 +75,15 @@ public class MainMenu{
   //   title.setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 44));
 
     //Initializes intro images and relocates them
-    text1 = new Text(500,145,"Level Select");
+    text1 = new Text(20,195,"Level Select");
     text1.setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 50));
     // text1.setFill(Color.RED);
     // text1.setStyle("-fx-font: 100px Tahoma;-fx-fill: linear-gradient(from 0% 0% to 100% 200%, repeat, aqua 0%, red 50%);-fx-stroke: black;-fx-stroke-width: 1;");
-    text2 = new Text(500,245,"Help");
+    text2 = new Text(20,295,"Help");
     text2.setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 50));
-    text3 = new Text(500,345,"Credits");
+    text3 = new Text(20,395,"Credits");
     text3.setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 50));
-    text4 = new Text(500,445,"Exit");
+    text4 = new Text(20,495,"Exit");
     text4.setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 50));
     title = new ImageView (new Image(Const.MAIN_MENU_PATH + "title.png"));
     title.relocate (0, 20);
@@ -118,15 +118,17 @@ public class MainMenu{
     //Creates level select
     levelSelect = new Pane();
     clock = new ImageView(new Image(Const.MAIN_MENU_PATH + "level_select_clock.png"));
-    choice1 = new ImageView (new Image(Const.MAIN_MENU_PATH + "level_select_text1.png"));
-    choice2 = new ImageView (new Image(Const.MAIN_MENU_PATH + "level_select_text2.png"));
-    choice3 = new ImageView (new Image(Const.MAIN_MENU_PATH + "level_select_text3.png"));
-    choice4 = new ImageView (new Image(Const.MAIN_MENU_PATH + "level_select_text4.png"));
+    choice1 = new Text(450,195,"Tutorial");
+    choice1.setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 50));
     
-    choice1.relocate (450, 195);
-    choice2.relocate (450, 295);
-    choice3.relocate (450, 395);
-    choice4.relocate (450, 495);
+    choice2 = new Text(450,295,"Act I: Basil Hallward");
+    choice2.setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 50));
+    
+    choice3 = new Text(450,395,"Act II: Lord Henry Wotton");
+    choice3.setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 50));
+    
+    choice4 = new Text(450,495,"Act III: Dorian Gray");
+    choice4.setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 50));
     menuButton2 = createMenuButton();
     enableLevelSelectFunction();
     
@@ -184,7 +186,7 @@ public class MainMenu{
     
     
     //Creates the inital scene
-    scene = new Scene(root, 1280, 720, true, SceneAntialiasing.BALANCED);
+    scene = new Scene(root, Const.LENGTH, Const.WIDTH, true, SceneAntialiasing.BALANCED);
     scene.setCamera(new PerspectiveCamera());
   }
   
@@ -542,17 +544,18 @@ public class MainMenu{
     });
     text1.setOnMouseEntered(new EventHandler<MouseEvent>(){
       @Override public void handle(MouseEvent mouseEvent) {
-         InnerShadow bloom = new InnerShadow();
-         bloom.setOffsetX(4);
-         bloom.setOffsetY(4);
-         bloom.setColor(Color.web("0xD44E4E"));
-        text1.setEffect(bloom);
+        //  InnerShadow bloom = new InnerShadow();
+        //  bloom.setOffsetX(4);
+        //  bloom.setOffsetY(4);
+        //  bloom.setColor(Color.web("0xD44E4E"));
+        // text1.setEffect(bloom);
+        text1.setFill(Color.web("0xD44E4E"));
         System.out.println("Level Select Entered");
       }
     });
     text1.setOnMouseExited(new EventHandler<MouseEvent>() {
       @Override public void handle(MouseEvent mouseEvent) {
-        text1.setEffect(null);
+        text1.setFill(Color.BLACK);
         System.out.println("Level Select Exited");
         
       }
@@ -567,18 +570,19 @@ public class MainMenu{
     text2.setOnMouseEntered(new EventHandler<MouseEvent>() {
       @Override
       public void handle(MouseEvent mouseEvent) {
-        InnerShadow bloom = new InnerShadow();
-        bloom.setOffsetX(4);
-        bloom.setOffsetY(4);
-        bloom.setColor(Color.web("0xDF5900"));
-        text2.setEffect(bloom);
+        // InnerShadow bloom = new InnerShadow();
+        // bloom.setOffsetX(4);
+        // bloom.setOffsetY(4);
+        // bloom.setColor(Color.web("0xDF5900"));
+        // text2.setEffect(bloom);
+        text2.setFill(Color.web("0xDF5900"));
         System.out.println("Help Entered");
       }
     });
     text2.setOnMouseExited(new EventHandler<MouseEvent>() {
       @Override
       public void handle(MouseEvent mouseEvent) {
-        text2.setEffect(null);
+        text2.setFill(Color.BLACK);
        System.out.println("Help Exited");
       }
     });
@@ -591,18 +595,19 @@ public class MainMenu{
     });
     text3.setOnMouseEntered(new EventHandler<MouseEvent>(){
       @Override public void handle(MouseEvent mouseEvent) {
-        InnerShadow bloom = new InnerShadow();
-        bloom.setOffsetX(4);
-        bloom.setOffsetY(4);
-        bloom.setColor(Color.web("0x6AA84F"));
-        text3.setEffect(bloom);
+        // InnerShadow bloom = new InnerShadow();
+        // bloom.setOffsetX(4);
+        // bloom.setOffsetY(4);
+        // bloom.setColor(Color.web("0x6AA84F"));
+        // text3.setEffect(bloom);
+        text3.setFill(Color.web("0x6AA84F"));
         System.out.println("Credits Entered");
       }
     });
     text3.setOnMouseExited(new EventHandler<MouseEvent>() {
       @Override
       public void handle(MouseEvent mouseEvent) {
-        text3.setEffect(null);
+        text3.setFill(Color.BLACK);
         System.out.println("Credits Exited");
       }
     });
@@ -613,18 +618,19 @@ public class MainMenu{
     });
     text4.setOnMouseEntered(new EventHandler<MouseEvent>(){
       @Override public void handle(MouseEvent mouseEvent) {
-        InnerShadow bloom = new InnerShadow();
-        bloom.setOffsetX(4);
-        bloom.setOffsetY(4);
-        bloom.setColor(Color.web("0x674EA7"));
-        text4.setEffect(bloom);
+        // InnerShadow bloom = new InnerShadow();
+        // bloom.setOffsetX(4);
+        // bloom.setOffsetY(4);
+        // bloom.setColor(Color.web("0x674EA7"));
+        // text4.setEffect(bloom);
+        text4.setFill(Color.web("0x674EA7"));
         System.out.println("Exit Entered");
       }
     });
     text4.setOnMouseExited(new EventHandler<MouseEvent>() {
       @Override
       public void handle(MouseEvent mouseEvent) {
-        text4.setEffect(null);
+        text4.setFill(Color.BLACK);
         System.out.println("Exit Exited");
       }
     });
@@ -660,12 +666,12 @@ public class MainMenu{
     });
     choice1.setOnMouseEntered(new EventHandler<MouseEvent>(){
       @Override public void handle(MouseEvent mouseEvent) {
-        choice1.setImage(new Image(Const.MAIN_MENU_PATH + "level_select_text1_over.png"));
+        choice1.setFill(Color.web("0x80de2f"));
       }
     });
     choice1.setOnMouseExited(new EventHandler<MouseEvent>() {
       @Override public void handle(MouseEvent mouseEvent) {
-        choice1.setImage(new Image(Const.MAIN_MENU_PATH + "level_select_text1.png"));
+        choice1.setFill(Color.BLACK);
       }
     });
     
@@ -682,13 +688,13 @@ public class MainMenu{
     choice2.setOnMouseEntered(new EventHandler<MouseEvent>() {
       @Override
       public void handle(MouseEvent mouseEvent) {
-        choice2.setImage(new Image(Const.MAIN_MENU_PATH + "level_select_text2_over.png"));
+        choice2.setFill(Color.web("0x80d0d7"));
       }
     });
     choice2.setOnMouseExited(new EventHandler<MouseEvent>() {
       @Override
       public void handle(MouseEvent mouseEvent) {
-        choice2.setImage(new Image(Const.MAIN_MENU_PATH + "level_select_text2.png"));
+        choice2.setFill(Color.BLACK);
       }
     });
     
@@ -704,13 +710,13 @@ public class MainMenu{
     });
     choice3.setOnMouseEntered(new EventHandler<MouseEvent>(){
       @Override public void handle(MouseEvent mouseEvent) {
-        choice3.setImage(new Image(Const.MAIN_MENU_PATH + "level_select_text3_over.png"));
+        choice3.setFill(Color.web("0xb480d7"));
       }
     });
     choice3.setOnMouseExited(new EventHandler<MouseEvent>() {
       @Override
       public void handle(MouseEvent mouseEvent) {
-        choice3.setImage(new Image(Const.MAIN_MENU_PATH + "level_select_text3.png"));
+        choice3.setFill(Color.BLACK);
       }
     });
     
@@ -726,13 +732,13 @@ public class MainMenu{
     });
     choice4.setOnMouseEntered(new EventHandler<MouseEvent>(){
       @Override public void handle(MouseEvent mouseEvent) {
-        choice4.setImage(new Image(Const.MAIN_MENU_PATH + "level_select_text4_over.png"));
+        choice4.setFill(Color.web("0xe78b41"));
       }
     });
     choice4.setOnMouseExited(new EventHandler<MouseEvent>() {
       @Override
       public void handle(MouseEvent mouseEvent) {
-        choice4.setImage(new Image(Const.MAIN_MENU_PATH + "level_select_text4.png"));
+        choice4.setFill(Color.BLACK);
       }
     });
   }
