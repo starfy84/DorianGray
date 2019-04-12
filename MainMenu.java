@@ -21,7 +21,7 @@ import javafx.event.*;
 import javafx.event.EventHandler;
 import javafx.scene.input.*;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
+import javafx.scene.text.*;
 import javafx.scene.text.Font;
 import javafx.geometry.Bounds;
 import javafx.scene.effect.*;
@@ -49,7 +49,6 @@ public class MainMenu{
   private ImageView menuButton; //The menu button that returns the user back to the main menu
   
   private static Pane levelSelect; //the pane that holds all the nodes used in the level select menu
-  private ImageView clock; //The clock in the level select
   private Text choice1, choice2, choice3, choice4; //Each ooption in level select
   private ImageView menuButton2; //The menu button to go back to the main menu 
   
@@ -111,29 +110,28 @@ public class MainMenu{
     sideMenu = new Pane();
     credits = new ImageView (new Image (Const.MAIN_MENU_PATH + "credits.png"));
     help = new ImageView (new Image (Const.MAIN_MENU_PATH + "help.png"));
-    menuButton = createMenuButton();;
+    menuButton = createMenuButton();
     sideMenu.getChildren().addAll(help, menuButton);
     
     
     //Creates level select
     levelSelect = new Pane();
-    clock = new ImageView(new Image(Const.MAIN_MENU_PATH + "level_select_clock.png"));
-    choice1 = new Text(450,195,"Tutorial");
+    choice1 = new Text(20,195,"Prelude");
     choice1.setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 50));
     
-    choice2 = new Text(450,295,"Act I: Basil Hallward");
+    choice2 = new Text(20,295,"Act I: Basil Hallward");
     choice2.setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 50));
     
-    choice3 = new Text(450,395,"Act II: Lord Henry Wotton");
+    choice3 = new Text(20,395,"Act II: Lord Henry Wotton");
     choice3.setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 50));
     
-    choice4 = new Text(450,495,"Act III: Dorian Gray");
+    choice4 = new Text(20,495,"Act III: Dorian Gray");
     choice4.setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 50));
     menuButton2 = createMenuButton();
     enableLevelSelectFunction();
-    
+
     //Adds all graphics to level select pane
-    levelSelect.getChildren().addAll(clock, choice1, choice2, choice3, choice4, menuButton2);
+    levelSelect.getChildren().addAll(choice1, choice2, choice3, choice4, menuButton2);
     
     
     //Creates the root for the main menu pane
