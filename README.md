@@ -16,9 +16,9 @@ TODO
 	* Main menu ui
 	* Portraits
 		* Dorian Gray
-		* Lord Henry
-		* Basil
-		* Sibyl
+		* ~~Lord Henry~~
+		* ~~Basil~~
+		* ~~Sibyl~~
 		* Generic Nobleman
 		* 360 x 360
 	* Backgrounds
@@ -51,7 +51,7 @@ TODO
 * Programming
 	* Take out card shuffle
 	* Remove responses (CardGen)
-	* Change Level options
+	* ~~Change Level options~~
 	* Make text sequential
 	* Add "Add Deck" function to Deck.java
 		* Append new decks to current deck depending on choices.
