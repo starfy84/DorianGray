@@ -65,7 +65,7 @@ public class Game {
   private ImageView cardDim; //The dim on the top of the card when displaying each choice
   
   private ImageView background; //The background of the scene
-  private Text levelName, /*scoreTxt,*/ personName, question; //Text for the level name, score, person's name, and question 
+  private Text /*scoreTxt,*/ personName, question; //Text for the level name, score, person's name, and question 
   //private ImageView boardScore; //The board that displays the score bars under it
   private Rectangle boardCard, boardName; // boardCard is the backboard used to hold the card and the other boards; boardName is the board for the name
   private ImageView cardBackStation; //a stationary carBack behind the current card front and back to simulate going through a deck
@@ -142,11 +142,7 @@ public class Game {
     // System.out.println (temp.getMaxX());
     // scoreTxt.relocate (2434 -temp.getMaxX(), 20);
     
-    //Initialization of the level name, question, and choice texts        
-    levelName = new Text (35, 685, deckName.substring(0, 1).toUpperCase() + deckName.substring(1)); 
-    levelName.setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 36));
-    //Sets the color of the text
-    levelName.setFill (Color.rgb(255, 255, 255));
+    //Initialization of the level name, question, and choice texts  
     
     personName = new Text (420, 700, currentCard.getName()); 
     personName.setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 36));
@@ -256,7 +252,7 @@ public class Game {
     });
     
     //Adds all the nodes to the scene
-    root.getChildren().addAll(background, boardCard, boardName, cardBackStation, /*boardScore,*//* scoreTxt,*/ levelName, question, personName, cardFront, cardBack);
+    root.getChildren().addAll(background, boardCard, boardName, cardBackStation, /*boardScore,*//* scoreTxt,*/ question, personName, cardFront, cardBack);
   }
   
   
