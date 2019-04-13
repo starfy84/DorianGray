@@ -37,7 +37,6 @@ import java.util.Iterator;
 public class DeckGenerator {
     //Instance Variables
   private static final String[] FILLERS = {"Ok.","Okay.","Sure.","Alright.","That's okay.","Whatever."};
-  private static final boolean DEBUG = true;
 
     private String deckName;   // Will be tutorial, childhood, middleschool, or highschool (just the level name, no file location info)
     
@@ -69,9 +68,8 @@ public class DeckGenerator {
     public List<List<Card>> getDeck(){
       List<List<Card>> d = new ArrayList<List<Card>>();
       List<Card> seq;
-      System.out.println (DEBUG);
-      System.out.println("debug:"+DEBUG);
-      if (DEBUG)
+      System.out.println("debug:"+Const.DECK_DEBUG);
+      if (Const.DECK_DEBUG)
         System.out.println("getDeck");
         // Create cards from Deck file
       try {
@@ -99,14 +97,14 @@ public class DeckGenerator {
           for (int i = 0; i < lines; i++){
             String line = reader.readLine();
             
-            if (DEBUG){
+            if (Const.DECK_DEBUG){
               System.out.println("Line("+i+"):"+line);
               System.out.println("    Resources/" + deckName + "/card/" + line + ".txt");
             }
             createCard("Resources/" + deckName + "/card/" + line + ".txt");
           }
           
-          if (DEBUG)
+          if (Const.DECK_DEBUG)
             System.out.println("\nALL CARDS MADE.\n");
           
                 // Create all card sequences
@@ -121,7 +119,7 @@ public class DeckGenerator {
               for (int j = 0; j < cards; j++) {
                 String line = reader.readLine();
                 
-                if (DEBUG){
+                if (Const.DECK_DEBUG){
                   System.out.println("Line("+i+","+j+") :"+line);
                   System.out.println("    Resources/" + deckName + "/card/" + line + ".txt");
                 }
@@ -132,19 +130,19 @@ public class DeckGenerator {
             d.add(seq);
           }
           
-          if (DEBUG)
+          if (Const.DECK_DEBUG)
             System.out.println("    Deck:" + d);
         } catch (NumberFormatException e){System.out.println("lines parse failed:"+r);}
 
         reader.close();
-      } catch (IOException e) { System.out.println("getDeck: file io failed" + DEBUG);}
+      } catch (IOException e) { System.out.println("getDeck: file io failed" + Const.DECK_DEBUG);}
 
         // Get a set of the entries in cardHash and create all choices
-      if (DEBUG)
+      if (Const.DECK_DEBUG)
         System.out.println("\nHASH PORTION");
       try{
         Set set = cardHash.keySet();
-        if (DEBUG)
+        if (Const.DECK_DEBUG)
           System.out.println("    Key Set:"+set);
         
             // Get an iterator
@@ -154,13 +152,13 @@ public class DeckGenerator {
         String key;
         while(i.hasNext()) {
           key = (String)i.next();
-          if (DEBUG)
+          if (Const.DECK_DEBUG)
             System.out.println("        Create choices:"+key+":"+cardHash.get(key));
           createChoices(cardHash.get(key));
         }
       } catch (Exception e) {System.out.println(e);}
       
-      if (DEBUG)
+      if (Const.DECK_DEBUG)
         System.out.println("\nGeneration complete.\n");
       
       return d;
@@ -172,7 +170,7 @@ public class DeckGenerator {
       * @return  The text with all special (non-alphanumeric) characters converted to '_'
       **/
     private static String cleanText(String text){
-      if (DEBUG)
+      if (Const.DECK_DEBUG)
         System.out.print("                                  cleanText:"+text);
       String clean = "";
       char ch;
@@ -183,7 +181,7 @@ public class DeckGenerator {
         else
           clean += "_";
       }
-      if (DEBUG)
+      if (Const.DECK_DEBUG)
         System.out.print("-->"+clean);
       return clean;
     }
@@ -201,7 +199,7 @@ public class DeckGenerator {
       * @param fileName  The .txt file where the card is stored (eg. "/Resources/card/middleschool/esteem1.txt")
       **/
     public ImageView createImage(String fileName){
-      if (DEBUG)
+      if (Const.DECK_DEBUG)
         System.out.println("            createImage:"+fileName);
       
       if (imageHash.containsKey(fileName))
@@ -221,7 +219,7 @@ public class DeckGenerator {
       * @param fileName  The .txt file where the card is stored (eg. "/Resources/card/middleschool/esteem1.txt")
       **/
     public Card createCard(String fileName){
-      if (DEBUG)
+      if (Const.DECK_DEBUG)
         System.out.println("\n       createCard: "+fileName);
       
       if (cardHash.containsKey(fileName))
@@ -235,7 +233,7 @@ public class DeckGenerator {
         text = reader.readLine();
         name = reader.readLine();
         
-        if (DEBUG)
+        if (Const.DECK_DEBUG)
           System.out.println("text:"+text+":name:"+name);
 
         reader.close();
@@ -254,7 +252,7 @@ public class DeckGenerator {
       * @param resultText  The text on the result card. The image is just this text rendered.
       **/
     public Card createResultCard(String resultText){     
-      if (DEBUG)
+      if (Const.DECK_DEBUG)
         System.out.println("                                  createResultCard:"+resultText);
         // Read text and name from file
       String clean = cleanText(resultText);
@@ -273,7 +271,7 @@ public class DeckGenerator {
       * @param typ         The type of ending
       **/
     public Card createEndingCard(String resultText, String typ){
-      if (DEBUG)
+      if (Const.DECK_DEBUG)
         System.out.println("                                  createResultCard:"+resultText);
         // Read text and name from file
       String clean = cleanText(resultText);
@@ -294,7 +292,7 @@ public class DeckGenerator {
       * Precondition: All Cards for the level (including nextCards, excluding result cards) have been initialized and are in cardHash.
       **/
     public void createChoices(Card c){
-      if (DEBUG)
+      if (Const.DECK_DEBUG)
         System.out.println("\n\nCREATE CHOICES: "+c);
 
       BufferedReader reader;
@@ -309,7 +307,7 @@ public class DeckGenerator {
       try{
         fileName = "Resources/" + c.getFileName().substring(10,c.getFileName().indexOf("/card")) + "/choice/";
         fileName += c.getFileName().substring(c.getFileName().indexOf("card/")+5,c.getFileName().length()-4)+"_0.txt";
-        if (DEBUG)
+        if (Const.DECK_DEBUG)
           System.out.println("                fileName:"+fileName);
         reader = new BufferedReader (new FileReader (fileName));
 
@@ -318,7 +316,7 @@ public class DeckGenerator {
           choiceText = getFillerText();
         resultText = reader.readLine();
         
-        if (DEBUG)
+        if (Const.DECK_DEBUG)
           System.out.println("                    Choice Info:"+choiceText + " " + resultText);
 
             // Read info for effects
@@ -330,7 +328,7 @@ public class DeckGenerator {
             effectAmount[i] = Integer.parseInt(reader.readLine());
           }catch (NumberFormatException e){System.out.println("effectAmount parse fail");}
         }
-        if (DEBUG)
+        if (Const.DECK_DEBUG)
           for (int i = 0; i < 4; i++)
             System.out.println("                       EFFECT:["+hasEffect[i]+","+effectAmount[i]+"]");
 
@@ -347,7 +345,7 @@ public class DeckGenerator {
             }
           }catch (NumberFormatException e){System.out.println("cardNum parse fail");}
           
-          if (DEBUG)
+          if (Const.DECK_DEBUG)
             System.out.println("                            Next Cards:"+cardNum+","+nextCards);
           
           reader.close ();
@@ -355,7 +353,7 @@ public class DeckGenerator {
           leftChoice = new Choice(choiceText, hasEffect, effectAmount, nextCards);
           choiceHash.put(fileName, leftChoice);
           
-          if (DEBUG)
+          if (Const.DECK_DEBUG)
             System.out.println(leftChoice);
 
         }catch (IOException e){System.out.println("file io fail");}
@@ -363,7 +361,7 @@ public class DeckGenerator {
         try{
           fileName = "Resources/" + c.getFileName().substring(10,c.getFileName().indexOf("/card")) + "/choice/";
           fileName += c.getFileName().substring(c.getFileName().indexOf("card/")+5,c.getFileName().length()-4)+"_1.txt";
-          if (DEBUG)
+          if (Const.DECK_DEBUG)
             System.out.println("                fileName:"+fileName);
           reader = new BufferedReader (new FileReader (fileName));
 
@@ -372,7 +370,7 @@ public class DeckGenerator {
             choiceText = getFillerText();
           resultText = reader.readLine();
           
-          if (DEBUG)
+          if (Const.DECK_DEBUG)
             System.out.println("                    Choice Info:"+choiceText + " " + resultText);
 
             // Read info for effects
@@ -384,7 +382,7 @@ public class DeckGenerator {
               effectAmount[i] = Integer.parseInt(reader.readLine());
             }catch (NumberFormatException e){System.out.println("effectAmount parse fail");}
           }
-          if (DEBUG)
+          if (Const.DECK_DEBUG)
             for (int i = 0; i < 4; i++)
               System.out.println("                       EFFECT:["+hasEffect[i]+","+effectAmount[i]+"]");
 
@@ -401,7 +399,7 @@ public class DeckGenerator {
               }
             }catch (NumberFormatException e){System.out.println("cardNum parse fail");}
             
-            if (DEBUG)
+            if (Const.DECK_DEBUG)
               System.out.println("                            Next Cards:"+cardNum+","+nextCards);
             
             reader.close ();
@@ -409,7 +407,7 @@ public class DeckGenerator {
             rightChoice = new Choice(choiceText, hasEffect, effectAmount, nextCards);
             choiceHash.put(fileName, rightChoice);
             
-            if (DEBUG)
+            if (Const.DECK_DEBUG)
               System.out.println(rightChoice+"\n");
 
           }catch (IOException e){System.out.println("file io fail");}

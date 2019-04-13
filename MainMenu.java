@@ -548,13 +548,15 @@ public class MainMenu{
         //  bloom.setColor(Color.web("0xD44E4E"));
         // text1.setEffect(bloom);
         text1.setFill(Color.web("0xD44E4E"));
-        System.out.println("Level Select Entered");
+        if(Const.MENU_DEBUG)
+          System.out.println("Level Select Entered");
       }
     });
     text1.setOnMouseExited(new EventHandler<MouseEvent>() {
       @Override public void handle(MouseEvent mouseEvent) {
         text1.setFill(Color.BLACK);
-        System.out.println("Level Select Exited");
+        if(Const.MENU_DEBUG)
+          System.out.println("Level Select Exited");
         
       }
     });
@@ -574,14 +576,16 @@ public class MainMenu{
         // bloom.setColor(Color.web("0xDF5900"));
         // text2.setEffect(bloom);
         text2.setFill(Color.web("0xDF5900"));
-        System.out.println("Help Entered");
+        if(Const.MENU_DEBUG)
+          System.out.println("Help Entered");
       }
     });
     text2.setOnMouseExited(new EventHandler<MouseEvent>() {
       @Override
       public void handle(MouseEvent mouseEvent) {
         text2.setFill(Color.BLACK);
-       System.out.println("Help Exited");
+        if(Const.MENU_DEBUG)
+          System.out.println("Help Exited");
       }
     });
     
@@ -599,14 +603,16 @@ public class MainMenu{
         // bloom.setColor(Color.web("0x6AA84F"));
         // text3.setEffect(bloom);
         text3.setFill(Color.web("0x6AA84F"));
-        System.out.println("Credits Entered");
+        if(Const.MENU_DEBUG)
+          System.out.println("Credits Entered");
       }
     });
     text3.setOnMouseExited(new EventHandler<MouseEvent>() {
       @Override
       public void handle(MouseEvent mouseEvent) {
         text3.setFill(Color.BLACK);
-        System.out.println("Credits Exited");
+        if(Const.MENU_DEBUG)
+          System.out.println("Credits Exited");
       }
     });
     text4.setOnMousePressed(new EventHandler<MouseEvent>(){
@@ -622,14 +628,16 @@ public class MainMenu{
         // bloom.setColor(Color.web("0x674EA7"));
         // text4.setEffect(bloom);
         text4.setFill(Color.web("0x674EA7"));
-        System.out.println("Exit Entered");
+        if(Const.MENU_DEBUG)
+          System.out.println("Exit Entered");
       }
     });
     text4.setOnMouseExited(new EventHandler<MouseEvent>() {
       @Override
       public void handle(MouseEvent mouseEvent) {
         text4.setFill(Color.BLACK);
-        System.out.println("Exit Exited");
+        if(Const.MENU_DEBUG)
+          System.out.println("Exit Exited");
       }
     });
     

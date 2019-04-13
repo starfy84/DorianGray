@@ -271,25 +271,29 @@ public class Game {
       if (currentCard != null){
         if (introDeck.nextCard((swipeLeft ? currentCard.getLeftChoice() : currentCard.getRightChoice()))){
           currentCard = introDeck.getCurrentCard();
-          System.out.println("  went to next intro card: "+currentCard);
+          if(Const.GAME_DEBUG)
+            System.out.println("  went to next intro card: "+currentCard);
         }
         // When there's no more cards in the intro deck, move to main deck
         else{
           state = "Main";
           currentCard = gameDeck.getCurrentCard();
-          System.out.println("  went to game deck: "+currentCard);
+          if(Const.GAME_DEBUG)
+            System.out.println("  went to game deck: "+currentCard);
         }
       }
       // No current card, so we call nextCard without passing choice
       else if (introDeck.nextCard()){
         currentCard = introDeck.getCurrentCard();
-        System.out.println("  went to next intro card: "+currentCard);
+        if(Const.GAME_DEBUG)
+          System.out.println("  went to next intro card: "+currentCard);
       }
       // No intro cards left, move to game
       else{
         state = "Main";
         currentCard = gameDeck.getCurrentCard();
-        System.out.println("  went to game deck: "+currentCard);
+        if(Const.GAME_DEBUG)
+          System.out.println("  went to game deck: "+currentCard);
       }
     }
     else if (state.equals("Main")){
@@ -297,8 +301,10 @@ public class Game {
       
       Choice chosen = (swipeLeft ? currentCard.getLeftChoice() : currentCard.getRightChoice());
       
-      System.out.println("  current: "+currentCard);
-      System.out.println("  chosen: "+chosen);
+      if(Const.GAME_DEBUG){
+        System.out.println("  current: "+currentCard);
+        System.out.println("  chosen: "+chosen);
+      }
       
       // If the game deck has another card
       if (gameDeck.nextCard(chosen)){

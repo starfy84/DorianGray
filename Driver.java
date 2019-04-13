@@ -26,6 +26,11 @@ public class Driver extends Application {
     /** Used in applications to initialize what is run on start**/
     @Override
     public void start(Stage stage) throws Exception {
+      if(Const.MASTER_DEBUG == true){
+        Const.MENU_DEBUG = true;
+        Const.DECK_DEBUG = true;
+        Const.GAME_DEBUG = true;
+      }
       window = stage;
       stage.getIcons().add(new Image ("/Images/icons/icon64x64.png"));  //Set icon
       MainMenu m = new MainMenu(); //Initialize and run main menu

@@ -9,13 +9,17 @@
  * 
  **/
 public final class Const{
-	public static final String HIGHSCORE_PATH = "saves/Highscores";
-	public static final String MAIN_MENU_PATH = "/Images/main menu/";
-	public static final String GAME_PATH = "/Images/game/";
-	private static final String CARD_PATH = "/Images/card/";
-	public static final String CARD_FRONT_PATH = "/Images/card/front/";
-	public static final String CARD_BACK_PATH = "/Images/card/back/";
-	public static final String TITLE = "The Changing of Dorian Gray";
-	public static final int LENGTH = 1280;
-	public static final int WIDTH = 720;
+	protected static final String HIGHSCORE_PATH = "saves/Highscores";
+	protected static final String MAIN_MENU_PATH = "/Images/main menu/";
+	protected static final String GAME_PATH = "/Images/game/";
+	protected static final String CARD_PATH = "/Images/card/";
+	protected static final String CARD_FRONT_PATH = "/Images/card/front/";
+	protected static final String CARD_BACK_PATH = "/Images/card/back/";
+	protected static final String TITLE = "The Changing of Dorian Gray";
+	protected static final int LENGTH = 1280;
+	protected static final int WIDTH = 720;
+	protected static boolean GAME_DEBUG = false;
+	protected static boolean MENU_DEBUG = false;
+	protected static boolean DECK_DEBUG = false;
+	protected static final boolean MASTER_DEBUG = false;
 }
