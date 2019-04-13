@@ -31,7 +31,15 @@ public class Driver extends Application {
       MainMenu m = new MainMenu(); //Initialize and run main menu
       window.setScene(m.getScene());
       window.setTitle (Const.TITLE);
-      window.setResizable(false);
+      window.setHeight(759);
+      window.setMaxHeight(759);
+      window.setMinHeight(759);
+
+      window.setWidth(1296);
+      window.setMaxWidth(1296);
+      window.setMinWidth(1296);
+
+      window.hide();
       window.show();
       m.intro();
     }    
