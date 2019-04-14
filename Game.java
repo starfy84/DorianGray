@@ -48,7 +48,7 @@ public class Game {
 //Instance Variables
   private String deckName;
   private Deck gameDeck, introDeck; //The two decks in the game, first contianing the cards in the game, the second containing the introduction cards
-  private List<Card> endingCards; //The ending cards, determined on if you lose and cause of loss or win
+  // private List<Card> endingCards; //The ending cards, determined on if you lose and cause of loss or win
   private DeckGenerator deckGenerator; //deckgenerator that generates the deck 
   private Card currentCard; //The currentCard in play
   
@@ -65,7 +65,7 @@ public class Game {
   private ImageView cardDim; //The dim on the top of the card when displaying each choice
   
   private ImageView background; //The background of the scene
-  private Text /*scoreTxt,*/ personName, question; //Text for the level name, score, person's name, and question 
+  private Text personName, question; //Text for the level name, score, person's name, and question 
   //private ImageView boardScore; //The board that displays the score bars under it
   private Rectangle boardCard, boardName; // boardCard is the backboard used to hold the card and the other boards; boardName is the board for the name
   private ImageView cardBackStation; //a stationary carBack behind the current card front and back to simulate going through a deck
@@ -77,34 +77,12 @@ public class Game {
     */
   public Game(String deckName){
     this.deckName = deckName;
-    //Creating the hashmaps
-    imageHash = new HashMap<String,ImageView>();
+    DeckGenerator gen = new DeckGenerator(deckName);
+    gameDeck = gen.genDeck(1,1,2,10);
     
-    List<List<Card>> seq = new ArrayList<List<Card>>();
+    currentCard = gameDeck.nextCard();
+    state = "Main";   // Main, End
     
-    // Set level name and create decks
-    deckGenerator = new DeckGenerator(deckName);
-    
-    gameDeck = new Deck(deckGenerator.getDeck());
-    
-    endingCards = gameDeck.getDeck().remove(0);     // First sequence will always be the result cards
-    endingCards.add(0,gameDeck.getCurrentCard());   // Compensate for how nextCard() skips over first card
-    
-    // Health Lose, Happiness Lose, Self-Esteem Lose, Achievement Lose, Success
-    seq.add(gameDeck.getDeck().remove(0));
-    introDeck = new Deck(seq); // Second sequence will always be the intro deck
-    
-    gameDeck.nextCard();  // Prepare first card for gameplay
-    
-    imageHash = deckGenerator.getImageHash();
-    cardHash = deckGenerator.getCardHash();
-    
-    resultImage = imageHash.get("RESULT");
-    
-    state = "Intro";   // Intro, Main, End
-    
-    //first card is null so nextCard must be called after intialization
-    nextCard(true);
     
     //Creation of the scene
     root = new Pane();
@@ -152,7 +130,7 @@ public class Game {
     //Sets the max size in pixels of how many characters are on one line
     personName.setWrappingWidth(440);
     
-    question = new Text (435, 160, currentCard.getText()); 
+    question = new Text (435, 50, currentCard.getText()); 
     question.setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 22));
     question.setFill (Color.rgb(0, 0, 0));
     question.setTextAlignment(TextAlignment.CENTER);
@@ -266,37 +244,7 @@ public class Game {
     * @return  nextCard  The next card to be in play, or null if there are none left (after the final result card).
     */
   public void nextCard(boolean swipeLeft){
-    if (state.equals("Intro")){
-      // Ensure we don't skip over result cards
-      if (currentCard != null){
-        if (introDeck.nextCard((swipeLeft ? currentCard.getLeftChoice() : currentCard.getRightChoice()))){
-          currentCard = introDeck.getCurrentCard();
-          if(Const.GAME_DEBUG)
-            System.out.println("  went to next intro card: "+currentCard);
-        }
-        // When there's no more cards in the intro deck, move to main deck
-        else{
-          state = "Main";
-          currentCard = gameDeck.getCurrentCard();
-          if(Const.GAME_DEBUG)
-            System.out.println("  went to game deck: "+currentCard);
-        }
-      }
-      // No current card, so we call nextCard without passing choice
-      else if (introDeck.nextCard()){
-        currentCard = introDeck.getCurrentCard();
-        if(Const.GAME_DEBUG)
-          System.out.println("  went to next intro card: "+currentCard);
-      }
-      // No intro cards left, move to game
-      else{
-        state = "Main";
-        currentCard = gameDeck.getCurrentCard();
-        if(Const.GAME_DEBUG)
-          System.out.println("  went to game deck: "+currentCard);
-      }
-    }
-    else if (state.equals("Main")){
+    if (state.equals("Main")){
       // Apply effects of choice
       
       Choice chosen = (swipeLeft ? currentCard.getLeftChoice() : currentCard.getRightChoice());
@@ -307,17 +255,14 @@ public class Game {
       }
       
       // If the game deck has another card
-      if (gameDeck.nextCard(chosen)){
-        currentCard = gameDeck.getCurrentCard();
+      if (gameDeck.getDeck().peekFirst() != null){
+        currentCard = gameDeck.nextCard();
       }
       // When there's no more cards in the game deck, move to success card
       else{
         state = "End";
-        currentCard = endingCards.get(4);
+        currentCard = null;
       }
-    }
-    else {
-      currentCard = null;
     }
   }
   

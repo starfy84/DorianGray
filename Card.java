@@ -30,16 +30,14 @@ import javafx.event.*;
 import javafx.event.EventHandler;
 
 public class Card {
-  private String text;
-  private String name;
-  private String fileName;
-    /* Text is the description of problem, the thing Derek must make a choice on
-       Name is the name of the person presenting the choice
-       Filename is the filename storing the card's info. Also used to reference card as a key in DeckImageGenerator's cardHash
-    */
-    private ImageView cardFront;   // Self explanatory; images used for the card front and back  
-    private Choice leftChoice, rightChoice;  // Choices that Derek can make by choosing the left or right 
-    
+  private String text; //Dialogue
+  private String name; //Name of Person
+  private String background;
+  private String type;
+  private ImageView cardFront;   // Self explanatory; images used for the card front and back  
+  private boolean hasChoice;
+  private Choice left;
+  private Choice right;
     /** Constructor
       * 
       * @param fileName  The filename of the card. This will access a text file with the matching name and create the
@@ -47,37 +45,32 @@ public class Card {
       * @param cardFront The image of the front face. Might be shared between cards, so created in DeckImageGenerator.
       * @param cardBack  The image of the back face. Might be shared between cards, so created in DeckImageGenerator.
       **/
-    public Card (String fileName, String text, String name, ImageView cardFront){
-      this.fileName = fileName;
-      this.cardFront = cardFront;
-      this.text = text;
+    public Card (String type, String name, String text, String background, ImageView cardFront){
+      this.type = type;
       this.name = name;
+      this.text = text;
+      this.background = background;
+      this.cardFront = cardFront;
+      hasChoice = false;
     }
 
-    /** Mutator for leftChoice.
-      * 
-      * @param c  New value of leftChoice
-      **/
-    public void setLeftChoice(Choice c){ this.leftChoice = c;}
-    
-    /** Mutator for rightChoice.
-      * 
-      * @param c  New value of rightChoice
-      **/
-    public void setRightChoice(Choice c){ this.rightChoice = c;}
-    
-    /** Accessor for leftChoice.
-      * 
-      * @return  Value of leftChoice
-      **/
-    public Choice getLeftChoice(){ return this.leftChoice;}
-    
-    /** Accessor for rightChoice.
-      * 
-      * @return  Value of rightChoice
-      **/
-    public Choice getRightChoice(){ return this.rightChoice;}
+    public Card (String type, String name, String text, String background, ImageView cardFront, Choice left, Choice right){
+      this.type = type;
+      this.name = name;
+      this.text = text;
+      this.background = background;
+      this.cardFront = cardFront;
+      this.left = left;
+      this.right = right;
+      hasChoice = true;
+    }
 
+    public Choice getLeftChoice(){
+      return left;
+    }
+    public Choice getRightChoice(){
+      return right;
+    }
     /** Accessor for text.
       *
       * @return  Value of text
@@ -90,25 +83,14 @@ public class Card {
       **/
     public String getName() { return this.name;}
 
-    /** Accessor for fileName.
-      *
-      * @return  Value of fileName.
-      **/
-    public String getFileName() { return fileName;}
-
     /** Accessor for cardFront.
       *
       * @return  Value of cardFront.
       **/
     public ImageView getCardFront() { return cardFront;}
 
-    /** Creates and returns a string representation of this object
-      * 
-      * @return   The string representation of the object
-      **/
-    @Override
     public String toString(){
-      return "(Card:"+fileName+")";
+      return text;
     }
     
   }

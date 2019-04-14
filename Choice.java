@@ -29,21 +29,15 @@ import java.util.ArrayList;
 
 public class Choice {
     private String text;                 // Preview text describing choice
-    private boolean[] hasEffect;         // Represents the bars this Card effects (Health, Happiness, Self-Esteem, Achievement)
-    private int[] effectAmount;          // Represents how much the bar is affected (eg. -20 or 5)
     private List<Card> nextCards;        // Stores cards that appear as a result of this choice.
     
     /** Constructor
       * 
       * @param text           Preview text for choice
-      * @param hasEffect      Represents the bars this Card effects (Health, Happiness, Self-Esteem, Achievement)
-      * @param effectAmount   Represents how much the bar is affected (eg. -20 or 5)
       * @param nextCards      Stores cards that appear as a result of this choice.
       **/
-    public Choice(String text, boolean[] hasEffect, int[] effectAmount, List<Card> nextCards){
+    public Choice(String text, List<Card> nextCards){
       this.text = text;
-      this.hasEffect = hasEffect;
-      this.effectAmount = effectAmount;
       this.nextCards = nextCards;
     }
     
@@ -53,8 +47,6 @@ public class Choice {
       **/
     public Choice(String text){
       this.text = text;
-      this.hasEffect = new boolean[4];
-      this.effectAmount = new int[4];
       this.nextCards = new ArrayList<Card>();
     }
     
@@ -64,17 +56,6 @@ public class Choice {
       **/
     public String getText(){ return text;}
     
-    /** Accessor method
-      * 
-      * @return  Array of aspects effected for choice
-      **/
-    public boolean[] getHasEffect(){ return hasEffect;}
-    
-    /** Accessor method
-      * 
-      * @return  Array of effect amounts per aspect for choice
-      **/
-    public int[] getEffectAmount(){ return effectAmount;}
     
     /** Accessor method
       * 
@@ -87,19 +68,4 @@ public class Choice {
       * @return First card from nextCards.
       **/
     public Card getNextCard(){ return nextCards.remove(0);}
-
-    /** Creates and returns a string representation of this object
-      * 
-      * @return   The string representation of the object
-      **/
-    @Override
-    public String toString(){
-      String s = "Choice:"+nextCards+":";
-      for (int i = 0; i < 4; i++)
-        s += hasEffect[i] + " ";
-      s += ":";
-      for (int i = 0; i < 4; i++)
-        s += effectAmount[i] + " ";
-      return s;
-    }
   }

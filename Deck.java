@@ -27,58 +27,89 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import javafx.event.*;
 import javafx.event.EventHandler;
-import java.util.List;
-import java.util.ArrayList;
+import java.util.*;
+import java.io.*;
 
 public class Deck {
-  private List<List<Card>> deck;
+  private LinkedList<Card> deck;
   private Card currentCard;
-
+  private int scenes;
+  private int totalCards;
+  private int[] cardsPerScene;
+  private int currScene;
+  private int currCard;
   private Parent deckImgs;
-
     /** Constructor
       *  
       * @param deckName  The string relating to the Deck file.
       **/
-    public Deck (List<List<Card>> deck) {
-      this.deck = deck;
+    public Deck (String act) {
+      deck = new LinkedList<Card>();
+      currScene = currCard = 1;
+      try{
+        BufferedReader in = new BufferedReader(new FileReader("Resources/"+act+"/scenes.txt"));
+        scenes = Integer.parseInt(in.readLine());
+        cardsPerScene = new int[scenes];
+        for(int x = 0;x < scenes;x++){
+          cardsPerScene[x] = Integer.parseInt(in.readLine());
+          totalCards+=cardsPerScene[x];
+        }
+        for(int scene = 1; scene <= scenes; scene++){
+          for(int card = 1; card <= cardsPerScene[scene-1]; card++){
+            Const.CARD_CACHE.put(act+":"+scene+":"+card,readCard(act,String.valueOf(scene),String.valueOf(card)));
+          }
+        }
+      }catch(Exception e){e.printStackTrace();}
+      if(Const.DECK_DEBUG)
+        System.out.println(cardsPerScene.length);
+    }
+
+    private Card readCard(String act, String scene, String card){
+      Card c = null;
+      try{
+        BufferedReader in = new BufferedReader(new FileReader("Resources/"+act+"/Scene"+scene+"/"+card+".txt"));
+        String type = in.readLine();
+        String character = in.readLine();
+        String text = in.readLine();
+        if(type.equals("End of Dialogue")){
+          Choice choice1 = new Choice(in.readLine());
+          Choice choice2 = new Choice(in.readLine());
+          String background = in.readLine();
+          c = new Card(type, character, text, background, getCharacterImage(character),choice1,choice2);
+        }
+        else {
+          Choice choice1 = new Choice("");
+          Choice choice2 = new Choice("");
+          String background = in.readLine();
+          c = new Card(type, character, text, background, getCharacterImage(character),choice1,choice2);
+        }
+      }catch(Exception e){e.printStackTrace();}
+      return c;
     }
     
+    private ImageView getCharacterImage(String character){
+        return new ImageView(new Image(Const.CARD_FRONT_PATH+character+".png"));
+    }
+
     /** Adds nextCards from choice into Deck, removes empty entries in deck, and sets the new value of currentCard.
       * 
       * @param chosen  The choice the player chose for the previous card
       * 
       * @return  If the deck still has cards.
       **/
-    public boolean nextCard(Choice chosen){
-	   // Add result card from chosen choice to front of Deck
-     if (chosen.getNextCards().size() > 0)
-       deck.get(0).add(0,chosen.getNextCard());
+    public Card nextCard(Choice chosen){
+      currentCard = deck.pollFirst();
+      return currentCard;
+    }
 
-	   // Add next cards from the chosen choice (result card has already been removed)
-     deck.add((int)(Math.random()*(deck.size()-1))+1, chosen.getNextCards());
+    public Card nextCard(){
+      currentCard = deck.pollFirst();
+      return currentCard;
+    }
 
-     return nextCard();
-   }
+    public int[] getCardsPerScene(){return cardsPerScene;}
 
-    /** Called to perform nextCard functions that don't need a Choice (in the constructor and in nextCard original)
-      * 
-      * @return  If the deck still has cards.
-      **/    
-    public boolean nextCard(){
-	   // Remove empty sequences at front
-     while (deck.size() > 0 && deck.get(0).size() == 0)
-       deck.remove(0);
-
-	   // Signals a game over
-     if (deck.size() == 0)
-       return false;
-
-	   // Add next card from front of deck
-     currentCard = deck.get(0).remove(0);
-     return true;
-   }
-
+    public int getScenes(){return scenes;}
     /** The card currently in play.
       * 
       * @return  Value of currentCard.
@@ -89,7 +120,7 @@ public class Deck {
       * 
       * @return     The deck of Cards
       **/
-    public List<List<Card>> getDeck(){ return deck;}
+    public LinkedList<Card> getDeck(){ return deck;}
     
     /** toString overload
       *

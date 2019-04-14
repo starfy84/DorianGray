@@ -23,7 +23,7 @@ import javafx.scene.input.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.*;
 import javafx.scene.text.Font;
-import javafx.geometry.Bounds;
+import javafx.geometry.*;
 import javafx.scene.effect.*;
 
 public class MainMenu{
@@ -31,13 +31,13 @@ public class MainMenu{
   private static Scene scene; //the scene used throughout the entire program
   private Pane root; //The main menu root, contains all the main menu elements
   private Game tutorial; //The game object of the tutorial
-  private Game childhood; //the game object of the childhood level
+  private Game act1; //the game object of act 1
   private Game middleschool; //The game object of the middleschool level
   private Game highschool; //The game object of the highschool level
   
   //Graphics
-  private ImageView title; //the images for the door used in the main menu and the title
-  private Text text1, text2, text3,text4; //The images used for each option of the menu as well as the bottom prompt
+  private Text title; //the images for the door used in the main menu and the title
+  private Text text1, text2, text3, text4, text5; //The images used for each option of the menu as well as the bottom prompt
   
   // private Rectangle fade1, fade2, fade3, fade4, fadeTitle, fadeBot; //The rectangles used in the intro fade animation 
   // private Color fade; //The color used for the fade
@@ -56,14 +56,14 @@ public class MainMenu{
   // private Pane highscoreMenu; //The pane that holds all the nodes used in the highscore menu
   private ImageView crown, menuButton3; //The crown and title shown in the highscore menu, and the menu button for this pane 
   private ImageView score1, score2, score3; //Each option 
-  private Pane childhoodScores, middleschoolScores, highschoolScores; //each pane that holds the highscores of each level
-  
+
   private Pane tutorialPane; //The pane for the tutorial level
-  private Pane childhoodPane; //The pane for the childhood level
-  private Pane middleschoolPane; //The pane for the middleschool level
-  private Pane highschoolPane; //The pane for the highschool level
+  private Pane act1Pane; //The pane for Act 1
+  private Pane act2Pane; //The pane for Act 2
+  private Pane act3Pane; //The pane for Act 3
   private ImageView menuButton4, menuButton5, menuButton6, menuButton7; //the menu buttons for each level 
   private ImageView closePrompt, leave, stay; //The components of the close prompt when you attempt to go back to the main menu in the middle of a game
+  private ImageView portrait;
   private Rectangle backFade;
   
   /**
@@ -74,18 +74,19 @@ public class MainMenu{
   //   title.setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 44));
 
     //Initializes intro images and relocates them
-    text1 = new Text(20,195,"Level Select");
+    text1 = new Text(20,225,"Level Select");
     text1.setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 50));
-    // text1.setFill(Color.RED);
-    // text1.setStyle("-fx-font: 100px Tahoma;-fx-fill: linear-gradient(from 0% 0% to 100% 200%, repeat, aqua 0%, red 50%);-fx-stroke: black;-fx-stroke-width: 1;");
-    text2 = new Text(20,295,"Help");
+    text2 = new Text(20,325,"Help");
     text2.setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 50));
-    text3 = new Text(20,395,"Credits");
+    text3 = new Text(20,425,"Credits");
     text3.setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 50));
-    text4 = new Text(20,495,"Exit");
+    text4 = new Text(20,525,"Exit");
     text4.setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 50));
-    title = new ImageView (new Image(Const.MAIN_MENU_PATH + "title.png"));
-    title.relocate (0, 20);
+    text5 = new Text(20,625,"Test");
+    text5.setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 50));
+    title = new Text(20,20,"The Changing of Dorian Gray");
+    title.setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 65));
+    title.setTextOrigin(VPos.TOP);
     
     
     //Initializes fade rectangles put on top for each text to simulate a fade
@@ -116,16 +117,16 @@ public class MainMenu{
     
     //Creates level select
     levelSelect = new Pane();
-    choice1 = new Text(20,195,"Prelude");
+    choice1 = new Text(20,225,"Prelude");
     choice1.setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 50));
     
-    choice2 = new Text(20,295,"Act I: Basil Hallward");
+    choice2 = new Text(20,325,"Act I: Basil Hallward");
     choice2.setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 50));
     
-    choice3 = new Text(20,395,"Act II: Lord Henry Wotton");
+    choice3 = new Text(20,425,"Act II: Lord Henry Wotton");
     choice3.setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 50));
     
-    choice4 = new Text(20,495,"Act III: Dorian Gray");
+    choice4 = new Text(20,525,"Act III: Dorian Gray");
     choice4.setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 50));
     menuButton2 = createMenuButton();
     enableLevelSelectFunction();
@@ -133,11 +134,12 @@ public class MainMenu{
     //Adds all graphics to level select pane
     levelSelect.getChildren().addAll(choice1, choice2, choice3, choice4, menuButton2);
     
-    
+    portrait = new ImageView(new Image(Const.CARD_FRONT_PATH+"Dorian Gray.png"));
+    portrait.relocate(500,180-portrait.getFitWidth()/2);
     //Creates the root for the main menu pane
     root = new Pane();
-    root.getChildren().addAll(text1, text2, text3,text4,/*fade1, fade2, fade3, fade4, fadeBot,*/ title/*, fadeTitle*/); //Adds all the intro nodes to the current pane
-    
+    root.getChildren().addAll(text1, text2, text3,text4,text5,portrait,/*fade1, fade2, fade3, fade4, fadeBot,*/ title/*, fadeTitle*/); //Adds all the intro nodes to the current pane
+    root.setId("pane");
     //Adds function to the buttons that adds the "are you sure want to go back to the main menu" prompt
     menuButton4 = createGameMenuButton(tutorialPane);
     menuButton4.setOnMousePressed(new EventHandler<MouseEvent>(){
@@ -145,22 +147,22 @@ public class MainMenu{
         tutorialPane.getChildren().addAll(backFade, closePrompt, leave, stay);
       }
     });
-    menuButton5 = createGameMenuButton(childhoodPane);
+    menuButton5 = createGameMenuButton(act1Pane);
     menuButton5.setOnMousePressed(new EventHandler<MouseEvent>(){
       @Override public void handle(MouseEvent mouseEvent) {
-        childhoodPane.getChildren().addAll(backFade, closePrompt, leave, stay);
+        act1Pane.getChildren().addAll(backFade, closePrompt, leave, stay);
       }
     });
-    menuButton6 = createGameMenuButton(middleschoolPane);
+    menuButton6 = createGameMenuButton(act2Pane);
     menuButton6.setOnMousePressed(new EventHandler<MouseEvent>(){
       @Override public void handle(MouseEvent mouseEvent) {
-        middleschoolPane.getChildren().addAll(backFade, closePrompt, leave, stay);
+        act2Pane.getChildren().addAll(backFade, closePrompt, leave, stay);
       }
     });
-    menuButton7 = createGameMenuButton(highschoolPane);
+    menuButton7 = createGameMenuButton(act3Pane);
     menuButton7.setOnMousePressed(new EventHandler<MouseEvent>(){
       @Override public void handle(MouseEvent mouseEvent) {
-        highschoolPane.getChildren().addAll(backFade, closePrompt, leave, stay);
+        act3Pane.getChildren().addAll(backFade, closePrompt, leave, stay);
       }
     });
     
@@ -186,6 +188,7 @@ public class MainMenu{
     //Creates the inital scene
     scene = new Scene(root, Const.LENGTH, Const.WIDTH, true, SceneAntialiasing.BALANCED);
     scene.setCamera(new PerspectiveCamera());
+    scene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
   }
   
   /** Created as multiple menu buttons are created
@@ -638,7 +641,32 @@ public class MainMenu{
         text4.setFill(Color.BLACK);
         if(Const.MENU_DEBUG)
           System.out.println("Exit Exited");
+      } 
+    });
+
+    text5.setOnMousePressed(new EventHandler<MouseEvent>(){
+      @Override public void handle(MouseEvent mouseEvent) {
+        Deck d = new Deck("Act1");
+        Card c = null;
+        while((c=d.nextCard())!=null){
+          System.out.println(c.getText());
+        };
       }
+    });
+    text5.setOnMouseEntered(new EventHandler<MouseEvent>(){
+      @Override public void handle(MouseEvent mouseEvent) {
+        text5.setFill(Color.web("0x674EA7"));
+        if(Const.MENU_DEBUG)
+          System.out.println("Test Entered");
+      }
+    });
+    text5.setOnMouseExited(new EventHandler<MouseEvent>() {
+      @Override
+      public void handle(MouseEvent mouseEvent) {
+        text5.setFill(Color.BLACK);
+        if(Const.MENU_DEBUG)
+          System.out.println("Test Exited");
+      } 
     });
     
     // text4.setOnMousePressed(new EventHandler<MouseEvent>(){
@@ -684,11 +712,11 @@ public class MainMenu{
     
     choice2.setOnMousePressed(new EventHandler<MouseEvent>(){
       @Override public void handle(MouseEvent mouseEvent) {
-        childhood = new Game("childhood");
-        childhoodPane = childhood.getRoot();
-        changeGameMenuFunction(childhoodPane);
-        childhoodPane.getChildren().add(menuButton5);
-        scene.setRoot(childhoodPane);
+        act1 = new Game("Act1");
+        act1Pane = act1.getRoot();
+        changeGameMenuFunction(act1Pane);
+        act1Pane.getChildren().add(menuButton5);
+        scene.setRoot(act1Pane);
       }
     });
     choice2.setOnMouseEntered(new EventHandler<MouseEvent>() {
@@ -708,10 +736,10 @@ public class MainMenu{
     choice3.setOnMousePressed(new EventHandler<MouseEvent>(){
       @Override public void handle(MouseEvent mouseEvent) {
         middleschool = new Game("middleschool");
-        middleschoolPane = middleschool.getRoot();
-        changeGameMenuFunction(middleschoolPane);
-        middleschoolPane.getChildren().add(menuButton6);
-        scene.setRoot(middleschoolPane);
+        act2Pane = middleschool.getRoot();
+        changeGameMenuFunction(act2Pane);
+        act2Pane.getChildren().add(menuButton6);
+        scene.setRoot(act2Pane);
       }
     });
     choice3.setOnMouseEntered(new EventHandler<MouseEvent>(){
@@ -730,10 +758,10 @@ public class MainMenu{
     choice4.setOnMousePressed(new EventHandler<MouseEvent>(){
       @Override public void handle(MouseEvent mouseEvent) {
         highschool = new Game("highschool");
-        highschoolPane = highschool.getRoot();
-        changeGameMenuFunction(highschoolPane);
-        highschoolPane.getChildren().add(menuButton7);
-        scene.setRoot(highschoolPane);
+        act3Pane = highschool.getRoot();
+        changeGameMenuFunction(act3Pane);
+        act3Pane.getChildren().add(menuButton7);
+        scene.setRoot(act3Pane);
       }
     });
     choice4.setOnMouseEntered(new EventHandler<MouseEvent>(){

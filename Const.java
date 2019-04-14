@@ -8,6 +8,8 @@
  * Description:
  * 
  **/
+import java.util.*;
+import javafx.scene.image.*;
 public final class Const{
 	protected static final String HIGHSCORE_PATH = "saves/Highscores";
 	protected static final String MAIN_MENU_PATH = "/Images/main menu/";
@@ -21,5 +23,9 @@ public final class Const{
 	protected static boolean GAME_DEBUG = false;
 	protected static boolean MENU_DEBUG = false;
 	protected static boolean DECK_DEBUG = false;
-	protected static final boolean MASTER_DEBUG = false;
+	protected static final boolean MASTER_DEBUG = true;
+	protected static HashMap<String, Card> CARD_CACHE = new HashMap<String, Card>();
+	protected static HashMap<String, Deck> DECK_CACHE = new HashMap<String, Deck>();
+	protected static HashMap<String, ImageView> CHARS = new HashMap<String, ImageView>();
+	protected static HashMap<String, ImageView> BACKGROUNDS = new HashMap<String, ImageView>();
 }
