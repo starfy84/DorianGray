@@ -37,7 +37,7 @@ public class MainMenu{
   
   //Graphics
   private Text title; //the images for the door used in the main menu and the title
-  private Text text1, text2, text3, text4, text5; //The images used for each option of the menu as well as the bottom prompt
+  private Text text1, text2, text3, text4; //The images used for each option of the menu as well as the bottom prompt
   
   // private Rectangle fade1, fade2, fade3, fade4, fadeTitle, fadeBot; //The rectangles used in the intro fade animation 
   // private Color fade; //The color used for the fade
@@ -82,8 +82,6 @@ public class MainMenu{
     text3.setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 50));
     text4 = new Text(20,525,"Exit");
     text4.setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 50));
-    text5 = new Text(20,625,"Test");
-    text5.setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 50));
     title = new Text(20,20,"The Changing of Dorian Gray");
     title.setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 65));
     title.setTextOrigin(VPos.TOP);
@@ -138,7 +136,7 @@ public class MainMenu{
     portrait.relocate(500,180-portrait.getFitWidth()/2);
     //Creates the root for the main menu pane
     root = new Pane();
-    root.getChildren().addAll(text1, text2, text3,text4,text5,portrait,/*fade1, fade2, fade3, fade4, fadeBot,*/ title/*, fadeTitle*/); //Adds all the intro nodes to the current pane
+    root.getChildren().addAll(text1, text2, text3,text4,portrait,/*fade1, fade2, fade3, fade4, fadeBot,*/ title/*, fadeTitle*/); //Adds all the intro nodes to the current pane
     root.setId("pane");
     //Adds function to the buttons that adds the "are you sure want to go back to the main menu" prompt
     menuButton4 = createGameMenuButton(tutorialPane);
@@ -643,31 +641,6 @@ public class MainMenu{
           System.out.println("Exit Exited");
       } 
     });
-
-    text5.setOnMousePressed(new EventHandler<MouseEvent>(){
-      @Override public void handle(MouseEvent mouseEvent) {
-        Deck d = new Deck("Act1");
-        Card c = null;
-        while((c=d.nextCard())!=null){
-          System.out.println(c.getText());
-        };
-      }
-    });
-    text5.setOnMouseEntered(new EventHandler<MouseEvent>(){
-      @Override public void handle(MouseEvent mouseEvent) {
-        text5.setFill(Color.web("0x674EA7"));
-        if(Const.MENU_DEBUG)
-          System.out.println("Test Entered");
-      }
-    });
-    text5.setOnMouseExited(new EventHandler<MouseEvent>() {
-      @Override
-      public void handle(MouseEvent mouseEvent) {
-        text5.setFill(Color.BLACK);
-        if(Const.MENU_DEBUG)
-          System.out.println("Test Exited");
-      } 
-    });
     
     // text4.setOnMousePressed(new EventHandler<MouseEvent>(){
     //   @Override public void handle(MouseEvent mouseEvent) {
@@ -691,11 +664,11 @@ public class MainMenu{
   private void enableLevelSelectFunction(){
     choice1.setOnMousePressed(new EventHandler<MouseEvent>(){
       @Override public void handle(MouseEvent mouseEvent) {
-        tutorial = new Game("tutorial");
-        tutorialPane = tutorial.getRoot();
-        changeGameMenuFunction(tutorialPane);
-        tutorialPane.getChildren().add(menuButton4);
-        scene.setRoot(tutorialPane);
+        // tutorial = new Game("tutorial");
+        // tutorialPane = tutorial.getRoot();
+        // changeGameMenuFunction(tutorialPane);
+        // tutorialPane.getChildren().add(menuButton4);
+        // scene.setRoot(tutorialPane);
       }
     });
     choice1.setOnMouseEntered(new EventHandler<MouseEvent>(){
@@ -712,7 +685,7 @@ public class MainMenu{
     
     choice2.setOnMousePressed(new EventHandler<MouseEvent>(){
       @Override public void handle(MouseEvent mouseEvent) {
-        act1 = new Game("Act1");
+        act1 = new Act1();
         act1Pane = act1.getRoot();
         changeGameMenuFunction(act1Pane);
         act1Pane.getChildren().add(menuButton5);
@@ -735,11 +708,11 @@ public class MainMenu{
     
     choice3.setOnMousePressed(new EventHandler<MouseEvent>(){
       @Override public void handle(MouseEvent mouseEvent) {
-        middleschool = new Game("middleschool");
-        act2Pane = middleschool.getRoot();
-        changeGameMenuFunction(act2Pane);
-        act2Pane.getChildren().add(menuButton6);
-        scene.setRoot(act2Pane);
+        // middleschool = new Game("middleschool");
+        // act2Pane = middleschool.getRoot();
+        // changeGameMenuFunction(act2Pane);
+        // act2Pane.getChildren().add(menuButton6);
+        // scene.setRoot(act2Pane);
       }
     });
     choice3.setOnMouseEntered(new EventHandler<MouseEvent>(){
@@ -757,11 +730,11 @@ public class MainMenu{
     
     choice4.setOnMousePressed(new EventHandler<MouseEvent>(){
       @Override public void handle(MouseEvent mouseEvent) {
-        highschool = new Game("highschool");
-        act3Pane = highschool.getRoot();
-        changeGameMenuFunction(act3Pane);
-        act3Pane.getChildren().add(menuButton7);
-        scene.setRoot(act3Pane);
+        // highschool = new Game("highschool");
+        // act3Pane = highschool.getRoot();
+        // changeGameMenuFunction(act3Pane);
+        // act3Pane.getChildren().add(menuButton7);
+        // scene.setRoot(act3Pane);
       }
     });
     choice4.setOnMouseEntered(new EventHandler<MouseEvent>(){

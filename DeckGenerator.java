@@ -30,14 +30,8 @@ import java.io.*;
 import java.util.*;
 
 public class DeckGenerator {
-    //Instance Variables
-  private static final String[] FILLERS = {"Ok.","Okay.","Sure.","Alright.","That's okay.","Whatever."};
 
     private String deckName;
-    
-    private Queue<Card> deck;
-
-    private ImageView resultImage;
 
     /** Constructor 
       *

@@ -44,19 +44,19 @@ import javafx.geometry.Bounds;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
 class Variables {boolean choiceLeft, choiceRight;}
-public class Game {
+public abstract class Game {
 //Instance Variables
   private String deckName;
-  private Deck gameDeck, introDeck; //The two decks in the game, first contianing the cards in the game, the second containing the introduction cards
+  protected Deck gameDeck, introDeck; //The two decks in the game, first contianing the cards in the game, the second containing the introduction cards
   // private List<Card> endingCards; //The ending cards, determined on if you lose and cause of loss or win
-  private DeckGenerator deckGenerator; //deckgenerator that generates the deck 
+  protected DeckGenerator deckGenerator; //deckgenerator that generates the deck 
   private Card currentCard; //The currentCard in play
   
   private ImageView resultImage; //
   
   private HashMap<String,ImageView> imageHash; //Used to make sure no image is used more than once
   private HashMap<String,Card> cardHash; //Used to make sure no card is use more than once
-  private String state; //The current state of the program; states are: Intro, Main, End
+  protected String state; //The current state of the program; states are: Intro, Main, End
   
   private Pane root; //the root that contains all the object in the scene
   
@@ -69,17 +69,28 @@ public class Game {
   //private ImageView boardScore; //The board that displays the score bars under it
   private Rectangle boardCard, boardName; // boardCard is the backboard used to hold the card and the other boards; boardName is the board for the name
   private ImageView cardBackStation; //a stationary carBack behind the current card front and back to simulate going through a deck
+  protected String choices;
   
-  
+  abstract public void addToDeck();
+  abstract public void conditional();
   /** Constructor for Game
     * 
     * @param  deckName  The name of the level/deck. Displayed in game and used to generate Deck.
     */
   public Game(String deckName){
     this.deckName = deckName;
-    DeckGenerator gen = new DeckGenerator(deckName);
-    gameDeck = gen.genDeck(1,1,2,10);
-    
+    deckGenerator = new DeckGenerator(deckName);
+
+    state = "Init";
+    addToDeck();
+
+    choices = "";
+    try{
+      PrintWriter clear = new PrintWriter(new FileWriter("saves/"+deckName));
+      clear.close();
+      // BufferedReader in = new BufferedReader(new FileReader("saves/"+deckName));
+      // choices = in.readLine();
+    }catch(Exception e){}
     currentCard = gameDeck.nextCard();
     state = "Main";   // Main, End
     
@@ -174,10 +185,14 @@ public class Game {
             root.getChildren().remove(root.getChildren().size()-2, root.getChildren().size()); //removes the right choice if it the mouse somehow never goes in the middle
             root.getChildren().add(choice2);
           }
-          else if (!v.choiceLeft)
-            root.getChildren().addAll(cardDim, choice1); //Adds the dim and choice if it isn't there
+          else if (!v.choiceLeft){
+            if(currentCard.getHasChoice())
+              root.getChildren().addAll(cardDim); //Adds the dim and choice if it isn't there
+            root.getChildren().addAll(choice1);
+          }
           cardFront.setRotate(Math.max(350, 360+(int)((mouseEvent.getSceneX()-555)/19.5))); //rotates the card front, dim, choices together
-          cardDim.setRotate(Math.max(350, 360+(int)((mouseEvent.getSceneX()-555)/19.5)));
+          if(currentCard.getHasChoice())
+            cardDim.setRotate(Math.max(350, 360+(int)((mouseEvent.getSceneX()-555)/19.5)));
           choice1.setRotate(Math.max(350, 360+(int)((mouseEvent.getSceneX()-555)/19.5)));
           v.choiceLeft = true; //Shows the left choice should be shown
           v.choiceRight = false;
@@ -187,23 +202,32 @@ public class Game {
             root.getChildren().remove(root.getChildren().size()-2, root.getChildren().size()); //removes the left choice if it the mouse somehow never goes in the middle
             root.getChildren().add(choice1);
           }
-          else if (!v.choiceRight)
-            root.getChildren().addAll(cardDim, choice2);
+          else if (!v.choiceRight){
+            if(currentCard.getHasChoice())
+              root.getChildren().addAll(cardDim);
+            root.getChildren().addAll(choice2);
+          }
           cardFront.setRotate(Math.min(10, 360+(int)((mouseEvent.getSceneX()-555)/19.5)));
-          cardDim.setRotate(Math.min(10, 360+(int)((mouseEvent.getSceneX()-555)/19.5)));
+          if(currentCard.getHasChoice())
+            cardDim.setRotate(Math.min(10, 360+(int)((mouseEvent.getSceneX()-555)/19.5)));
           choice2.setRotate(Math.min(10, 360+(int)((mouseEvent.getSceneX()-555)/19.5)));
           v.choiceLeft = false; //Shows the right choice should be shown
           v.choiceRight = true;
         }
         else{ //if mouse is in the middle
-          if (v.choiceRight || v.choiceLeft)
-            root.getChildren().remove(root.getChildren().size()-2, root.getChildren().size());
+          if (v.choiceRight || v.choiceLeft){
+            if(currentCard.getHasChoice())
+              root.getChildren().remove(root.getChildren().size()-2, root.getChildren().size());
+            else
+              root.getChildren().remove(root.getChildren().size()-1,root.getChildren().size());
+          }
           cardFront.setRotate(360+(int)((mouseEvent.getSceneX()-555)/19.5));
           v.choiceLeft = false; //Shows no choice should be shown
           v.choiceRight = false;
         }
         cardFront.relocate(450+(mouseEvent.getSceneX()-460)/20, 260+(mouseEvent.getSceneY()-640)/30); //Moves the cards in respect to the mouse but within bounds
-        cardDim.relocate(450+(mouseEvent.getSceneX()-460)/20, 260+(mouseEvent.getSceneY()-640)/30);
+        if(currentCard.getHasChoice())
+          cardDim.relocate(450+(mouseEvent.getSceneX()-460)/20, 260+(mouseEvent.getSceneY()-640)/30);
         choice1.relocate(450+(mouseEvent.getSceneX()-460)/20, 280+(mouseEvent.getSceneY()-640)/30);
         choice2.relocate(500+(mouseEvent.getSceneX()-460)/20, 280+(mouseEvent.getSceneY()-640)/30);
       }
@@ -216,15 +240,22 @@ public class Game {
         cardFront.relocate(460, 260); //Relocated card front and hides it
         cardFront.setRotate(0);
         if (mouseEvent.getSceneX() < 450){
-          root.getChildren().remove(root.getChildren().size()-2, root.getChildren().size()); //dim and choice removes
+          if(currentCard.getHasChoice())
+            root.getChildren().remove(root.getChildren().size()-2, root.getChildren().size());
+          else
+            root.getChildren().remove(root.getChildren().size()-1,root.getChildren().size());
           updateGame(true); //left choice was chosen
         }
         else if (mouseEvent.getSceneX() > 810){
-          root.getChildren().remove(root.getChildren().size()-2, root.getChildren().size());
+          if(currentCard.getHasChoice())
+            root.getChildren().remove(root.getChildren().size()-2, root.getChildren().size());
+          else
+            root.getChildren().remove(root.getChildren().size()-1,root.getChildren().size());
           updateGame(false); //right choice was chosen
         }
         if (currentCard == null){ //if the game is over
-            MainMenu.backToLevelSelect(); //back to level select
+          conditional();
+          MainMenu.backToLevelSelect(); //back to level select
         }
       }
     });
@@ -248,12 +279,27 @@ public class Game {
       // Apply effects of choice
       
       Choice chosen = (swipeLeft ? currentCard.getLeftChoice() : currentCard.getRightChoice());
-      
+      try{
+        PrintWriter out = new PrintWriter(new FileWriter("saves/"+deckName,true));
+        if(chosen.getText().equals("")){
+          out.print("0");
+          choices+="0";
+        }
+        else if(swipeLeft){
+          out.print("L");
+          choices+="L";
+        }
+        else{
+          out.print("R");
+          choices+="R";
+        }
+        out.close();
+      }catch(Exception e){}
       if(Const.GAME_DEBUG){
         System.out.println("  current: "+currentCard);
         System.out.println("  chosen: "+chosen);
       }
-      
+      addToDeck();
       // If the game deck has another card
       if (gameDeck.getDeck().peekFirst() != null){
         currentCard = gameDeck.nextCard();

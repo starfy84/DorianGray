@@ -45,14 +45,6 @@ public class Card {
       * @param cardFront The image of the front face. Might be shared between cards, so created in DeckImageGenerator.
       * @param cardBack  The image of the back face. Might be shared between cards, so created in DeckImageGenerator.
       **/
-    public Card (String type, String name, String text, String background, ImageView cardFront){
-      this.type = type;
-      this.name = name;
-      this.text = text;
-      this.background = background;
-      this.cardFront = cardFront;
-      hasChoice = false;
-    }
 
     public Card (String type, String name, String text, String background, ImageView cardFront, Choice left, Choice right){
       this.type = type;
@@ -62,7 +54,7 @@ public class Card {
       this.cardFront = cardFront;
       this.left = left;
       this.right = right;
-      hasChoice = true;
+      hasChoice = !(left.getText().equals("") && right.getText().equals(""));
     }
 
     public Choice getLeftChoice(){
@@ -77,6 +69,7 @@ public class Card {
       **/
     public String getText() { return this.text;}
 
+    public boolean getHasChoice(){ return this.hasChoice;}
     /** Accessor for name.
       *
       * @return  Value of name
