@@ -107,8 +107,8 @@ public class MainMenu{
     
     //Creates menu button and picutres for both help and credits
     sideMenu = new Pane();
-    credits = new ImageView (new Image (Const.MAIN_MENU_PATH + "credits.png"));
-    help = new ImageView (new Image (Const.MAIN_MENU_PATH + "help.png"));
+    credits = new ImageView (new Image (Const.MAIN_MENU_PATH + "stockimg.png"));
+    help = new ImageView (new Image (Const.MAIN_MENU_PATH + "stockimg.png"));
     menuButton = createMenuButton();
     sideMenu.getChildren().addAll(help, menuButton);
     

@@ -23,7 +23,7 @@ public final class Const{
 	protected static boolean GAME_DEBUG = false;
 	protected static boolean MENU_DEBUG = false;
 	protected static boolean DECK_DEBUG = false;
-	protected static final boolean MASTER_DEBUG = true;
+	protected static final boolean MASTER_DEBUG = false;
 	protected static HashMap<String, Card> CARD_CACHE = new HashMap<String, Card>();
 	protected static HashMap<String, Deck> DECK_CACHE = new HashMap<String, Deck>();
 	protected static HashMap<String, ImageView> CHARS = new HashMap<String, ImageView>();
