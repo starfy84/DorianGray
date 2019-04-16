@@ -63,6 +63,10 @@ public class Deck {
       if(Const.DECK_DEBUG)
         System.out.println(cardsPerScene.length);
     }
+    public Deck () {
+      deck = new LinkedList<Card>();
+    }
+
 
     private Card readCard(String act, String scene, String card){
       Card c = null;
