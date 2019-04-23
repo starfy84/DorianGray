@@ -2,8 +2,10 @@ import java.util.*;
 import java.io.*;
 public class Act2 extends Game{
   private char lastActResult;
+  private boolean scene6;
   public Act2(){
     super("Act2","richpersonhouse");
+    scene6 = false;
   }
   private Deck gen(int bScene, int bCard, int eScene,int eCard){
     return super.deckGenerator.genDeck(bScene,bCard,eScene,eCard);
@@ -27,6 +29,26 @@ public class Act2 extends Game{
       else if(lastActResult == 'B'){
         super.gameDeck = gen(1,1,1,8);
         add(super.gameDeck,gen(3,1,3,16),gen(3,1,3,1),gen(3,4,3,54),gen(3,57,3,57),gen(4,1,4,10),gen(4,12,4,27),gen(5,1,5,15),gen(5,17,5,21),gen(5,23,5,64));
+      }
+    }
+    else if(super.state.equals("Main")){
+      if(lastActResult == 'G'){
+        if(super.choices.length() == 131){
+          if(super.choices.charAt(130) == 'L'){
+            scene6 = true;
+          }
+          else if(super.choices.charAt(130) == 'R'){
+            add(super.gameDeck,gen(5,66,5,67));
+          }
+        }
+        else if(super.choices.length() == 133){
+          scene6 = true;
+        }
+      }
+      else if(lastActResult == 'B'){
+        if(super.choices.length() == 149){
+          scene6 = true;
+        }
       }
     }
   }
