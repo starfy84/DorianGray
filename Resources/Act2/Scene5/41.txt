@@ -1,0 +1,6 @@
+End of Dialogue
+Theatre Manager
+Would you like to go behind scenes and meet the lead actress, Sibyl Vane?
+How funny you are! Juliet has been dead for hundreds of years and her body lays in Verona.
+What a comedian you are! Juliet has been dead for hundreds of years and her body lays in Verona.
+None
