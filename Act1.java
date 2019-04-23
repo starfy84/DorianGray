@@ -2,9 +2,7 @@ import java.util.*;
 import java.io.*;
 public class Act1 extends Game{
   public Act1(){
-    super("Act1");
-
-    
+    super("Act1","garden");
     Deck d = new Deck();
     Const.DECK_CACHE.put("Act1:2:11-Act1:2:11",super.deckGenerator.genDeck(2,11,2,11));
     Const.DECK_CACHE.put("Act1:2:13-Act1:2:13",super.deckGenerator.genDeck(2,13,2,13));

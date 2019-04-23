@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.Set;
 import java.util.Iterator;
-
+import javafx.scene.effect.*;
 import javafx.animation.*;
 import javafx.scene.*;
 import javafx.scene.text.*;
@@ -64,7 +64,7 @@ public abstract class Game {
   private Text choice1, choice2; //The text of each choices presented by the card
   private ImageView cardDim; //The dim on the top of the card when displaying each choice
   
-  private ImageView background; //The background of the scene
+  protected ImageView background; //The background of the scene
   private Text personName, question; //Text for the level name, score, person's name, and question 
   //private ImageView boardScore; //The board that displays the score bars under it
   private Rectangle boardCard, boardName; // boardCard is the backboard used to hold the card and the other boards; boardName is the board for the name
@@ -77,7 +77,7 @@ public abstract class Game {
     * 
     * @param  deckName  The name of the level/deck. Displayed in game and used to generate Deck.
     */
-  public Game(String deckName){
+  public Game(String deckName,String bg){
     this.deckName = deckName;
     deckGenerator = new DeckGenerator(deckName);
 
@@ -99,8 +99,8 @@ public abstract class Game {
     root = new Pane();
     
     //background intialization
-    background = new ImageView(new Image(Const.GAME_PATH+"backgrounds/"+deckName+".png"));
-    
+    background = new ImageView(new Image(Const.GAME_PATH+"backgrounds/"+bg+".png"));
+    checkBG();
     /*
     boardScore = new ImageView(new Image(Const.GAME_PATH+"ui/game_bar.png"));
     boardScore.relocate(420, 0);
@@ -341,12 +341,22 @@ public abstract class Game {
     });
     rotation1.play();
   }
-  
+   
+  private void checkBG(){
+    if (currentCard.background.equals("Blurry")){
+      background.setEffect(new GaussianBlur());
+    }
+    else{
+      background.setEffect(null);
+    }
+  }
+
   /** **/
   private void updateGame(boolean swipeLeft){
     nextCard(swipeLeft);
     if (currentCard == null)
       return;
+    checkBG();
     cardFront.setImage(currentCard.getCardFront().getImage());  
     cardBack.setScaleX(1);
     // scoreTxt.setText(String.valueOf(score));

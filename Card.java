@@ -32,7 +32,7 @@ import javafx.event.EventHandler;
 public class Card {
   private String text; //Dialogue
   private String name; //Name of Person
-  private String background;
+  public String background;
   private String type;
   private ImageView cardFront;   // Self explanatory; images used for the card front and back  
   private boolean hasChoice;
