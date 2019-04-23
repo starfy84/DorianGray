@@ -70,11 +70,12 @@ public class Deck {
 
     private Card readCard(String act, String scene, String card){
       Card c = null;
+      String type="",character="",text="";
       try{
         BufferedReader in = new BufferedReader(new FileReader("Resources/"+act+"/Scene"+scene+"/"+card+".txt"));
-        String type = in.readLine();
-        String character = in.readLine();
-        String text = in.readLine();
+        type = in.readLine();
+        character = in.readLine();
+        text = in.readLine();
         if(type.equals("End of Dialogue")){
           Choice choice1 = new Choice(in.readLine());
           Choice choice2 = new Choice(in.readLine());
@@ -87,7 +88,7 @@ public class Deck {
           String background = in.readLine();
           c = new Card(type, character, text, background, getCharacterImage(character),choice1,choice2);
         }
-      }catch(Exception e){e.printStackTrace();}
+      }catch(Exception e){System.out.println(character);}
       return c;
     }
     
