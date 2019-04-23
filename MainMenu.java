@@ -32,7 +32,7 @@ public class MainMenu{
   private Pane root; //The main menu root, contains all the main menu elements
   private Game tutorial; //The game object of the tutorial
   private Game act1; //the game object of act 1
-  private Game middleschool; //The game object of the middleschool level
+  private Game act2; //The game object of the middleschool level
   private Game highschool; //The game object of the highschool level
   
   //Graphics
@@ -708,11 +708,11 @@ public class MainMenu{
     
     choice3.setOnMousePressed(new EventHandler<MouseEvent>(){
       @Override public void handle(MouseEvent mouseEvent) {
-        // middleschool = new Game("middleschool");
-        // act2Pane = middleschool.getRoot();
-        // changeGameMenuFunction(act2Pane);
-        // act2Pane.getChildren().add(menuButton6);
-        // scene.setRoot(act2Pane);
+        act2 = new Act2();
+        act2Pane = act2.getRoot();
+        changeGameMenuFunction(act2Pane);
+        act2Pane.getChildren().add(menuButton6);
+        scene.setRoot(act2Pane);
       }
     });
     choice3.setOnMouseEntered(new EventHandler<MouseEvent>(){
