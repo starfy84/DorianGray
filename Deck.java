@@ -47,7 +47,7 @@ public class Deck {
       deck = new LinkedList<Card>();
       currScene = currCard = 1;
       try{
-        BufferedReader in = new BufferedReader(new FileReader("Resources/"+act+"/scenes.txt"));
+        BufferedReader in = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("/Resources/"+act+"/scenes.txt")));
         scenes = Integer.parseInt(in.readLine());
         cardsPerScene = new int[scenes];
         for(int x = 0;x < scenes;x++){
@@ -70,7 +70,7 @@ public class Deck {
       Card c = null;
       String type="",character="",text="";
       try{
-        BufferedReader in = new BufferedReader(new FileReader("Resources/"+act+"/Scene"+scene+"/"+card+".txt"));
+        BufferedReader in = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("/Resources/"+act+"/Scene"+scene+"/"+card+".txt")));
         type = in.readLine();
         character = in.readLine();
         text = in.readLine();
