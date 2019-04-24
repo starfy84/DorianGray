@@ -67,10 +67,12 @@ public abstract class Game {
   protected ImageView background; //The background of the scene
   private Text personName, question; //Text for the level name, score, person's name, and question 
   //private ImageView boardScore; //The board that displays the score bars under it
-  private Rectangle boardCard, boardName; // boardCard is the backboard used to hold the card and the other boards; boardName is the board for the name
+  private Rectangle boardCard, boardName,boardTop; // boardCard is the backboard used to hold the card and the other boards; boardName is the board for the name
   private ImageView cardBackStation; //a stationary carBack behind the current card front and back to simulate going through a deck
   protected String choices;
-  
+  private double dark,blur;
+  private Timeline blurE,darkE,noneBE,noneDE;
+  private String currentBack;
   abstract public void addToDeck();
   abstract public void conditional();
   /** Constructor for Game
@@ -78,12 +80,52 @@ public abstract class Game {
     * @param  deckName  The name of the level/deck. Displayed in game and used to generate Deck.
     */
   public Game(String deckName,String bg){
+      blurE= new Timeline(
+        new KeyFrame(
+          Duration.millis(100),
+          (evt) ->{
+            blur= Math.min(blur+1,20);
+            background.setEffect(new GaussianBlur(blur));
+          }));
+      blurE.setCycleCount(20);
+
+            darkE= new Timeline(
+        new KeyFrame(
+          Duration.millis(100),
+          (evt) ->{
+            ColorAdjust ad = new ColorAdjust();
+            dark= Math.max(dark-.05,-0.9);
+            ad.setBrightness(dark);
+            background.setEffect(ad);
+          }));
+      darkE.setCycleCount(20);
+
+      noneDE= new Timeline(
+        new KeyFrame(
+          Duration.millis(100),
+          (evt) ->{
+            ColorAdjust ad = new ColorAdjust();
+            dark= Math.min(dark+.05,0);
+            ad.setBrightness(dark);
+            background.setEffect(ad);
+          }));
+      noneDE.setCycleCount(20);
+
+        noneBE= new Timeline(
+        new KeyFrame(
+          Duration.millis(100),
+          (evt) ->{
+            blur= Math.max(blur-1,0);
+            background.setEffect(new GaussianBlur(blur));
+          }));
+      noneBE.setCycleCount(20);
     this.deckName = deckName;
     deckGenerator = new DeckGenerator(deckName);
-
+    dark = 0;
+    blur = 0;
     state = "Init";
     addToDeck();
-
+    currentBack = "";
     choices = "";
     try{
       PrintWriter clear = new PrintWriter(new FileWriter("saves/"+deckName));
@@ -111,11 +153,13 @@ public abstract class Game {
     Color brown = Color.rgb(108, 58, 5);
     boardCard = new Rectangle (440, 720, peach);
     boardName = new Rectangle (440, 70, brown);  
+    boardTop = new Rectangle(440,70,brown);
     cardBackStation = new ImageView(new Image(Const.CARD_BACK_PATH+deckName+".png"));     
     
     //relocation of the boards
     boardCard.relocate(420, 0);
     boardName.relocate(420, 650);
+    boardTop.relocate(420,0);
     cardBackStation.relocate (460, 260);
 
     
@@ -141,7 +185,7 @@ public abstract class Game {
     //Sets the max size in pixels of how many characters are on one line
     personName.setWrappingWidth(440);
     
-    question = new Text (435, 50, currentCard.getText()); 
+    question = new Text (435, 100, currentCard.getText()); 
     question.setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 22));
     question.setFill (Color.rgb(0, 0, 0));
     question.setTextAlignment(TextAlignment.CENTER);
@@ -256,12 +300,17 @@ public abstract class Game {
         if (currentCard == null){ //if the game is over
           conditional();
           MainMenu.backToLevelSelect(); //back to level select
+          Const.tutSong.stop();
+          Const.act1Song.stop();
+          Const.act2Song.stop();
+          Const.act3Song.stop();
+          Const.menuSong.play();
         }
       }
     });
     
     //Adds all the nodes to the scene
-    root.getChildren().addAll(background, boardCard, boardName, cardBackStation, /*boardScore,*//* scoreTxt,*/ question, personName, cardFront, cardBack);
+    root.getChildren().addAll(background, boardCard, boardName,boardTop, cardBackStation, /*boardScore,*//* scoreTxt,*/ question, personName, cardFront, cardBack);
   }
   
   
@@ -297,7 +346,7 @@ public abstract class Game {
       }catch(Exception e){}
       if(Const.GAME_DEBUG){
         System.out.println("  current: "+currentCard);
-        System.out.println("  chosen: "+chosen);
+        System.out.println("  chosen: "+chosen.getText());
       }
       addToDeck();
       // If the game deck has another card
@@ -341,14 +390,38 @@ public abstract class Game {
     });
     rotation1.play();
   }
-   
+       // Timeline fadeOut = new Timeline (
+    //  new KeyFrame(
+    //   Duration.millis(100),
+    //   (evt) -> {
+    //     alpha = (((double)(int)(alpha*100.0))+4)/100;
+    //     fade = Color.rgb(255, 255, 255, alpha);
+    //     fade1.setFill(fade);
+    //     fade2.setFill(fade);
+    //     fade3.setFill(fade);
+    //     fade4.setFill(fade);
+    //     fadeBot.setFill(fade);
+    //   }));
   private void checkBG(){
-    if (currentCard.background.equals("Blurry")){
-      background.setEffect(new GaussianBlur());
+    if(!currentCard.background.equals(currentBack)){
+      if (currentCard.background.equals("Blurry")){
+        noneBE.stop();
+        blurE.play();
+      }
+      else if(currentCard.background.equals("Dark")){
+        noneDE.stop();
+        darkE.play();
+      }
+      else if(currentBack.equals("Blurry")){
+        blurE.stop();
+        noneBE.play();
+      }
+      else if(currentBack.equals("Dark")){
+        darkE.stop();
+        noneDE.play();
+      }
     }
-    else{
-      background.setEffect(null);
-    }
+    currentBack = currentCard.background;
   }
 
   /** **/

@@ -1,0 +1,6 @@
+End of Dialogue
+Oscar Wilde
+If you haven't been doing it already, you can swipe left and right to progress through dialogue.
+This is a left swipe.
+This is a right swipe.
+None

@@ -17,15 +17,50 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Set;
+import javafx.util.Duration;
 import java.util.Iterator;
 import javafx.scene.image.*;
-
+import javafx.scene.media.*;
 public class Driver extends Application {
     private static Stage window; //the window of the game
 
     /** Used in applications to initialize what is run on start**/
     @Override
     public void start(Stage stage) throws Exception {
+      Const.menuSong = new MediaPlayer(new Media(getClass().getResource("Resources/Music/menu.mp3").toString()));
+      Const.menuSong.setOnEndOfMedia(new Runnable(){
+        public void run(){
+          Const.menuSong.seek(Duration.ZERO);
+        }
+      });
+
+      Const.act1Song = new MediaPlayer(new Media(getClass().getResource("Resources/Music/act1.mp3").toString()));
+      Const.act1Song.setOnEndOfMedia(new Runnable(){
+        public void run(){
+          Const.act1Song.seek(Duration.ZERO);
+        }
+      });
+
+      Const.act2Song = new MediaPlayer(new Media(getClass().getResource("Resources/Music/act2.mp3").toString()));
+      Const.act2Song.setOnEndOfMedia(new Runnable(){
+        public void run(){
+          Const.act2Song.seek(Duration.ZERO);
+        }
+      });
+
+      Const.act3Song = new MediaPlayer(new Media(getClass().getResource("Resources/Music/act3.mp3").toString()));
+      Const.act3Song.setOnEndOfMedia(new Runnable(){
+        public void run(){
+          Const.act3Song.seek(Duration.ZERO);
+        }
+      });
+
+      Const.tutSong = new MediaPlayer(new Media(getClass().getResource("Resources/Music/tutorial.mp3").toString()));
+      Const.tutSong.setOnEndOfMedia(new Runnable(){
+        public void run(){
+          Const.tutSong.seek(Duration.ZERO);
+        }
+      });
       if(Const.MASTER_DEBUG == true){
         Const.MENU_DEBUG = true;
         Const.DECK_DEBUG = true;

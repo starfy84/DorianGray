@@ -60,8 +60,6 @@ public class Deck {
           }
         }
       }catch(Exception e){e.printStackTrace();}
-      if(Const.DECK_DEBUG)
-        System.out.println(cardsPerScene.length);
     }
     public Deck () {
       deck = new LinkedList<Card>();

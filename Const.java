@@ -10,6 +10,7 @@
  **/
 import java.util.*;
 import javafx.scene.image.*;
+import javafx.scene.media.*;
 public final class Const{
 	protected static final String HIGHSCORE_PATH = "saves/Highscores";
 	protected static final String MAIN_MENU_PATH = "/Images/main menu/";
@@ -17,7 +18,7 @@ public final class Const{
 	protected static final String CARD_PATH = "/Images/card/";
 	protected static final String CARD_FRONT_PATH = "/Images/card/front/";
 	protected static final String CARD_BACK_PATH = "/Images/card/back/";
-	protected static final String TITLE = "The Changing of Dorian Gray";
+	protected static final String TITLE = "The Choices of Dorian Gray";
 	protected static final int LENGTH = 1280;
 	protected static final int WIDTH = 720;
 	protected static boolean GAME_DEBUG = true;
@@ -28,4 +29,10 @@ public final class Const{
 	protected static HashMap<String, Deck> DECK_CACHE = new HashMap<String, Deck>();
 	protected static HashMap<String, ImageView> CHARS = new HashMap<String, ImageView>();
 	protected static HashMap<String, ImageView> BACKGROUNDS = new HashMap<String, ImageView>();
+	protected static MediaPlayer menuSong;
+	protected static MediaPlayer act1Song;
+	protected static MediaPlayer act2Song;
+	protected static MediaPlayer act3Song;
+	protected static MediaPlayer tutSong;
+
 }

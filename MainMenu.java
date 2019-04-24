@@ -15,6 +15,7 @@ import javafx.scene.*;
 import javafx.scene.shape.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.*;
+import javafx.scene.media.*;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 import javafx.event.*;
@@ -34,7 +35,6 @@ public class MainMenu{
   private Game act1; //the game object of act 1
   private Game act2; //The game object of the middleschool level
   private Game highschool; //The game object of the highschool level
-  
   //Graphics
   private Text title; //the images for the door used in the main menu and the title
   private Text text1, text2, text3, text4; //The images used for each option of the menu as well as the bottom prompt
@@ -74,19 +74,20 @@ public class MainMenu{
   //   title.setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 44));
 
     //Initializes intro images and relocates them
+    portrait = new ImageView(new Image("Images/game/backgrounds/bad.png"));
+    portrait.relocate(0,0);
     text1 = new Text(20,225,"Level Select");
-    text1.setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 50));
+    text1.setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 30));
     text2 = new Text(20,325,"Help");
-    text2.setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 50));
+    text2.setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 30));
     text3 = new Text(20,425,"Credits");
-    text3.setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 50));
+    text3.setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 30));
     text4 = new Text(20,525,"Exit");
-    text4.setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 50));
-    title = new Text(20,20,"The Changing of Dorian Gray");
+    text4.setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 30));
+    title = new Text(20,20,"The Choices of Dorian Gray");
     title.setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 65));
     title.setTextOrigin(VPos.TOP);
-    
-    
+    Const.menuSong.play();
     //Initializes fade rectangles put on top for each text to simulate a fade
     // alpha = 0.0;
     // fade = Color.rgb(255, 255, 255, alpha);
@@ -116,28 +117,27 @@ public class MainMenu{
     //Creates level select
     levelSelect = new Pane();
     choice1 = new Text(20,225,"Prelude");
-    choice1.setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 50));
+    choice1.setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 30));
     
     choice2 = new Text(20,325,"Act I: Basil Hallward");
-    choice2.setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 50));
+    choice2.setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 30));
     
     choice3 = new Text(20,425,"Act II: Lord Henry Wotton");
-    choice3.setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 50));
+    choice3.setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 30));
     
     choice4 = new Text(20,525,"Act III: Dorian Gray");
-    choice4.setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 50));
+    choice4.setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 30));
     menuButton2 = createMenuButton();
     enableLevelSelectFunction();
-
+    ImageView poo = new ImageView(new Image("Images/game/backgrounds/bad.png"));
+    poo.relocate(0,0);
     //Adds all graphics to level select pane
-    levelSelect.getChildren().addAll(choice1, choice2, choice3, choice4, menuButton2);
+    levelSelect.getChildren().addAll(poo,choice1, choice2, choice3, choice4, menuButton2,portrait);
     
-    portrait = new ImageView(new Image(Const.CARD_FRONT_PATH+"Dorian Gray.png"));
-    portrait.relocate(500,180-portrait.getFitWidth()/2);
+
     //Creates the root for the main menu pane
     root = new Pane();
-    root.getChildren().addAll(text1, text2, text3,text4,portrait,/*fade1, fade2, fade3, fade4, fadeBot,*/ title/*, fadeTitle*/); //Adds all the intro nodes to the current pane
-    root.setId("pane");
+    root.getChildren().addAll(portrait,text1, text2, text3,text4,/*fade1, fade2, fade3, fade4, fadeBot,*/ title/*, fadeTitle*/); //Adds all the intro nodes to the current pane
     //Adds function to the buttons that adds the "are you sure want to go back to the main menu" prompt
     menuButton4 = createGameMenuButton(tutorialPane);
     menuButton4.setOnMousePressed(new EventHandler<MouseEvent>(){
@@ -199,6 +199,11 @@ public class MainMenu{
     menuButtonTemp.setOnMousePressed(new EventHandler<MouseEvent>(){
       @Override public void handle(MouseEvent mouseEvent) {
         scene.setRoot(root);
+        Const.tutSong.stop();
+        Const.act1Song.stop();
+        Const.act2Song.stop();
+        Const.act3Song.stop();
+        Const.menuSong.play();
       }
     });
     menuButtonTemp.setOnMouseEntered(new EventHandler<MouseEvent>(){
@@ -277,6 +282,11 @@ public class MainMenu{
     leave.setOnMousePressed(new EventHandler<MouseEvent>(){
       @Override public void handle(MouseEvent mouseEvent) {
         scene.setRoot(levelSelect);
+        Const.tutSong.stop();
+        Const.act1Song.stop();
+        Const.act2Song.stop();
+        Const.act3Song.stop();
+        Const.menuSong.play();
       }
     });
     leave.setOnMouseEntered(new EventHandler<MouseEvent>(){
@@ -664,11 +674,13 @@ public class MainMenu{
   private void enableLevelSelectFunction(){
     choice1.setOnMousePressed(new EventHandler<MouseEvent>(){
       @Override public void handle(MouseEvent mouseEvent) {
-        // tutorial = new Game("tutorial");
-        // tutorialPane = tutorial.getRoot();
-        // changeGameMenuFunction(tutorialPane);
-        // tutorialPane.getChildren().add(menuButton4);
-        // scene.setRoot(tutorialPane);
+        tutorial = new Act0();
+        tutorialPane = tutorial.getRoot();
+        changeGameMenuFunction(tutorialPane);
+        tutorialPane.getChildren().add(menuButton4);
+        scene.setRoot(tutorialPane);
+        Const.menuSong.stop();
+        Const.tutSong.play();
       }
     });
     choice1.setOnMouseEntered(new EventHandler<MouseEvent>(){
@@ -690,6 +702,8 @@ public class MainMenu{
         changeGameMenuFunction(act1Pane);
         act1Pane.getChildren().add(menuButton5);
         scene.setRoot(act1Pane);
+        Const.menuSong.stop();
+        Const.act1Song.play();
       }
     });
     choice2.setOnMouseEntered(new EventHandler<MouseEvent>() {
@@ -713,6 +727,8 @@ public class MainMenu{
         changeGameMenuFunction(act2Pane);
         act2Pane.getChildren().add(menuButton6);
         scene.setRoot(act2Pane);
+        Const.menuSong.stop();
+        Const.act2Song.play();
       }
     });
     choice3.setOnMouseEntered(new EventHandler<MouseEvent>(){
