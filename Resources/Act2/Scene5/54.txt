@@ -1,6 +1,4 @@
-End of Dialogue
-Theatre Manager
-Sibyl I have someone for you to meet, Mr. Dorian Gray. Please, address this man as my lord.
-That is quite unnecessary, for I am nothing of the kind. I have to say your performance was quite stunning.
-No, you must not call me that. I am nothing of the kind. With a stunning performance like that, Dorian is fine my lady.
+Dialogue
+Sibyl Vane
+T-t-thank you...
 None
