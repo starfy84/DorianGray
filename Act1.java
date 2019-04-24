@@ -73,4 +73,5 @@ public class Act1 extends Game{
       out.close();
     }catch(Exception e){}
   }
+  public void sceneChange(){}
 }

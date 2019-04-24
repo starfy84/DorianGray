@@ -86,6 +86,9 @@ public class Deck {
           String background = in.readLine();
           c = new Card(type, character, text, background, getCharacterImage(character),choice1,choice2);
         }
+        c.act = act;
+        c.scene = scene;
+        c.cardn = card;
       }catch(Exception e){System.out.println(character);}
       return c;
     }

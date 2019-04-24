@@ -50,14 +50,15 @@ public abstract class Game {
   protected Deck gameDeck, introDeck; //The two decks in the game, first contianing the cards in the game, the second containing the introduction cards
   // private List<Card> endingCards; //The ending cards, determined on if you lose and cause of loss or win
   protected DeckGenerator deckGenerator; //deckgenerator that generates the deck 
-  private Card currentCard; //The currentCard in play
+  protected Card currentCard; //The currentCard in play
   
   private ImageView resultImage; //
   
   private HashMap<String,ImageView> imageHash; //Used to make sure no image is used more than once
   private HashMap<String,Card> cardHash; //Used to make sure no card is use more than once
   protected String state; //The current state of the program; states are: Intro, Main, End
-  
+  protected String currScene;
+  protected String currCard;
   private Pane root; //the root that contains all the object in the scene
   
   private ImageView cardBack, cardFront; //The current back and front of the card
@@ -65,7 +66,7 @@ public abstract class Game {
   private ImageView cardDim; //The dim on the top of the card when displaying each choice
   
   protected ImageView background; //The background of the scene
-  private Text personName, question; //Text for the level name, score, person's name, and question 
+  private Text personName, question,sceneText; //Text for the level name, score, person's name, and question 
   //private ImageView boardScore; //The board that displays the score bars under it
   private Rectangle boardCard, boardName,boardTop; // boardCard is the backboard used to hold the card and the other boards; boardName is the board for the name
   private ImageView cardBackStation; //a stationary carBack behind the current card front and back to simulate going through a deck
@@ -73,8 +74,13 @@ public abstract class Game {
   private double dark,blur;
   private Timeline blurE,darkE,noneBE,noneDE;
   private String currentBack;
+
+  private Rectangle rect;
+
+
   abstract public void addToDeck();
   abstract public void conditional();
+  abstract public void sceneChange();
   /** Constructor for Game
     * 
     * @param  deckName  The name of the level/deck. Displayed in game and used to generate Deck.
@@ -120,13 +126,17 @@ public abstract class Game {
           }));
       noneBE.setCycleCount(20);
     this.deckName = deckName;
+         rect = new Rectangle (0,0,Const.LENGTH, Const.WIDTH);
+      rect.setFill(Color.BLACK);
     deckGenerator = new DeckGenerator(deckName);
     dark = 0;
     blur = 0;
     state = "Init";
     addToDeck();
     currentBack = "";
+    currScene="";
     choices = "";
+
     try{
       PrintWriter clear = new PrintWriter(new FileWriter("saves/"+deckName));
       clear.close();
@@ -136,13 +146,16 @@ public abstract class Game {
     currentCard = gameDeck.nextCard();
     state = "Main";   // Main, End
     
-    
+        sceneText = new Text(20,425,"");
+    sceneText.setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 65));
+    sceneText.setFill(Color.WHITE);
     //Creation of the scene
     root = new Pane();
-    
+          
     //background intialization
     background = new ImageView(new Image(Const.GAME_PATH+"backgrounds/"+bg+".png"));
     checkBG();
+    checkScene();
     /*
     boardScore = new ImageView(new Image(Const.GAME_PATH+"ui/game_bar.png"));
     boardScore.relocate(420, 0);
@@ -203,6 +216,7 @@ public abstract class Game {
     choice2.setTextAlignment(TextAlignment.LEFT);
     choice2.setWrappingWidth(320);
     
+
     
     //Intialization of the back and front of the cards
     cardBack = new ImageView(new Image(Const.CARD_BACK_PATH+deckName+".png")); 
@@ -310,7 +324,7 @@ public abstract class Game {
     });
     
     //Adds all the nodes to the scene
-    root.getChildren().addAll(background, boardCard, boardName,boardTop, cardBackStation, /*boardScore,*//* scoreTxt,*/ question, personName, cardFront, cardBack);
+    root.getChildren().addAll(background, boardCard, boardName,boardTop, cardBackStation, /*boardScore,*//* scoreTxt,*/ question, personName, cardFront, cardBack,rect,sceneText);
   }
   
   
@@ -353,6 +367,7 @@ public abstract class Game {
       if (gameDeck.getDeck().peekFirst() != null){
         currentCard = gameDeck.nextCard();
       }
+      // addToDeck();
       // When there's no more cards in the game deck, move to success card
       else{
         state = "End";
@@ -423,6 +438,73 @@ public abstract class Game {
     }
     currentBack = currentCard.background;
   }
+  private void checkScene(){
+
+    if(!currScene.equals(currentCard.scene)){
+                rect.setVisible(false);
+      sceneText.setVisible(false);
+     //  sceneText.setText("Scene: "+currentCard.scene);
+     //  rect.setVisible(true);
+     //  sceneText.setVisible(true);
+     //  FadeTransition fa = new FadeTransition(Duration.millis(3000),rect);
+     //  fa.setFromValue(0f);
+     //  fa.setToValue(1f);
+     //  fa.setAutoReverse(true);
+     //  fa.setCycleCount(1);
+
+     //  FadeTransition fate = new FadeTransition(Duration.millis(3000),sceneText);
+     //  fate.setFromValue(0f);
+     //  fate.setToValue(1f);
+     //  fate.setAutoReverse(true);
+     //  fate.setCycleCount(1);
+
+     //  FadeTransition ta = new FadeTransition(Duration.millis(3000),rect);
+     //  ta.setFromValue(1f);
+     //  ta.setToValue(0f);
+     //  ta.setAutoReverse(true);
+     //  ta.setCycleCount(1);
+
+     //  FadeTransition tate = new FadeTransition(Duration.millis(3000),sceneText);
+     //  tate.setFromValue(1f);
+     //  tate.setToValue(0f);
+     //  tate.setAutoReverse(true);
+     //  tate.setCycleCount(1);
+
+     //  fa.setOnFinished(new EventHandler<ActionEvent>() {
+     //   @Override
+     //   public void handle(ActionEvent t) {
+     //     ta.play();
+     //   }
+     // });
+
+     //  fate.setOnFinished(new EventHandler<ActionEvent>() {
+     //   @Override
+     //   public void handle(ActionEvent t) {
+     //     tate.play();
+     //   }
+     // });
+
+
+     //  ta.setOnFinished(new EventHandler<ActionEvent>() {
+     //   @Override
+     //   public void handle(ActionEvent t) {
+     //     rect.setVisible(false);
+     //   }
+     // });
+
+
+     //  tate.setOnFinished(new EventHandler<ActionEvent>() {
+     //   @Override
+     //   public void handle(ActionEvent t) {
+     //     sceneText.setVisible(false);
+     //   }
+     // });
+     //  fa.play();
+     //  fate.play();
+    }
+    currScene = currentCard.scene;
+    currCard = currentCard.cardn;
+  }
 
   /** **/
   private void updateGame(boolean swipeLeft){
@@ -430,6 +512,8 @@ public abstract class Game {
     if (currentCard == null)
       return;
     checkBG();
+    checkScene();
+    sceneChange();
     cardFront.setImage(currentCard.getCardFront().getImage());  
     cardBack.setScaleX(1);
     // scoreTxt.setText(String.valueOf(score));

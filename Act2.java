@@ -1,5 +1,24 @@
-import java.util.*;
+import javafx.scene.image.*;
 import java.io.*;
+import java.util.*;
+import javafx.scene.effect.*;
+import javafx.animation.*;
+import javafx.scene.*;
+import javafx.scene.text.*;
+import javafx.scene.shape.*;
+import javafx.scene.image.ImageView;
+import javafx.scene.image.*;
+import javafx.scene.layout.Pane;
+import javafx.util.Duration;
+import javafx.event.*;
+import javafx.event.EventHandler;
+import javafx.scene.input.*;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
+import javafx.scene.text.Font;
+import javafx.geometry.Bounds;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Label;
 public class Act2 extends Game{
   private char lastActResult;
   private boolean scene6;
@@ -117,5 +136,51 @@ public class Act2 extends Game{
       }
       out.close();
     }catch(Exception e){}
+  }
+  public void sceneChange(){
+    if(super.currentCard.scene.equals("5")){
+        FadeTransition fa = new FadeTransition(Duration.millis(3000),background);
+        fa.setFromValue(1f);
+        fa.setToValue(0f);
+        fa.setAutoReverse(true);
+        fa.setCycleCount(1);
+
+              FadeTransition ta = new FadeTransition(Duration.millis(3000),background);
+      ta.setFromValue(0f);
+      ta.setToValue(1f);
+      ta.setAutoReverse(true);
+      ta.setCycleCount(1);
+
+              fa.setOnFinished(new EventHandler<ActionEvent>() {
+       @Override
+       public void handle(ActionEvent t) {
+        background.setImage(new Image("Images/game/backgrounds/slums.png"));
+         ta.play();
+       }
+     });
+      fa.play();
+    }
+    else if(super.currentCard.scene.equals("6")){
+        FadeTransition fa = new FadeTransition(Duration.millis(3000),background);
+        fa.setFromValue(1f);
+        fa.setToValue(0f);
+        fa.setAutoReverse(true);
+        fa.setCycleCount(1);
+
+              FadeTransition ta = new FadeTransition(Duration.millis(3000),background);
+      ta.setFromValue(0f);
+      ta.setToValue(1f);
+      ta.setAutoReverse(true);
+      ta.setCycleCount(1);
+
+              fa.setOnFinished(new EventHandler<ActionEvent>() {
+       @Override
+       public void handle(ActionEvent t) {
+        background.setImage(new Image("Images/game/backgrounds/richpersonhouse.png"));
+         ta.play();
+       }
+     });
+      fa.play();
+    }
   }
 }

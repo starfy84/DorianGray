@@ -38,6 +38,7 @@ public class Card {
   private boolean hasChoice;
   private Choice left;
   private Choice right;
+  protected String act,scene,cardn;
     /** Constructor
       * 
       * @param fileName  The filename of the card. This will access a text file with the matching name and create the

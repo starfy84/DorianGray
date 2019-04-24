@@ -10,6 +10,7 @@
  **/
 
 import java.util.*;
+import java.io.*;
 import javafx.animation.*;
 import javafx.scene.*;
 import javafx.scene.shape.*;
@@ -34,10 +35,10 @@ public class MainMenu{
   private Game tutorial; //The game object of the tutorial
   private Game act1; //the game object of act 1
   private Game act2; //The game object of the middleschool level
-  private Game highschool; //The game object of the highschool level
+  private Game act3; //The game object of the highschool level
   //Graphics
   private Text title; //the images for the door used in the main menu and the title
-  private Text text1, text2, text3, text4; //The images used for each option of the menu as well as the bottom prompt
+  private Text text1, text3, text4; //The images used for each option of the menu as well as the bottom prompt
   
   // private Rectangle fade1, fade2, fade3, fade4, fadeTitle, fadeBot; //The rectangles used in the intro fade animation 
   // private Color fade; //The color used for the fade
@@ -65,7 +66,39 @@ public class MainMenu{
   private ImageView closePrompt, leave, stay; //The components of the close prompt when you attempt to go back to the main menu in the middle of a game
   private ImageView portrait;
   private Rectangle backFade;
-  
+  private ImageView bgg;
+  private Pane creditsPane;
+  private Text prog,writ,art;
+  private String pImg;
+  private int counterr;
+  private ImageView bbg;
+
+    private void check(){
+      counterr=0;
+      try{
+        BufferedReader in = new BufferedReader(new FileReader("saves/Act1"));
+        if(in.readLine().contains("B"))
+          counterr++;
+        in = new BufferedReader(new FileReader("saves/Act2"));
+        if(in.readLine().contains("B"))
+          counterr++;
+        in = new BufferedReader(new FileReader("saves/Act3"));
+        if(in.readLine().contains("B"))
+          counterr++;
+      }catch(Exception e){}
+      if(counterr<1)
+          pImg = "Images/game/backgrounds/normal.png";
+      else if(counterr < 3)
+          pImg = "Images/game/backgrounds/bad.png";
+      else if(counterr == 3)
+          pImg = "Images/game/backgrounds/badbad.png";
+
+  }
+  private void updateP(){
+    portrait.setImage(new Image(pImg));
+    bbg.setImage(new Image(pImg));
+    bgg.setImage(new Image(pImg));
+  }
   /**
    * Constructor for MainMenu
    **/
@@ -74,15 +107,15 @@ public class MainMenu{
   //   title.setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 44));
 
     //Initializes intro images and relocates them
-    portrait = new ImageView(new Image("Images/game/backgrounds/bad.png"));
+    counterr =0;
+    check();
+    portrait = new ImageView(new Image(pImg));
     portrait.relocate(0,0);
     text1 = new Text(20,225,"Level Select");
     text1.setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 30));
-    text2 = new Text(20,325,"Help");
-    text2.setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 30));
-    text3 = new Text(20,425,"Credits");
+    text3 = new Text(20,325,"Credits");
     text3.setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 30));
-    text4 = new Text(20,525,"Exit");
+    text4 = new Text(20,425,"Exit");
     text4.setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 30));
     title = new Text(20,20,"The Choices of Dorian Gray");
     title.setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 65));
@@ -129,15 +162,30 @@ public class MainMenu{
     choice4.setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 30));
     menuButton2 = createMenuButton();
     enableLevelSelectFunction();
-    ImageView poo = new ImageView(new Image("Images/game/backgrounds/bad.png"));
-    poo.relocate(0,0);
+    bgg = new ImageView(new Image(pImg));
+    bgg.relocate(0,0);
     //Adds all graphics to level select pane
-    levelSelect.getChildren().addAll(poo,choice1, choice2, choice3, choice4, menuButton2,portrait);
+    levelSelect.getChildren().addAll(bgg,choice1, choice2, choice3, choice4, menuButton2,portrait);
     
+
+    creditsPane = new Pane();
+    prog = new Text(20,225,"Programmer: Dereck Tu");
+    prog.setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 30));
+    
+    writ = new Text(20,325,"Writer: Matthew Mach");
+    writ.setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 30));
+    
+    art = new Text(20,425,"Artist: William Xu");
+    art.setFont(Font.loadFont(getClass().getResourceAsStream("/Images/montserrat_light.ttf"), 30));
+    menuButton3 = createMenuButton();
+    bbg = new ImageView(new Image(pImg));
+    bbg.relocate(0,0);
+    //Adds all graphics to level select pane
+    creditsPane.getChildren().addAll(bbg,prog, writ, art, menuButton3,portrait);
 
     //Creates the root for the main menu pane
     root = new Pane();
-    root.getChildren().addAll(portrait,text1, text2, text3,text4,/*fade1, fade2, fade3, fade4, fadeBot,*/ title/*, fadeTitle*/); //Adds all the intro nodes to the current pane
+    root.getChildren().addAll(portrait,text1,text3,text4,/*fade1, fade2, fade3, fade4, fadeBot,*/ title/*, fadeTitle*/); //Adds all the intro nodes to the current pane
     //Adds function to the buttons that adds the "are you sure want to go back to the main menu" prompt
     menuButton4 = createGameMenuButton(tutorialPane);
     menuButton4.setOnMousePressed(new EventHandler<MouseEvent>(){
@@ -199,6 +247,8 @@ public class MainMenu{
     menuButtonTemp.setOnMousePressed(new EventHandler<MouseEvent>(){
       @Override public void handle(MouseEvent mouseEvent) {
         scene.setRoot(root);
+        check();
+        updateP();
         Const.tutSong.stop();
         Const.act1Song.stop();
         Const.act2Song.stop();
@@ -281,6 +331,8 @@ public class MainMenu{
     leave = new ImageView (new Image (Const.MAIN_MENU_PATH + "leave.png"));
     leave.setOnMousePressed(new EventHandler<MouseEvent>(){
       @Override public void handle(MouseEvent mouseEvent) {
+        check();
+        updateP();
         scene.setRoot(levelSelect);
         Const.tutSong.stop();
         Const.act1Song.stop();
@@ -332,21 +384,19 @@ public class MainMenu{
   
   /** Changes the scene to level select **/
   private void levelSelect(){
+    check();
+    updateP();
     scene.setRoot(levelSelect);
+
   }  
   
-  /** Changes the scene to help menu **/
-  private void helpMenu() {
-    sideMenu.getChildren().remove(0, 2);
-    sideMenu.getChildren().addAll(help, menuButton);
-    scene.setRoot(sideMenu);
-  }
+
   
   /** Changes the scene to credits **/
   private void credits() {
-    sideMenu.getChildren().remove(0, 2);
-    sideMenu.getChildren().addAll(credits, menuButton);
-    scene.setRoot(sideMenu);
+    check();
+    updateP();
+    scene.setRoot(creditsPane);
   }
   
   // /** updates the childhood highscores from the file**/
@@ -573,32 +623,6 @@ public class MainMenu{
     });
     
     
-    text2.setOnMousePressed(new EventHandler<MouseEvent>(){
-      @Override public void handle(MouseEvent mouseEvent) {
-        helpMenu();
-      }
-    });
-    text2.setOnMouseEntered(new EventHandler<MouseEvent>() {
-      @Override
-      public void handle(MouseEvent mouseEvent) {
-        // InnerShadow bloom = new InnerShadow();
-        // bloom.setOffsetX(4);
-        // bloom.setOffsetY(4);
-        // bloom.setColor(Color.web("0xDF5900"));
-        // text2.setEffect(bloom);
-        text2.setFill(Color.web("0xDF5900"));
-        if(Const.MENU_DEBUG)
-          System.out.println("Help Entered");
-      }
-    });
-    text2.setOnMouseExited(new EventHandler<MouseEvent>() {
-      @Override
-      public void handle(MouseEvent mouseEvent) {
-        text2.setFill(Color.BLACK);
-        if(Const.MENU_DEBUG)
-          System.out.println("Help Exited");
-      }
-    });
     
     
     text3.setOnMousePressed(new EventHandler<MouseEvent>(){
@@ -746,11 +770,13 @@ public class MainMenu{
     
     choice4.setOnMousePressed(new EventHandler<MouseEvent>(){
       @Override public void handle(MouseEvent mouseEvent) {
-        // highschool = new Game("highschool");
-        // act3Pane = highschool.getRoot();
-        // changeGameMenuFunction(act3Pane);
-        // act3Pane.getChildren().add(menuButton7);
-        // scene.setRoot(act3Pane);
+        act3 = new Act3();
+        act3Pane = act3.getRoot();
+        changeGameMenuFunction(act3Pane);
+        act3Pane.getChildren().add(menuButton7);
+        scene.setRoot(act3Pane);
+        Const.menuSong.stop();
+        Const.act3Song.play();
       }
     });
     choice4.setOnMouseEntered(new EventHandler<MouseEvent>(){

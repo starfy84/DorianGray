@@ -28,4 +28,5 @@ public class Act0 extends Game{
   }
   public void conditional(){
   }
+  public void sceneChange(){}
 }
