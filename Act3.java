@@ -23,10 +23,7 @@ public class Act3 extends Game{
   private char act1Res,act2Res;
   public Act3(){
     super("Act3","theatre");
-    Const.DECK_CACHE.put("Act3:5:1-Act3:5:21",gen(5,1,5,21));
-    Const.DECK_CACHE.put("Act3:4:1-Act3:4:19",gen(4,1,4,19));
-    Const.DECK_CACHE.put("Act3:6:1-Act3:6:18",gen(6,1,6,18));
-    Const.DECK_CACHE.put("Act3:2:1-Act3:2:66",gen(2,1,2,66));
+
   }
   private void add(Deck d,Deck...l){
     for(Deck x:l)
@@ -47,16 +44,16 @@ public class Act3 extends Game{
         act2Res = s.charAt(s.length()-1);
       }catch(IOException e){}
       if(act1Res=='B' && act2Res == 'B'){
-        super.gameDeck = gen(1,1,1,39);
-        add(super.gameDeck,gen(1,42,1,62),Const.DECK_CACHE.get("Act3:2:1-Act3:2:66"),Const.DECK_CACHE.get("Act3:4:1-Act3:4:19"));
+        super.gameDeck = Const.DECK_CACHE.get("Act3:BB BG Init");
+        add(super.gameDeck,Const.DECK_CACHE.get("Act3:1:42-Act3:1:62"),Const.DECK_CACHE.get("Act3:2:1-Act3:2:66"),Const.DECK_CACHE.get("Act3:4:1-Act3:4:19"));
       }
       else if(act1Res == 'G' && act2Res == 'G'){
-        super.gameDeck = gen(1,1,1,4);
-        add(super.gameDeck,gen(1,6,1,38),gen(1,40,1,61),gen(1,63,1,63));
+        super.gameDeck = Const.DECK_CACHE.get("Act3:GG Init");
+        add(super.gameDeck,Const.DECK_CACHE.get("Act3:1:6-Act3:1:38"),Const.DECK_CACHE.get("Act3:1:40-Act3:1:61"),Const.DECK_CACHE.get("Act3:1:63-Act3:1:63"));
       }
       else{
-        super.gameDeck = gen(1,1,1,39);
-        add(super.gameDeck,gen(1,42,1,61),gen(1,63,1,63));
+        super.gameDeck = Const.DECK_CACHE.get("Act3:BB BG Init");
+        add(super.gameDeck,Const.DECK_CACHE.get("Act3:1:42-Act3:1:61"),Const.DECK_CACHE.get("Act3:1:63-Act3:1:63"));
       }
       
     }
@@ -64,23 +61,23 @@ public class Act3 extends Game{
       if((act1Res == 'B' && act2Res == 'G') || (act1Res == 'G' && act2Res == 'B')){
         if(super.choices.length() == 68){
           if(super.choices.charAt(65) == 'R' && super.choices.charAt(67) == 'L'){
-            add(super.gameDeck,gen(3,32,3,32));          
+            add(super.gameDeck,Const.DECK_CACHE.get("Act3:3:32-Act3:3:32"));          
           }
           else{
-            add(super.gameDeck,gen(3,33,3,68),Const.DECK_CACHE.get("Act3:4:1-Act3:4:19"));
+            add(super.gameDeck,Const.DECK_CACHE.get("Act3:33-Act3:3:68"),Const.DECK_CACHE.get("Act3:4:1-Act3:4:19"));
           }
         }
         else if(super.choices.length() == 91){
           if(super.choices.charAt(90) == 'L'){
-            add(super.gameDeck,gen(3,69,3,74),Const.DECK_CACHE.get("Act3:5:1-Act3:5:21"));
+            add(super.gameDeck,Const.DECK_CACHE.get("Act3:3:69-Act3:3:74"),Const.DECK_CACHE.get("Act3:5:1-Act3:5:21"));
           }
           else if(super.choices.charAt(90) == 'R'){
-            add(super.gameDeck,gen(3,33,3,68),Const.DECK_CACHE.get("Act3:4:1-Act3:4:19"));
+            add(super.gameDeck,Const.DECK_CACHE.get("Act3:33-Act3:3:68"),Const.DECK_CACHE.get("Act3:4:1-Act3:4:19"));
           }
         }
         else if(super.choices.length() == 60){
           if(super.choices.charAt(59) == 'L'){
-            add(super.gameDeck,gen(3,1,3,30));
+            add(super.gameDeck,Const.DECK_CACHE.get("Act3:3:1-Act3:3:30"));
           }
           else if(super.choices.charAt(59) == 'R'){
             add(super.gameDeck,Const.DECK_CACHE.get("Act3:2:1-Act3:2:66"),Const.DECK_CACHE.get("Act3:4:1-Act3:4:19"));
@@ -90,24 +87,24 @@ public class Act3 extends Game{
       else if(act1Res == 'G' && act2Res == 'G'){
         if(super.choices.length() == 68){
           if(super.choices.charAt(65) == 'R' && super.choices.charAt(67) == 'L'){
-            add(super.gameDeck,gen(3,32,3,32));
+            add(super.gameDeck,Const.DECK_CACHE.get("Act3:3:32-Act3:3:32"));
           }
           else{
-            add(super.gameDeck,gen(3,33,3,68),Const.DECK_CACHE.get("Act3:4:1-Act3:4:19"));
+            add(super.gameDeck,Const.DECK_CACHE.get("Act3:33-Act3:3:68"),Const.DECK_CACHE.get("Act3:4:1-Act3:4:19"));
             
           }
         }
         else if(super.choices.length() == 91){
           if(super.choices.charAt(90) == 'L'){
-            add(super.gameDeck,gen(3,69,3,74),Const.DECK_CACHE.get("Act3:6:1-Act3:6:18"));
+            add(super.gameDeck,Const.DECK_CACHE.get("Act3:3:69-Act3:3:74"),Const.DECK_CACHE.get("Act3:6:1-Act3:6:18"));
           }
           else if(super.choices.charAt(90) == 'R'){
-            add(super.gameDeck,gen(3,33,3,68),Const.DECK_CACHE.get("Act3:4:1-Act3:4:19"));
+            add(super.gameDeck,Const.DECK_CACHE.get("Act3:33-Act3:3:68"),Const.DECK_CACHE.get("Act3:4:1-Act3:4:19"));
           }
         }
               else if(super.choices.length() == 60){
         if(super.choices.charAt(59) == 'L'){
-          add(super.gameDeck,gen(3,1,3,30));
+          add(super.gameDeck,Const.DECK_CACHE.get("Act3:3:1-Act3:3:30"));
         }
         else if(super.choices.charAt(59) == 'R'){
           add(super.gameDeck,Const.DECK_CACHE.get("Act3:2:1-Act3:2:66"),Const.DECK_CACHE.get("Act3:4:1-Act3:4:19"));
