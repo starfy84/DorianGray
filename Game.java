@@ -437,24 +437,6 @@ public abstract class Game {
         cardFront.setRotate(0);
         updateGame(ttf);
             if (currentCard == null){ //if the game is over
-                    rect.setVisible(true);
-      FadeTransition fa = new FadeTransition(Duration.millis(3000),rect);
-      fa.setFromValue(0f);
-      fa.setToValue(1f);
-      fa.setAutoReverse(true);
-      fa.setCycleCount(1);
-
-
-      FadeTransition ta = new FadeTransition(Duration.millis(3000),rect);
-      ta.setFromValue(1f);
-      ta.setToValue(0f);
-      ta.setAutoReverse(true);
-      ta.setCycleCount(1);
-
-      fa.setOnFinished(new EventHandler<ActionEvent>() {
-       @Override
-       public void handle(ActionEvent t) {
-         ta.play();
           conditional();
           MainMenu.backToLevelSelect(); //back to level select
           Const.tutSong.stop();
@@ -462,18 +444,6 @@ public abstract class Game {
           Const.act2Song.stop();
           Const.act3Song.stop();
           Const.menuSong.play();
-       }
-     });
-
-
-
-      ta.setOnFinished(new EventHandler<ActionEvent>() {
-       @Override
-       public void handle(ActionEvent t) {
-         rect.setVisible(false);
-       }
-     });
-      fa.play();
     }
       }
     });
@@ -506,6 +476,64 @@ public abstract class Game {
     if(!currScene.equals(currentCard.scene)){
                 rect.setVisible(false);
       sceneText.setVisible(false);
+     //  sceneText.setText("Scene: "+currentCard.scene);
+     //  rect.setVisible(true);
+     //  sceneText.setVisible(true);
+     //  FadeTransition fa = new FadeTransition(Duration.millis(3000),rect);
+     //  fa.setFromValue(0f);
+     //  fa.setToValue(1f);
+     //  fa.setAutoReverse(true);
+     //  fa.setCycleCount(1);
+
+     //  FadeTransition fate = new FadeTransition(Duration.millis(3000),sceneText);
+     //  fate.setFromValue(0f);
+     //  fate.setToValue(1f);
+     //  fate.setAutoReverse(true);
+     //  fate.setCycleCount(1);
+
+     //  FadeTransition ta = new FadeTransition(Duration.millis(3000),rect);
+     //  ta.setFromValue(1f);
+     //  ta.setToValue(0f);
+     //  ta.setAutoReverse(true);
+     //  ta.setCycleCount(1);
+
+     //  FadeTransition tate = new FadeTransition(Duration.millis(3000),sceneText);
+     //  tate.setFromValue(1f);
+     //  tate.setToValue(0f);
+     //  tate.setAutoReverse(true);
+     //  tate.setCycleCount(1);
+
+     //  fa.setOnFinished(new EventHandler<ActionEvent>() {
+     //   @Override
+     //   public void handle(ActionEvent t) {
+     //     ta.play();
+     //   }
+     // });
+
+     //  fate.setOnFinished(new EventHandler<ActionEvent>() {
+     //   @Override
+     //   public void handle(ActionEvent t) {
+     //     tate.play();
+     //   }
+     // });
+
+
+     //  ta.setOnFinished(new EventHandler<ActionEvent>() {
+     //   @Override
+     //   public void handle(ActionEvent t) {
+     //     rect.setVisible(false);
+     //   }
+     // });
+
+
+     //  tate.setOnFinished(new EventHandler<ActionEvent>() {
+     //   @Override
+     //   public void handle(ActionEvent t) {
+     //     sceneText.setVisible(false);
+     //   }
+     // });
+     //  fa.play();
+     //  fate.play();
     }
     currScene = currentCard.scene;
     currCard = currentCard.cardn;
