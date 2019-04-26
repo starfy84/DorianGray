@@ -89,7 +89,7 @@ public class Deck {
         c.act = act;
         c.scene = scene;
         c.cardn = card;
-      }catch(Exception e){System.out.println(character);}
+      }catch(Exception e){System.out.println(act+":"+scene+":"+card);}
       return c;
     }
     

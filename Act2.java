@@ -138,7 +138,7 @@ public class Act2 extends Game{
     }catch(Exception e){}
   }
   public void sceneChange(){
-    if(super.currentCard.scene.equals("5")){
+    if(super.currentCard.scene.equals("5") && super.currentCard.cardn.equals("1")){
         FadeTransition fa = new FadeTransition(Duration.millis(3000),background);
         fa.setFromValue(1f);
         fa.setToValue(0f);
@@ -160,7 +160,7 @@ public class Act2 extends Game{
      });
       fa.play();
     }
-    else if(super.currentCard.scene.equals("6")){
+    else if(super.currentCard.scene.equals("6") && super.currentCard.cardn.equals("1")){
         FadeTransition fa = new FadeTransition(Duration.millis(3000),background);
         fa.setFromValue(1f);
         fa.setToValue(0f);
