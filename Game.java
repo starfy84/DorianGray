@@ -295,31 +295,23 @@ public abstract class Game {
       @Override public void handle(MouseEvent mouseEvent) {
         v.choiceLeft = false; //Sets the variables to false for good measure; resets it 
         v.choiceRight = false;
-        cardFront.relocate(460, 260); //Relocated card front and hides it
-        cardFront.setRotate(0);
+        double rotation;
         if (mouseEvent.getSceneX() < 450){
           if(currentCard.getHasChoice())
             root.getChildren().remove(root.getChildren().size()-2, root.getChildren().size());
           else
             root.getChildren().remove(root.getChildren().size()-1,root.getChildren().size());
-          updateGame(true); //left choice was chosen
+          cardFall(true); //left choice was chosen
         }
         else if (mouseEvent.getSceneX() > 810){
           if(currentCard.getHasChoice())
             root.getChildren().remove(root.getChildren().size()-2, root.getChildren().size());
           else
             root.getChildren().remove(root.getChildren().size()-1,root.getChildren().size());
-          updateGame(false); //right choice was chosen
+          cardFall(false); //right choice was chosen
         }
-        if (currentCard == null){ //if the game is over
-          conditional();
-          MainMenu.backToLevelSelect(); //back to level select
-          Const.tutSong.stop();
-          Const.act1Song.stop();
-          Const.act2Song.stop();
-          Const.act3Song.stop();
-          Const.menuSong.play();
-        }
+        cardFront.relocate(460, 260); //Relocated card front and hides it
+        cardFront.setRotate(0);
       }
     });
     
@@ -383,8 +375,7 @@ public abstract class Game {
   public Pane getRoot(){
     return root;
   }
-  
-  
+
   /** Creates and plays a ScaleTransition mocking a card flip**/
   private void cardFlip() {
     ScaleTransition rotation1 = new ScaleTransition(Duration.millis(300), cardBack);
@@ -417,6 +408,48 @@ public abstract class Game {
     //     fade4.setFill(fade);
     //     fadeBot.setFill(fade);
     //   }));
+
+  private void cardFall(boolean ttf){
+    RotateTransition r = new RotateTransition(Duration.millis(600),cardFront);
+    r.setFromAngle(cardFront.getRotate());
+    if (ttf)
+      r.setToAngle(cardFront.getRotate()-360);
+    else
+      r.setToAngle(cardFront.getRotate()+360);
+    r.setCycleCount(1);
+    r.setAutoReverse(false);
+
+    TranslateTransition t = new TranslateTransition(Duration.millis(600),cardFront);
+    if (ttf)
+      t.setByX(-400);
+    else
+      t.setByX(400);
+    t.setByY(530);
+    t.setCycleCount(1);
+    t.setAutoReverse(false);
+
+    ParallelTransition p = new ParallelTransition(r,t);
+    p.setOnFinished(new EventHandler<ActionEvent>() {
+      @Override
+      public void handle(ActionEvent t) {
+        cardFront.setTranslateX(0);
+        cardFront.setTranslateY(0);
+        cardFront.setRotate(0);
+        updateGame(ttf);
+            if (currentCard == null){ //if the game is over
+          conditional();
+          MainMenu.backToLevelSelect(); //back to level select
+          Const.tutSong.stop();
+          Const.act1Song.stop();
+          Const.act2Song.stop();
+          Const.act3Song.stop();
+          Const.menuSong.play();
+    }
+      }
+    });
+    p.play();
+  }
+
   private void checkBG(){
     if(!currentCard.background.equals(currentBack)){
       if (currentCard.background.equals("Blurry")){
